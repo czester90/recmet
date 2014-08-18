@@ -1,0 +1,53 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+            ->prependFile($this->basePath() . '/js/jquery.min.js')
+            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                        <li><a href="<?php echo $this->url('advert') ?>"><?php echo $this->translate('Ogłoszenia') ?></a></li>
+                        <li><a href="<?php echo $this->url('companies') ?>"><?php echo $this->translate('Firmy') ?></a></li>
+                        <li><a href="<?php //echo $this->url('transactions') ?>"><?php echo $this->translate('Tranzacje') ?></a></li>
+                        <li><a href="<?php //echo $this->url('jobs') ?>"><?php echo $this->translate('Specjaliści') ?></a></li>
+                        <li><a href="<?php //echo $this->url('website') ?>"><?php echo $this->translate('Strona') ?></a></li>
+                        <li><a href="<?php //echo $this->url('statistics') ?>"><?php echo $this->translate('Giełda') ?></a></li>
+                        <li><a href="<?php //echo $this->url('support') ?>"><?php echo $this->translate('Wsparcie') ?></a></li>
+                        <li><a href="<?php //echo $this->url('contact') ?>"><?php echo $this->translate('Kontakt') ?></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <?php echo $this->content; ?>
+            <hr>
+            <footer>
+                <p>&copy; 2014 - <?php echo date('Y') ?> by Recol Investment Group Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+            </footer>
+        </div>
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>
