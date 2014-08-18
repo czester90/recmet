@@ -22,6 +22,16 @@ return array(
                     ),
                 ),
             ),
+            'prices' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/prices',
+                    'defaults' => array(
+                        'controller' => 'company\company',
+                        'action'     => 'priceTable',
+                    ),
+                ),
+            ),
         ),
     ),
 );

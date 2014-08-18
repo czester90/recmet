@@ -1,44 +1,480 @@
-<div class="jumbotron">
-    <h1><?php echo sprintf($this->translate('Welcome to %sZend Framework 2%s'), '<span class="zf-green">', '</span>') ?></h1>
-    <p><?php echo sprintf($this->translate('Congratulations! You have successfully installed the %sZF2 Skeleton Application%s. You are currently running Zend Framework version %s. This skeleton can serve as a simple starting point for you to begin building your application on ZF2.'), '<a href="https://github.com/zendframework/ZendSkeletonApplication" target="_blank">', '</a>', \Zend\Version\Version::VERSION) ?></p>
-    <p><a class="btn btn-success btn-lg" href="https://github.com/zendframework/zf2" target="_blank"><?php echo $this->translate('Fork Zend Framework 2 on GitHub') ?> &raquo;</a></p>
-</div>
-
-<div class="row">
-
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Follow Development') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('Zend Framework 2 is under active development. If you are interested in following the development of ZF2, there is a special ZF2 portal on the official Zend Framework website which provides links to the ZF2 %swiki%s, %sdev blog%s, %sissue tracker%s, and much more. This is a great resource for staying up to date with the latest developments!'), '<a href="http://framework.zend.com/wiki/display/ZFDEV2/Home">', '</a>', '<a href="http://framework.zend.com/zf2/blog">', '</a>', '<a href="https://github.com/zendframework/zf2/issues">', '</a>') ?></p>
-                <p><a class="btn btn-success pull-right" href="http://framework.zend.com/zf2" target="_blank"><?php echo $this->translate('ZF2 Development Portal') ?> &raquo;</a></p>
-            </div>
+<section id='homepage-slider'>
+  <div class='controls-wrapper'>
+    <section class='container'>
+      <section class='row'>
+        <div class='controls hidden-phone'>
+          <a href="#" class='prev'>Previous</a>
+          <a href="#" class='next'>Next</a>
         </div>
+      </section>
+    </section>
+  </div>
+  <section class='slider-wrapper'>
+    <div class='homepage-slider hidden-phone'>
+      <ul class='slides'>
+        <li>
+          <img src="img/photos/4834201449_2801d96045_o-1.jpg" alt="" class='bg-image'/>
+          <div class='container'>
+            <div class='row'>
+              <div class='span12'>
+                <div class='text-box span6'>
+                  <h1><a href="property.html">Great place for artists!</a></h1>
+                  <p>In sit amet arcu quis dolor adipiscing laoreet sed sit amet arcu. Proin non adipiscing felis.</p>
+                </div>
+                <div class='description'>
+                  <div class='left'>
+                    <div class='title'>
+                      <div class='big'>Seaway house</div>
+                      <div class='small'>Los Angeles, CA</div>
+                    </div>
+                    <div class='rooms'> 3 bedrooms - 2 bathrooms </div>
+                  </div>
+                  <div class='right'>
+                    <div class='price'>
+                      <div class='number'> $1200 </div>
+                      <div class='rate'> per month </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <img src="img/photos/4834826842_7483d905eb_o.jpg" alt="" class='bg-image'/>
+          <div class='container'>
+            <div class='row'>
+              <div class='span12'>
+                <div class='text-box span6'>
+                  <h1><a href="property.html">4 bedrooms apartment for sale!</a></h1>
+                  <p>Pellentesque viverra lacus quis lacus viverra mattis. Sed sed nisi erat, sed consectetur metus.</p>
+                </div>
+                <div class='description'>
+                  <div class='left'>
+                    <div class='title'>
+                      <div class='big'>Seaway house</div>
+                      <div class='small'>Los Angeles, CA</div>
+                    </div>
+                    <div class='rooms'> 4 bedrooms - 5 bathrooms </div>
+                  </div>
+                  <div class='right'>
+                    <div class='price'>
+                      <div class='number'> $32000 </div>
+                      <div class='rate'> per year </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
+  </section>
+</section>
 
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Discover Modules') ?></h3>
+<section id='main' role='main'>
+  <section class='container'>
+    <section class='row tab-finder'>
+      <div class='span12'>
+        <div class="tabbable">
+          <ul class="nav nav-tabs">
+            <li class="active first-tab"><a href="#tab1" data-toggle="tab">For Sale</a></li>
+            <li><a href="#tab2" data-toggle="tab">For Rent</a></li>
+            <li><a href="#tab3" data-toggle="tab">Foreclosures</a></li>
+            <li class='last-tab'><a href="#tab4" data-toggle="tab">New Homes</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab1">
+              <div class='inner'>
+                <form action="#">
+                  <input type="text" name='search-string' class='search-string' placeholder="eg. 'Miami', 'Los Angeles'"/>
+                  <input type="text" name='search-year' class='search-year' placeholder="Year"/>
+                  <select name="search-bedrooms" class='span2 selectpicker search-select'>
+                    <option>Bedrooms</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                  <select name="search-bathrooms" class='span2 selectpicker search-select'>
+                    <option>Bathrooms</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                  <input type="text" name='search-min-price' class='span2 search-price no-margin' placeholder="Min. Price"/>
+                  <span class='line-divider'>&ndash;</span>
+                  <input type="text" name='search-max-price' class='span2 search-price' placeholder="Max. Price"/>
+                  <button type="submit" class='btn btn-primary search-property'><i class="icon-search icon-white"></i> Search Property</button>
+                </form>
+              </div>
             </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('The community is working on developing a community site to serve as a repository and gallery for ZF2 modules. The project is available %son GitHub%s. The site is currently live and currently contains a list of some of the modules already available for ZF2.'), '<a href="https://github.com/zendframework/modules.zendframework.com">', '</a>') ?></p>
-                <p><a class="btn btn-success pull-right" href="http://modules.zendframework.com/" target="_blank"><?php echo $this->translate('Explore ZF2 Modules') ?> &raquo;</a></p>
+            <div class="tab-pane" id="tab2">
+              <div class='inner'>
+                <form action="#">
+                  <input type="text" name='search-string' class='search-string' placeholder="eg. 'Miami', 'Los Angeles'"/>
+                  <input type="text" name='search-year' class='search-year' placeholder="Year"/>
+                  <select name="search-bedrooms" class='span2 selectpicker search-select'>
+                    <option>Bedrooms</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                  <select name="search-bathrooms" class='span2 selectpicker search-select'>
+                    <option>Bathrooms</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                  <input type="text" name='search-min-price' class='span2 search-price no-margin' placeholder="Min. Price"/>
+                  <span class='line-divider'>&ndash;</span>
+                  <input type="text" name='search-max-price' class='span2 search-price' placeholder="Max. Price"/>
+                  <button type="submit" class='btn btn-primary search-property'><i class="icon-search icon-white"></i> Search Property</button>
+                </form>
+              </div>
             </div>
+            <div class="tab-pane" id="tab3">
+              <div class='inner'>
+                <form action="#">
+                  <input type="text" name='search-string' class='search-string' placeholder="eg. 'Miami', 'Los Angeles'"/>
+                  <input type="text" name='search-year' class='search-year' placeholder="Year"/>
+                  <select name="search-bedrooms" class='span2 selectpicker search-select'>
+                    <option>Bedrooms</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                  <select name="search-bathrooms" class='span2 selectpicker search-select'>
+                    <option>Bathrooms</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                  <input type="text" name='search-min-price' class='span2 search-price no-margin' placeholder="Min. Price"/>
+                  <span class='line-divider'>&ndash;</span>
+                  <input type="text" name='search-max-price' class='span2 search-price' placeholder="Max. Price"/>
+                  <button type="submit" class='btn btn-primary search-property'><i class="icon-search icon-white"></i> Search Property</button>
+                </form>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab4">
+              <div class='inner'>
+                <form action="#">
+                  <input type="text" name='search-string' class='search-string' placeholder="eg. 'Miami', 'Los Angeles'"/>
+                  <input type="text" name='search-year' class='search-year' placeholder="Year"/>
+                  <select name="search-bedrooms" class='span2 selectpicker search-select'>
+                    <option>Bedrooms</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                  <select name="search-bathrooms" class='span2 selectpicker search-select'>
+                    <option>Bathrooms</option>
+                    <option>1</option>
+                    <option>2</option>
+                  </select>
+                  <input type="text" name='search-min-price' class='span2 search-price no-margin' placeholder="Min. Price"/>
+                  <span class='line-divider'>&ndash;</span>
+                  <input type="text" name='search-max-price' class='span2 search-price' placeholder="Max. Price"/>
+                  <button type="submit" class='btn btn-primary search-property'><i class="icon-search icon-white"></i> Search Property</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Help &amp; Support') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('If you need any help or support while developing with ZF2, you may reach us via IRC: %s#zftalk on Freenode%s. We\'d love to hear any questions or feedback you may have regarding the beta releases. Alternatively, you may subscribe and post questions to the %smailing lists%s.'), '<a href="irc://irc.freenode.net/zftalk">', '</a>', '<a href="http://framework.zend.com/wiki/display/ZFDEV/Mailing+Lists">', '</a>') ?></p>
-                <p><a class="btn btn-success pull-right" href="http://webchat.freenode.net?channels=zftalk" target="_blank"><?php echo $this->translate('Ping us on IRC') ?> &raquo;</a></p>
-            </div>
+      </div>
+    </section>
+    <section class='row featured-items'>
+      <div class='span12'>
+        <h2>Featured Items</h2>
+        <div class='controls'>
+          <a href="#" class='prev'>Previous</a>
+          <a href="#" class='next'>Next</a>
         </div>
-    </div>
-</div>
+        <div class='featured-items-slider'>
+          <ul class='slides'>
+            <li>
+              <div class='row'>
+                <div class='span3 featured-item-wrapper'>
+                  <div class='featured-item'>
+                    <div class='top'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <figure>
+                            <img src="img/photos/4834194361_85d5c4a5e0_b.jpg" alt="" />
+                            <div class='banner'>For Rent</div>
+                            <a href="property.html" class='figure-hover'>Zoom</a>
+                          </figure>
+                          <h3><a href="property.html">1 Central Park S</a></h3>
+                          <p>Las Vegas, NV</p>
+                        </div>
+                      </div>
+                      <i class='bubble'></i>
+                    </div>
+                    <div class='bottom'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <p>3 beds  +  1 bath  +  100 sqft</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='star-rating'>
+                    <button class='star blue'>1 Star</button>
+                    <button class='star active'>2 Star</button>
+                    <button class='star active'>3 Star</button>
+                    <button class='star'>4 Star</button>
+                    <button class='star'>5 Star</button>
+                  </div>
+                  <div class='price-wrapper'>
+                    <div class='price'>$2,150</div>
+                    <div class='rate'>/mo</div>
+                  </div>
+                </div>
+                <div class='span3 featured-item-wrapper'>
+                  <div class='featured-item'>
+                    <div class='top'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <figure>
+                            <img src="img/photos/4834197589_84d75a42bd_b.jpg" alt="" />
+                            <div class='banner'>For Sale</div>
+                            <a href="property.html" class='figure-hover'>Zoom</a>
+                          </figure>
+                          <h3><a href="property.html">555 Malcolm X Blvd</a></h3>
+                          <p>Los Angeles, CA</p>
+                        </div>
+                      </div>
+                      <i class='bubble'></i>
+                    </div>
+                    <div class='bottom'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <p>3 beds  +  1 bath  +  100 sqft</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='star-rating'>
+                    <button class='star blue'>1 Star</button>
+                    <button class='star active'>2 Star</button>
+                    <button class='star active'>3 Star</button>
+                    <button class='star'>4 Star</button>
+                    <button class='star'>5 Star</button>
+                  </div>
+                </div>
+                <div class='span3 featured-item-wrapper'>
+                  <div class='featured-item'>
+                    <div class='top'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <figure>
+                            <img src="img/photos/4834201025_e7f66118eb_b.jpg" alt="" />
+                            <div class='banner'>For Rent</div>
+                            <a href="property.html" class='figure-hover'>Zoom</a>
+                          </figure>
+                          <h3><a href="property.html">520 W 110th St</a></h3>
+                          <p>Las Vegas, NV</p>
+                        </div>
+                      </div>
+                      <i class='bubble'></i>
+                    </div>
+                    <div class='bottom'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <p>4 beds  +  2 baths  +  245 sqft</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='star-rating'>
+                    <button class='star active'>1 Star</button>
+                    <button class='star active'>2 Star</button>
+                    <button class='star active'>3 Star</button>
+                    <button class='star active'>4 Star</button>
+                    <button class='star active'>5 Star</button>
+                  </div>
+                  <div class='price-wrapper'>
+                    <div class='price'>$17,000</div>
+                    <div class='rate'>/year</div>
+                  </div>
+                </div>
+                <div class='span3 featured-item-wrapper'>
+                  <div class='featured-item'>
+                    <div class='top'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <figure>
+                            <img src="img/photos/4834203945_3e56a09048_b.jpg" alt="" />
+                            <a href="property.html" class='figure-hover'>Zoom</a>
+                          </figure>
+                          <h3><a href="property.html">100 W 57th St</a></h3>
+                          <p>Los Angeles, CA</p>
+                        </div>
+                      </div>
+                      <i class='bubble'></i>
+                    </div>
+                    <div class='bottom'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <p>2 beds  +  2 baths + 168 sqft</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='star-rating'>
+                    <button class='star active'>1 Star</button>
+                    <button class='star active'>2 Star</button>
+                    <button class='star active'>3 Star</button>
+                    <button class='star active'>4 Star</button>
+                    <button class='star active'>5 Star</button>
+                  </div>
+                  <div class='price-wrapper'>
+                    <div class='price'>$3,600</div>
+                    <div class='rate'>/mo</div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class='row'>
+                <div class='span3 featured-item-wrapper'>
+                  <div class='featured-item'>
+                    <div class='top'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <figure>
+                            <img src="img/photos/4834790926_0228ed6cde_b.jpg" alt="" />
+                            <div class='banner'>For Sale</div>
+                            <a href="property.html" class='figure-hover'>Zoom</a>
+                          </figure>
+                          <h3><a href="property.html">140 E 63rd St</a></h3>
+                          <p>Boston, MA</p>
+                        </div>
+                      </div>
+                      <i class='bubble'></i>
+                    </div>
+                    <div class='bottom'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <p>3 beds  +  1 bath  +  100 sqft</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='star-rating'>
+                    <button class='star blue'>1 Star</button>
+                    <button class='star active'>2 Star</button>
+                    <button class='star active'>3 Star</button>
+                    <button class='star'>4 Star</button>
+                    <button class='star'>5 Star</button>
+                  </div>
+                  <div class='price-wrapper'>
+                    <div class='price'>$2,150</div>
+                    <div class='rate'>/mo</div>
+                  </div>
+                </div>
+                <div class='span3 featured-item-wrapper'>
+                  <div class='featured-item'>
+                    <div class='top'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <figure>
+                            <img src="img/photos/4834812234_3379989227_b.jpg" alt="" />
+                            <a href="property.html" class='figure-hover'>Zoom</a>
+                          </figure>
+                          <h3><a href="property.html">161 E 110th St</a></h3>
+                          <p>Los Angeles, CA</p>
+                        </div>
+                      </div>
+                      <i class='bubble'></i>
+                    </div>
+                    <div class='bottom'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <p>3 beds  +  1 bath  +  100 sqft</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='star-rating'>
+                    <button class='star blue'>1 Star</button>
+                    <button class='star active'>2 Star</button>
+                    <button class='star active'>3 Star</button>
+                    <button class='star'>4 Star</button>
+                    <button class='star'>5 Star</button>
+                  </div>
+                </div>
+                <div class='span3 featured-item-wrapper'>
+                  <div class='featured-item'>
+                    <div class='top'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <figure>
+                            <img src="img/photos/4834826842_cdeb5bc8be_b.jpg" alt="" />
+                            <div class='banner'>For Rent</div>
+                            <a href="property.html" class='figure-hover'>Zoom</a>
+                          </figure>
+                          <h3><a href="property.html">East 61st Street and Park Avenue</a></h3>
+                          <p>Los Angeles, CA</p>
+                        </div>
+                      </div>
+                      <i class='bubble'></i>
+                    </div>
+                    <div class='bottom'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <p>4 beds  +  2 baths  +  245 sqft</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='star-rating'>
+                    <button class='star active'>1 Star</button>
+                    <button class='star active'>2 Star</button>
+                    <button class='star active'>3 Star</button>
+                    <button class='star active'>4 Star</button>
+                    <button class='star active'>5 Star</button>
+                  </div>
+                  <div class='price-wrapper'>
+                    <div class='price'>$17,000</div>
+                    <div class='rate'>/year</div>
+                  </div>
+                </div>
+                <div class='span3 featured-item-wrapper'>
+                  <div class='featured-item'>
+                    <div class='top'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <figure>
+                            <img src="img/photos/4947806065_f932310392_b.jpg" alt="" />
+                            <a href="property.html" class='figure-hover'>Zoom</a>
+                          </figure>
+                          <h3><a href="property.html">300 Riverside Dr</a></h3>
+                          <p>Boston, MA</p>
+                        </div>
+                      </div>
+                      <i class='bubble'></i>
+                    </div>
+                    <div class='bottom'>
+                      <div class='inner-border'>
+                        <div class='inner-padding'>
+                          <p>2 beds  +  2 baths + 168 sqft</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='star-rating'>
+                    <button class='star active'>1 Star</button>
+                    <button class='star active'>2 Star</button>
+                    <button class='star active'>3 Star</button>
+                    <button class='star active'>4 Star</button>
+                    <button class='star active'>5 Star</button>
+                  </div>
+                  <div class='price-wrapper'>
+                    <div class='price'>$3,600</div>
+                    <div class='rate'>/mo</div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <i class='content-bubble'></i>
+    </section>
+  </section>
+</section>

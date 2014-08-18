@@ -12,4 +12,8 @@ class CompanyController extends AbstractActionController {
       
     ));
   }
+  
+  public function priceTableAction() {
+    return new ViewModel();
+  }
 }

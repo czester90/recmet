@@ -85,8 +85,6 @@ class UserController extends AbstractActionController {
     $request = $this->getRequest();
     $form = $this->getLoginForm();
 
-    $id = $this->params()->fromRoute('id', 0);
-
     if($this->getOptions()->getUseRedirectParameterIfPresent() && $request->getQuery()->get('redirect')) {
       $redirect = $request->getQuery()->get('redirect');
     } else {
@@ -95,10 +93,8 @@ class UserController extends AbstractActionController {
 
     if(!$request->isPost()) {
       return array(
-        'id' => $id,
         'loginForm' => $form,
         'redirect' => $redirect,
-        'categories' => $this->em('Article\Entity\Category'),
         'enableRegistration' => $this->getOptions()->getEnableRegistration(),
       );
     }
@@ -169,40 +165,14 @@ class UserController extends AbstractActionController {
                       . ($redirect ? '?redirect=' . $redirect : ''));
     }
 
-    if($this->getOptions()->getUseRedirectParameterIfPresent() && $redirect) {
-      //return $this->redirect()->toUrl($redirect);
-    }
-
-
-    if($this->checkAdminId()) {
-      $this->setNotice('User Login', 'User , has been Login', 'INFO');
-      if($redirect) {
-        return $this->redirect()->toRoute($redirect);
-      } else {
-        return $this->redirect()->toRoute('admin');
-      }
-    } else {
-      if($redirect) {
-        return $this->redirect()->toRoute($redirect);
-      } else {
-        return $this->redirect()->toRoute('user/profile');
-      }
-    }
+    return $this->redirect()->toRoute('user/profile');
   }
 
   /**
    * Register new user
    */
   public function registerAction() {
-
-    $access = $this->em('Admin\Entity\Settings')->findOneBy(array('setting' => 'register-new-user'))->getValue();
-
-    if($access == "0") {
-      return $this->redirect()->toRoute('article');
-    }
-    // if the user is logged in, we don't need to register
     if($this->UserAuthentication()->hasIdentity()) {
-      // redirect to the login redirect route
       return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
     }
     // if registration is disabled
@@ -265,9 +235,6 @@ class UserController extends AbstractActionController {
     return $this->redirect()->toUrl($this->url()->fromRoute(static::ROUTE_LOGIN) . ($redirect ? '?redirect=' . $redirect : ''));
   }
 
-  /**
-   * Getters/setters for DI stuff
-   */
   public function getUserService() {
     if(!$this->userService) {
       $this->userService = $this->getServiceLocator()->get('user_user_service');
@@ -309,22 +276,11 @@ class UserController extends AbstractActionController {
     return $this;
   }
 
-  /**
-   * set options
-   *
-   * @param UserControllerOptionsInterface $options
-   * @return UserController
-   */
   public function setOptions(UserControllerOptionsInterface $options) {
     $this->options = $options;
     return $this;
   }
 
-  /**
-   * get options
-   *
-   * @return UserControllerOptionsInterface
-   */
   public function getOptions() {
     if(!$this->options instanceof UserControllerOptionsInterface) {
       $this->setOptions($this->getServiceLocator()->get('user_module_options'));

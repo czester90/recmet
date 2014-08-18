@@ -1,53 +1,265 @@
 <?php echo $this->doctype(); ?>
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+  <head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle('RecMet ' . $this->translate('Materials'))->setSeparator(' - ')->setAutoEscape(false) ?>
+    <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0')->appendHttpEquiv('X-UA-Compatible', 'IE=edge') ?>
 
-        <?php echo $this->headMeta()
-            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
-            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-        ?>
+    <?php
+    echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+            ->prependStylesheet($this->basePath() . '/css/styles.css')
+            ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+    ?>
 
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                        ->prependStylesheet($this->basePath() . '/css/style.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+<?php echo $this->headScript()->prependFile($this->basePath() . '/js/scripts.js'); ?>
 
-        <?php echo $this->headScript()
-            ->prependFile($this->basePath() . '/js/bootstrap.min.js')
-            ->prependFile($this->basePath() . '/js/jquery.min.js')
-            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
-        ; ?>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <section id='hidden-header'>
+      <section class='container'>
+        <section class='row contact-form'>
+          <div class='span6'>
+            <div class='login-form top-form'>
+              <h2>Contact Form</h2>
+              <p>Quisque tincidunt ornare sapien, at commodo ante tristique non. Integer id tellus nisl. Donec eget nunc eget odio malesuada egestas.</p>
 
-    </head>
-    <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                        <li><a href="<?php echo $this->url('advert') ?>"><?php echo $this->translate('Ogłoszenia') ?></a></li>
-                        <li><a href="<?php echo $this->url('companies') ?>"><?php echo $this->translate('Firmy') ?></a></li>
-                        <li><a href="<?php //echo $this->url('transactions') ?>"><?php echo $this->translate('Tranzacje') ?></a></li>
-                        <li><a href="<?php //echo $this->url('jobs') ?>"><?php echo $this->translate('Specjaliści') ?></a></li>
-                        <li><a href="<?php //echo $this->url('website') ?>"><?php echo $this->translate('Strona') ?></a></li>
-                        <li><a href="<?php //echo $this->url('statistics') ?>"><?php echo $this->translate('Giełda') ?></a></li>
-                        <li><a href="<?php //echo $this->url('support') ?>"><?php echo $this->translate('Wsparcie') ?></a></li>
-                        <li><a href="<?php //echo $this->url('contact') ?>"><?php echo $this->translate('Kontakt') ?></a></li>
-                    </ul>
+              <form action="#" class='row'>
+                <div class='span3'>
+                  <input type="text" class='input-block-level' name='name' placeholder="Name"/>
                 </div>
+                <div class='span3'>
+                  <input type="email" class='input-block-level' name='email' placeholder="Email"/>
+
+                </div>
+                <div class='span6'>
+                  <textarea name="message" class='input-block-level' rows="5" placeholder="Message"></textarea>
+                  <input type="submit" name='submit' value='Send' class='btn btn-primary'/>
+                </div>
+              </form>
             </div>
-        </nav>
-        <div class="container">
-            <?php echo $this->content; ?>
-            <hr>
-            <footer>
-                <p>&copy; 2014 - <?php echo date('Y') ?> by Recol Investment Group Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
-            </footer>
-        </div>
-        <?php echo $this->inlineScript() ?>
-    </body>
+          </div>
+          <div class='span6'>
+            <div class='top-form addresses'>
+              <h2>Location & Address</h2>
+              <div class='map-container'>
+                <iframe width="100%" height="180" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;q=Rainer+Ave,+Rowland+Heights,+Los+Angeles,+California+91748&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=42.495706,93.076172&amp;t=m&amp;ie=UTF8&amp;geocode=FcByBgIdVe34-A&amp;split=0&amp;hq=&amp;hnear=Rainer+Ave,+Rowland+Heights,+Los+Angeles,+California+91748&amp;ll=33.977033,-117.904072&amp;spn=0.024912,0.036478&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
+              </div>
+              <div class='row'>
+                <div class='span3'>
+                  <address>
+                    <strong>Head Office</strong> <br/>
+                    Reiner street 5, Los Angeles, CA 48523 <br/>
+                    Phone: +32 (0)2 494 01 28 <br/>
+                    Email: hidentica@gmail.com <br/>
+                  </address>
+                </div>
+                <div class='span3'>
+                  <address>
+                    <strong>Representative</strong> <br/>
+                    Winsont F. st. 10, New York, 48523 <br/>
+                    Phone: +32 (0)2 494 01 28 <br/>
+                    Email: hidentica@gmail.com <br/>
+                  </address>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class='row profile-form'>
+          <div class='span6'>
+            <div class='login-form top-form'>
+              <h2>Login</h2>
+              <p>Quisque tincidunt ornare sapien, at commodo ante tristique non. Integer id tellus nisl. Donec eget nunc eget odio malesuada egestas.</p>
+
+              <form action="#" class='row'>
+                <div class='span3'>
+                  <input type="text" class='input-block-level' name='username' placeholder="Username"/>
+                </div>
+                <div class='span3'>
+                  <input type="password" class='input-block-level' name='username' placeholder="Password"/>
+                  <input type="submit" name='submit' value='Login' class='btn btn-primary'/>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class='span6'>
+            <div class='login-form top-form'>
+              <h2>Register</h2>
+              <p>Quisque tincidunt ornare sapien, at commodo ante tristique non. Integer id tellus nisl. Donec eget nunc eget odio malesuada egestas.</p>
+
+              <form action="#" class='row'>
+                <div class='span3'>
+                  <input type="text" class='input-block-level' name='username' placeholder="Username"/>
+                  <input type="password" class='input-block-level' name='password' placeholder="Password"/>
+                </div>
+                <div class='span3'>
+                  <input type="email" class='input-block-level' name='email' placeholder="Email"/>
+                  <input type="password" class='input-block-level' name='confirm-password' placeholder="Confirm Password"/>
+                  <input type="submit" name='submit' value='Register' class='btn btn-primary'/>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </section>
+    </section>
+    <header>
+      <section class='container'>
+        <section class='row'>
+          <div class='span3'>
+            <figure class='logo'>
+              <a href="index-2.html">
+                <img src="img/logo.png" alt=""/>
+              </a>
+            </figure>
+          </div>
+          <div class='span7'>
+            <nav class='main-nav'>
+              <ul>
+                <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                <li><a href="<?php echo $this->url('advert') ?>"><?php echo $this->translate('Ogłoszenia') ?></a></li>
+                <li><a href="<?php echo $this->url('companies') ?>"><?php echo $this->translate('Firmy') ?></a></li>
+                <li><a href="<?php //echo $this->url('transactions')   ?>"><?php echo $this->translate('Tranzacje') ?></a></li>
+                <li><a href="<?php //echo $this->url('jobs')   ?>"><?php echo $this->translate('Specjaliści') ?></a></li>
+                <li><a href="<?php //echo $this->url('website')   ?>"><?php echo $this->translate('Strona') ?></a></li>
+                <li><a href="<?php //echo $this->url('statistics')   ?>"><?php echo $this->translate('Giełda') ?></a></li>
+                <li><a href="<?php //echo $this->url('support')   ?>"><?php echo $this->translate('Wsparcie') ?></a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class='span2'>
+            <div class='header-buttons'>
+              <a href="#" class='add custom-tooltip' title="Add something">Add</a>
+              <a href="#" class='profile custom-tooltip' title="Go to My Profile">Profile</a>
+              <a href="#" class='contact custom-tooltip' title='Got to Contact Form'>Contact</a>
+            </div>
+          </div>
+        </section>
+      </section>
+    </header>
+    
+    <?php echo $this->content; ?>
+    
+    <footer>
+      <section class='container'>
+        <section class='row'>
+          <div class='span4 footer-widget'>
+            <h2>About Us</h2>
+            <p>Donec ac diam nec magna dignissim porta ut eu nulla. Cras neque metus, dictum et congue ac, tristique eget ante. In hac habitasse platea dictumst.</p>
+            <p>Quisque tincidunt ornare sapien, at commodo ante tristique non. Integer id tellus nisl. Donec eget nunc eget odio malesuada egestas.</p>
+            <a href="#" class='read-more'>Learn More</a>
+          </div>
+          <div class='span4 footer-widget'>
+            <h2>Recent News</h2>
+            <div class='blog-style'>
+              <article>
+                <div class='date-box'>
+                  <div class='day'>20</div>
+                  <div class='month'>mar</div>
+                </div>
+                <div class='text-box'>
+                  <h3><a href="post.html">How to Choose Property</a></h3>
+                  <span class='author'>posted by admin</span>
+                  <div class='excerpt'>
+                    <p>In porttitor augue vel velit luctus at scelerisque nisi dictum. Ut tempus dignissim mi, at gravida leo.</p>
+                  </div>
+                </div>
+              </article>
+              <article>
+                <div class='date-box'>
+                  <div class='day'>16</div>
+                  <div class='month'>mar</div>
+                </div>
+                <div class='text-box'>
+                  <h3><a href="post.html">Real Estate of Future</a></h3>
+                  <span class='author'>posted by admin</span>
+                  <div class='excerpt'>
+                    <p>In porttitor augue vel velit luctus at scelerisque nisi dictum. Ut tempus dignissim mi, at gravida leo.</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class='span4 footer-widget'>
+            <h2>Testimonials</h2>
+            <div class='testimonial-box'>
+              <div class='controls'>
+                <a href="#" class='prev'>Previous</a>
+                <a href="#" class='next'>Next</a>
+              </div>
+              <ul class='slides'>
+                <li>
+                  <div class='slide-box'>
+                    <div class='text-box'>
+                      <div class='inner'>
+                        <p>"Quisque venenatis dui vitae augue accumsan sed blandit lectus pretium. Vivamus at urna ut est faucibus ornare in quis lacus. Praesent erat nulla, venenatis ac consequat vel, vestibulum id massa."</p>
+                      </div>
+                      <i class='bubble'></i>
+                    </div>
+                    <div class='author-box'>
+                      <figure></figure>
+                      <div class='texts'>
+                        <span class='name'>John Doe</span> <br />
+                        <span class='position'>Company name</span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class='slide-box'>
+                    <div class='text-box'>
+                      <div class='inner'>
+                        <p>Donec ac diam nec magna dignissim porta ut eu nulla. Cras neque metus, dictum et congue ac, tristique eget ante. In hac habitasse platea dictumst.</p>
+                      </div>
+                      <i class='bubble'></i>
+                    </div>
+                    <div class='author-box'>
+                      <figure></figure>
+                      <div class='texts'>
+                        <span class='name'>John Doe</span> <br />
+                        <span class='position'>Company name</span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <i class='footer-bubble'></i>
+        </section>
+      </section>
+    </footer>
+    <section id='sub-footer'>
+      <section class='container'>
+        <section class='row'>
+          <div class='span3'>
+            <figure class='logo'>
+              <a href="index-2.html">
+                <img src="img/logo-footer.png" alt=""/>
+              </a>
+            </figure>
+          </div>
+          <div class='span6'>
+            <div class='copyright'>
+              <p>&copy; 2014 - <?php echo date('Y') ?> by Recol Investment Group Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+            </div>
+          </div>
+          <div class='span3'>
+            <div class='social-icons'>
+              <a href="#" class='be'>Be</a>
+              <a href="#" class='star'>Star</a>
+              <a href="#" class='pinterest'>Pinterest</a>
+              <a href="#" class='facebook'>Facebook</a>
+              <a href="#" class='twitter'>Twitter</a>
+            </div>
+          </div>
+        </section>
+      </section>
+    </section>
+<?php echo $this->inlineScript() ?>
+  </body>
 </html>

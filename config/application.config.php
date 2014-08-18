@@ -7,13 +7,14 @@
  */
 return array(
     'modules' => array(
+        'Admin',
+        'Advert',
         'Application',
-        'User',
+        'AssetManager',
+        'Company',
         'DoctrineModule',
         'DoctrineORMModule',
-        'Advert',
-        'Company',
-        'Admin'
+        'User'
     ),
     'module_listener_options' => array(
         'module_paths' => array(
