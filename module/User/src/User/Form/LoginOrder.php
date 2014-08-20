@@ -12,7 +12,7 @@ class Login extends Form
 
     $this->setAttributes(array(
       'method' => 'post',
-      'class' => 'span6 first',
+      'class' => 'col-md-6 first',
     ));
     $this->add(array(
       'name' => 'identity',

@@ -12,6 +12,11 @@
         "zendframework/zendframework": "2.3.*",
         "zendframework/zftool": "dev-master",
         "doctrine/doctrine-orm-module": "0.8.*",
-        "rwoverdijk/assetmanager": "1.*"
+        "rwoverdijk/assetmanager": "1.*",
+        "natxet/CssMin": "3.0.2",
+        "doctrine/migrations": "dev-master",
+        "hounddog/doctrine-data-fixture-module": "dev-master",
+        "zf-commons/zfc-user-doctrine-orm": "dev-master",
+        "bjyoungblood/bjy-authorize": "dev-master"
     }
 }

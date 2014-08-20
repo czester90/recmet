@@ -22,34 +22,34 @@
     <section id='hidden-header'>
       <section class='container'>
         <section class='row contact-form'>
-          <div class='span6'>
+          <div class='col-md-6'>
             <div class='login-form top-form'>
               <h2>Contact Form</h2>
               <p>Quisque tincidunt ornare sapien, at commodo ante tristique non. Integer id tellus nisl. Donec eget nunc eget odio malesuada egestas.</p>
 
               <form action="#" class='row'>
-                <div class='span3'>
+                <div class='col-md-3'>
                   <input type="text" class='input-block-level' name='name' placeholder="Name"/>
                 </div>
-                <div class='span3'>
+                <div class='col-md-3'>
                   <input type="email" class='input-block-level' name='email' placeholder="Email"/>
 
                 </div>
-                <div class='span6'>
+                <div class='col-md-6'>
                   <textarea name="message" class='input-block-level' rows="5" placeholder="Message"></textarea>
                   <input type="submit" name='submit' value='Send' class='btn btn-primary'/>
                 </div>
               </form>
             </div>
           </div>
-          <div class='span6'>
+          <div class='col-md-6'>
             <div class='top-form addresses'>
               <h2>Location & Address</h2>
               <div class='map-container'>
                 <iframe width="100%" height="180" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;q=Rainer+Ave,+Rowland+Heights,+Los+Angeles,+California+91748&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=42.495706,93.076172&amp;t=m&amp;ie=UTF8&amp;geocode=FcByBgIdVe34-A&amp;split=0&amp;hq=&amp;hnear=Rainer+Ave,+Rowland+Heights,+Los+Angeles,+California+91748&amp;ll=33.977033,-117.904072&amp;spn=0.024912,0.036478&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
               </div>
               <div class='row'>
-                <div class='span3'>
+                <div class='col-md-3'>
                   <address>
                     <strong>Head Office</strong> <br/>
                     Reiner street 5, Los Angeles, CA 48523 <br/>
@@ -57,7 +57,7 @@
                     Email: hidentica@gmail.com <br/>
                   </address>
                 </div>
-                <div class='span3'>
+                <div class='col-md-3'>
                   <address>
                     <strong>Representative</strong> <br/>
                     Winsont F. st. 10, New York, 48523 <br/>
@@ -70,33 +70,33 @@
           </div>
         </section>
         <section class='row profile-form'>
-          <div class='span6'>
+          <div class='col-md-6'>
             <div class='login-form top-form'>
               <h2>Login</h2>
               <p>Quisque tincidunt ornare sapien, at commodo ante tristique non. Integer id tellus nisl. Donec eget nunc eget odio malesuada egestas.</p>
 
               <form action="#" class='row'>
-                <div class='span3'>
+                <div class='col-md-3'>
                   <input type="text" class='input-block-level' name='username' placeholder="Username"/>
                 </div>
-                <div class='span3'>
+                <div class='col-md-3'>
                   <input type="password" class='input-block-level' name='username' placeholder="Password"/>
                   <input type="submit" name='submit' value='Login' class='btn btn-primary'/>
                 </div>
               </form>
             </div>
           </div>
-          <div class='span6'>
+          <div class='col-md-6'>
             <div class='login-form top-form'>
               <h2>Register</h2>
               <p>Quisque tincidunt ornare sapien, at commodo ante tristique non. Integer id tellus nisl. Donec eget nunc eget odio malesuada egestas.</p>
 
               <form action="#" class='row'>
-                <div class='span3'>
+                <div class='col-md-3'>
                   <input type="text" class='input-block-level' name='username' placeholder="Username"/>
                   <input type="password" class='input-block-level' name='password' placeholder="Password"/>
                 </div>
-                <div class='span3'>
+                <div class='col-md-3'>
                   <input type="email" class='input-block-level' name='email' placeholder="Email"/>
                   <input type="password" class='input-block-level' name='confirm-password' placeholder="Confirm Password"/>
                   <input type="submit" name='submit' value='Register' class='btn btn-primary'/>
@@ -110,16 +110,16 @@
     <header>
       <section class='container'>
         <section class='row'>
-          <div class='span3'>
+          <div class='col-md-3'>
             <figure class='logo'>
               <a href="index-2.html">
                 <img src="img/logo.png" alt=""/>
               </a>
             </figure>
           </div>
-          <div class='span7'>
+          <div class='col-md-7'>
             <nav class='main-nav'>
-              <ul>
+              <ul class="l_tinynav1 hidden-phone">
                 <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
                 <li><a href="<?php echo $this->url('advert') ?>"><?php echo $this->translate('Ogłoszenia') ?></a></li>
                 <li><a href="<?php echo $this->url('companies') ?>"><?php echo $this->translate('Firmy') ?></a></li>
@@ -131,7 +131,7 @@
               </ul>
             </nav>
           </div>
-          <div class='span2'>
+          <div class='col-md-2'>
             <div class='header-buttons'>
               <a href="#" class='add custom-tooltip' title="Add something">Add</a>
               <a href="#" class='profile custom-tooltip' title="Go to My Profile">Profile</a>
@@ -141,19 +141,34 @@
         </section>
       </section>
     </header>
+    <section class="subheader">
+      <section class='container' style="height: 40px; line-height: 40px;">
+        <div class="col-md-10">
+          <ul class="list-inline">
+            
+          </ul>
+        </div>
+        <div class="col-md-2 text-right">
+          <ul class="list-inline">
+            <li><a href="<?php echo $this->url('user/login') ?>">Zaloguj</a></li>
+            <li><a href="<?php echo $this->url('prices') ?>">Zarejestruj</a></li>
+          </ul>
+        </div>
+      </section>
+    </section>
     
     <?php echo $this->content; ?>
     
     <footer>
       <section class='container'>
         <section class='row'>
-          <div class='span4 footer-widget'>
+          <div class='col-md-4 footer-widget'>
             <h2>About Us</h2>
             <p>Donec ac diam nec magna dignissim porta ut eu nulla. Cras neque metus, dictum et congue ac, tristique eget ante. In hac habitasse platea dictumst.</p>
             <p>Quisque tincidunt ornare sapien, at commodo ante tristique non. Integer id tellus nisl. Donec eget nunc eget odio malesuada egestas.</p>
             <a href="#" class='read-more'>Learn More</a>
           </div>
-          <div class='span4 footer-widget'>
+          <div class='col-md-4 footer-widget'>
             <h2>Recent News</h2>
             <div class='blog-style'>
               <article>
@@ -184,7 +199,7 @@
               </article>
             </div>
           </div>
-          <div class='span4 footer-widget'>
+          <div class='col-md-4 footer-widget'>
             <h2>Testimonials</h2>
             <div class='testimonial-box'>
               <div class='controls'>
@@ -236,19 +251,19 @@
     <section id='sub-footer'>
       <section class='container'>
         <section class='row'>
-          <div class='span3'>
+          <div class='col-md-3'>
             <figure class='logo'>
               <a href="index-2.html">
                 <img src="img/logo-footer.png" alt=""/>
               </a>
             </figure>
           </div>
-          <div class='span6'>
+          <div class='col-md-6'>
             <div class='copyright'>
               <p>&copy; 2014 - <?php echo date('Y') ?> by Recol Investment Group Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
             </div>
           </div>
-          <div class='span3'>
+          <div class='col-md-3'>
             <div class='social-icons'>
               <a href="#" class='be'>Be</a>
               <a href="#" class='star'>Star</a>

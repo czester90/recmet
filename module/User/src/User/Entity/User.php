@@ -2,28 +2,33 @@
 
 namespace User\Entity;
 
-use Application\Entity\BaseEntity;
-
 use BjyAuthorize\Provider\Role\ProviderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use User\Entity\UserInterface;
 
-
 /**
  * @ORM\Entity
- * @ORM\Table(name="users")
+ * @ORM\Table(name="Users")
  */
 
-class User extends BaseEntity implements UserInterface, ProviderInterface {
+class User implements UserInterface, ProviderInterface {
 
   /**
    * Initialies the roles variable.
    */
   public function __construct() {
-    parent::__construct();
     $this->roles = new ArrayCollection();
+    $this->modified_at = new \DateTime();
+    $this->created_at  = new \DateTime();
   }
+  
+  /**
+   * @ORM\Id
+   * @ORM\GeneratedValue(strategy="AUTO")
+   * @ORM\Column(type="integer")
+   */
+  protected $id;
 
   /**
    * @var string
@@ -46,7 +51,7 @@ class User extends BaseEntity implements UserInterface, ProviderInterface {
   /**
    * @var \Doctrine\Common\Collections\Collection
    * @ORM\ManyToMany(targetEntity="User\Entity\Role", cascade={"persist"})
-   * @ORM\JoinTable(name="users_roles",
+   * @ORM\JoinTable(name="Users_roles",
    *    joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
    *    inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
    * )
@@ -76,6 +81,16 @@ class User extends BaseEntity implements UserInterface, ProviderInterface {
    * @ORM\Column(type="string", length=41, nullable=true)
    */
   protected $password_recovery_hash;
+  
+  /**
+   * @ORM\Column(type="datetime")
+   */
+  protected $modified_at;
+
+  /**
+   * @ORM\Column(type="datetime")
+   */
+  protected $created_at;
 
   public function getId() {
     return $this->id;
@@ -144,4 +159,13 @@ class User extends BaseEntity implements UserInterface, ProviderInterface {
   public function setLastLogin($last_login) {
     $this->last_login = $last_login;
   }
+
+  public function getDisplayName() {
+    
+  }
+
+  public function setDisplayName($displayName) {
+    
+  }
+
 }

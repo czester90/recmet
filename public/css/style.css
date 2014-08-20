@@ -2,6 +2,10 @@
 :focus {
   outline: medium none !important;
 }
+
+.row {
+  margin-left: -15px;
+}
 body {
   font-family: "Ubuntu", Arial !important;
   background-color: #edeeef;
@@ -169,6 +173,15 @@ header {
 header .logo a {
   display: inline-block;
 }
+.subheader {
+  width: 100%;
+  float: left;
+  height: 40px;
+  position: relative;
+  z-index: 1000;  
+  margin-top: -1px;
+  background: #000;
+}
 #homepage-slider {
   background-color: #2b5188;
   height: 275px;
@@ -193,7 +206,7 @@ header .logo a {
 #homepage-slider .controls {
   position: absolute;
   bottom: 15px;
-  left: 0;
+  left: 15px;
   z-index: 200;
 }
 #homepage-slider .controls a {
@@ -336,6 +349,7 @@ header .logo a {
   margin-top: -1px;
   margin-bottom: -46px;
   padding-top: 30px;
+  box-sizing: content-box;
 }
 #page-title.small-height {
   margin-bottom: 20px;
@@ -1071,6 +1085,7 @@ footer .footer-bubble {
 }
 .featured-items .featured-item.featured-list .bottom .inner-padding {
   height: 30px;
+  box-sizing: content-box;
 }
 .featured-items .featured-item.featured-list .bottom p {
   float: left;

@@ -1,0 +1,104 @@
+<section class='container'>   
+  <form class="form-horizontal" method="POST">
+      <?= $this->status; ?>
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="company">Nazwa Firmy</label>  
+        <div class="col-md-6">
+          <input id="company" name="company" placeholder="Nazwa" class="form-control input-md" type="text">
+
+        </div>
+      </div>
+
+      <!-- Select Basic -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="country">Państwo</label>
+        <div class="col-md-6">
+          <select id="country" name="country" class="form-control">
+            <option value="Polska">Polska</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="city">Miasto</label>  
+        <div class="col-md-6">
+          <input id="city" name="city" placeholder="Miasto" class="form-control input-md" type="text">
+
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="address">Adres Firmy</label>  
+        <div class="col-md-6">
+          <input id="address" name="address" placeholder="Ulica" class="form-control input-md" type="text">
+
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="post_code">Kod Pocztowy</label>  
+        <div class="col-md-6">
+          <input id="post_code" name="post_code" placeholder="12-345" class="form-control input-md" type="text">
+
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-10">
+            <label class="control-label">
+              Dane Użytkownika
+            </label>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="username">Username</label>  
+        <div class="col-md-6">
+          <input id="username" name="username" placeholder="Nazwa Użytkownika" class="form-control input-md" type="text">
+
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="email">Email</label>  
+        <div class="col-md-6">
+          <input id="email" name="email" placeholder="Adres Email" class="form-control input-md" type="text">
+
+        </div>
+      </div>
+
+      <!-- Password input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="password">Hasło</label>
+        <div class="col-md-6">
+          <input id="password" name="password" placeholder="" class="form-control input-md" type="password">
+
+        </div>
+      </div>
+
+      <!-- Password input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="password2">Powtórz Hasło</label>
+        <div class="col-md-6">
+          <input id="password2" name="password2" placeholder="" class="form-control input-md" type="password">
+
+        </div>
+      </div>
+
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="register"></label>
+        <div class="col-md-4">
+          <button id="register" name="register" class="btn btn-success">Rejestruj Firme</button>
+        </div>
+      </div>
+
+  </form>
+
+</section>

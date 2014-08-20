@@ -6,8 +6,7 @@ $form->setAttribute('method', 'post');
 $form->setAttribute('class', 'loginForm');
 $form->setAttribute('id', 'login-form-user-show');
 ?>
-<?php $this->StylesList(array('css/login.css')); ?>
-
+<section class='container'>
 <div class="contents">
   <div class="login--user">
     <form id="login-form-user-hide" class="loginForm <?php if($this->id !== 'password') echo 'hide'; ?>" method="POST" action="<?= $this->url('user/reset') ?>">
@@ -79,10 +78,9 @@ $form->setAttribute('id', 'login-form-user-show');
       </div>
 
       <span class="forgotPassword">Forgot your password?</span>
-      <a href="<?= $this->url('Courses'); ?>">Sign up now</a>
     </div>
     <?php echo $this->form()->closeTag() ?>
     <?php endif; ?>
   </div>
 </div>
-<?php echo $this->test; ?>
+</section>

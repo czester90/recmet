@@ -17,12 +17,6 @@ class Module implements
         $app     = $e->getParam('application');
         $sm      = $app->getServiceManager();
         $options = $sm->get('user_module_options');
-
-        // Add the default entity driver only if specified in configuration
-        if ($options->getEnableDefaultEntities()) {
-            $chain = $sm->get('doctrine.driver.orm_default');
-            $chain->addDriver(new XmlDriver(__DIR__ . '/config/xml/userdoctrineorm'), 'User\Entity');
-        }
     }
   
     public function getAutoloaderConfig()
