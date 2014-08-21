@@ -21,11 +21,6 @@ class CompanyController extends BaseController {
   }
   
   public function registerAction() {
-    
-    if ($this->user()->getIdentity()) {
-      echo "yes";
-    }
-    
     $request = $this->getRequest();
     $message = new MessageStatus();
     
