@@ -10,7 +10,6 @@ return array(
         'Admin',
         'Advert',
         'Application',
-        'AssetManager',
         'Company',
         'DoctrineModule',
         'DoctrineORMModule',

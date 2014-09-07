@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "64d612cc9e7f849955dcf786ed01c6c2",
+    "hash": "1c1e28b65f77f26793e7779378eb41f5",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bjyoungblood/BjyAuthorize.git",
-                "reference": "fb81997c2d904da7b7620da78c0962989ea53dec"
+                "reference": "5c153e3812a0bec2fae1e94319a4919989cc2d4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bjyoungblood/BjyAuthorize/zipball/fb81997c2d904da7b7620da78c0962989ea53dec",
-                "reference": "fb81997c2d904da7b7620da78c0962989ea53dec",
+                "url": "https://api.github.com/repos/bjyoungblood/BjyAuthorize/zipball/5c153e3812a0bec2fae1e94319a4919989cc2d4e",
+                "reference": "5c153e3812a0bec2fae1e94319a4919989cc2d4e",
                 "shasum": ""
             },
             "require": {
@@ -74,7 +74,7 @@
                 "zf2",
                 "zfc-user"
             ],
-            "time": "2014-08-07 11:40:29"
+            "time": "2014-08-26 14:39:08"
         },
         {
             "name": "doctrine/annotations",
@@ -964,16 +964,16 @@
         },
         {
             "name": "kriswallsmith/assetic",
-            "version": "v1.1.2",
+            "version": "1.1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/assetic.git",
-                "reference": "735cffd3982c6e8cdebe292d5db39d077f65890f"
+                "reference": "ddaccff1bd80bd8721a56e0d36bb141363bf3605"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/735cffd3982c6e8cdebe292d5db39d077f65890f",
-                "reference": "735cffd3982c6e8cdebe292d5db39d077f65890f",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/ddaccff1bd80bd8721a56e0d36bb141363bf3605",
+                "reference": "ddaccff1bd80bd8721a56e0d36bb141363bf3605",
                 "shasum": ""
             },
             "require": {
@@ -1031,7 +1031,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2013-07-19 00:03:27"
+            "time": "2014-04-26 15:49:46"
         },
         {
             "name": "natxet/CssMin",
@@ -1139,17 +1139,17 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.5.3",
+            "version": "v2.5.4",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "cd2d1e4bac2206b337326b0140ff475fe9ad5f63"
+                "reference": "748beed2a1e73179c3f5154d33fe6ae100c1aeb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/cd2d1e4bac2206b337326b0140ff475fe9ad5f63",
-                "reference": "cd2d1e4bac2206b337326b0140ff475fe9ad5f63",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/748beed2a1e73179c3f5154d33fe6ae100c1aeb1",
+                "reference": "748beed2a1e73179c3f5154d33fe6ae100c1aeb1",
                 "shasum": ""
             },
             "require": {
@@ -1190,21 +1190,21 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2014-08-05 09:00:40"
+            "time": "2014-08-14 16:10:54"
         },
         {
             "name": "symfony/process",
-            "version": "v2.5.3",
+            "version": "v2.5.4",
             "target-dir": "Symfony/Component/Process",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "e0997d2a9a1a763484b34b989900b61322a9b056"
+                "reference": "136cf0bdaacea81f779583376d47dd8aef4fc6ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/e0997d2a9a1a763484b34b989900b61322a9b056",
-                "reference": "e0997d2a9a1a763484b34b989900b61322a9b056",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/136cf0bdaacea81f779583376d47dd8aef4fc6ba",
+                "reference": "136cf0bdaacea81f779583376d47dd8aef4fc6ba",
                 "shasum": ""
             },
             "require": {
@@ -1237,7 +1237,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2014-08-05 09:00:40"
+            "time": "2014-08-31 03:22:04"
         },
         {
             "name": "zendframework/zenddiagnostics",
@@ -1711,6 +1711,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "zendframework/zftool": 20,
+        "kriswallsmith/assetic": 20,
         "doctrine/migrations": 20,
         "hounddog/doctrine-data-fixture-module": 20,
         "zf-commons/zfc-user-doctrine-orm": 20,

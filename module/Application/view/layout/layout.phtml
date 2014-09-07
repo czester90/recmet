@@ -8,11 +8,11 @@
 
     <?php
     echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-            ->prependStylesheet($this->basePath() . '/css/styles.css')
+            ->prependStylesheet($this->basePath() . '/css/styles.min.css')
             ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
     ?>
 
-<?php echo $this->headScript()->prependFile($this->basePath() . '/js/scripts.js'); ?>
+<?php echo $this->headScript()->prependFile($this->basePath() . '/js/scripts.min.js'); ?>
 
   </head>
   <body>
@@ -67,10 +67,11 @@
           <ul class="list-inline submenu">
               <li><a href="<?= $this->url('user/profile') ?>">Profile</a></li>
               <li><a href="#">Oferty</a></li>
-              <li><a href="#">Dodaj Ogłoszenie</a></li>
-              <li><a href="#">Moje Ogłoszenia</a></li>
+              <li><a href="<?= $this->url('advert/add') ?>">Zarzadzanie Ogłoszeniami</a></li>
+              <li><a href="#">Magazyn</a></li>
               <li><a href="#">Tranzakcje</a></li>
               <li><a href="#">Przedstawiciele</a></li>
+              <li><a href="#">Płatności</a></li>
               <li><a href="#">Ustawienia</a></li>
           </ul>
         </div>
@@ -85,24 +86,6 @@
     
     <?php echo $this->content; ?>
     
-    <footer>
-      <section class='container'>
-        <section class='row'>
-          <div class='col-md-4 footer-widget'>
-            <h2>O nas</h2>
-            <p>Donec ac diam nec magna dignissim porta ut eu nulla. Cras neque metus, dictum et congue ac, tristique eget ante. In hac habitasse platea dictumst.</p>
-            <a href="#" class='read-more'>Czytaj więcej</a>
-          </div>
-          <div class='col-md-4 footer-widget'>
-            <h2>Obsługa Klienta</h2>
-          </div>
-          <div class='col-md-4 footer-widget'>
-            <h2>Kontakt</h2>
-          </div>
-          <i class='footer-bubble'></i>
-        </section>
-      </section>
-    </footer>
     <section id='sub-footer'>
       <section class='container'>
         <section class='row'>
