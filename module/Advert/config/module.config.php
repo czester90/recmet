@@ -21,6 +21,18 @@ return array(
                         'action'     => 'advertList',
                     ),
                 ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'add' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/add',
+                            'defaults' => array(
+                                'action' => 'add'
+                            ),
+                        ),
+                    ),
+                ),
             ),
         ),
     ),

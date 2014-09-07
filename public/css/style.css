@@ -18,6 +18,7 @@ figure {
   margin: 0;
   padding: 0;
 }
+
 h2 {
   font-size: 15px;
   color: #a1a1a1;
@@ -61,6 +62,7 @@ textarea:invalid {
   color: #f66442;
   border-color: #f66442;
 }
+
 .tooltip.bottom .tooltip-arrow {
   right: 20px;
   left: auto !important;
@@ -807,8 +809,10 @@ footer .footer-bubble {
   position: absolute;
   top: -6px;
 }
+
 .featured-items {
   padding-bottom: 20px;
+  margin: 30px 0;
 }
 .featured-items .controls {
   float: right;

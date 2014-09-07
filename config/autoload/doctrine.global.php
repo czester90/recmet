@@ -21,10 +21,17 @@ return array(
                     __DIR__ . '/../../module/Company/src/Company/Entity',
                 )
             ),
+            'advert_entities' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'paths' => array(
+                    __DIR__ . '/../../module/Advert/src/Advert/Entity',
+                )
+            ),
             'orm_default' => array(
                 'drivers' => array(
                     'User\Entity' => 'user_entities',
-                    'Company\Entity' => 'company_entities'
+                    'Company\Entity' => 'company_entities',
+                    'Advert\Entity' => 'advert_entities'
                 ),
             ),
         ),

@@ -7,6 +7,8 @@ use Zend\View\Model\ViewModel;
 use Library\MessageStatus;
 use Zend\Crypt\Password\Bcrypt;
 use Zend\Stdlib\Parameters;
+use Company\Entity\Company;
+use User\Entity\User;
 
 class CompanyController extends BaseController {
   
@@ -25,7 +27,7 @@ class CompanyController extends BaseController {
     $message = new MessageStatus();
     
     if($request->isPost()){
-      $company = new \Company\Entity\Company();
+      $company = new Company();
       $company->setName($request->getPost('company'));
       $company->setCountry($request->getPost('country'));
       $company->setCity($request->getPost('city'));
@@ -37,7 +39,7 @@ class CompanyController extends BaseController {
       $bcrypt = new Bcrypt;
       $bcrypt->setCost(14);
       
-      $user = new \User\Entity\User();
+      $user = new User();
       $user->setUsername($request->getPost('username'));
       $user->setPassword($bcrypt->create($request->getPost('password')));
       $user->setEmail($request->getPost('email'));

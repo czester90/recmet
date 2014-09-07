@@ -1,0 +1,75 @@
+<section role="main" id="main">
+  <section class="container">
+    <section class="row featured-items ">
+      <div class="col-md-4">
+        <div class="list-group">
+          <a href="#" class="list-group-item active">
+            Dashboard
+          </a>
+          <a href="#" class="list-group-item">Dodaj Ogłoszenie</a>
+          <a href="#" class="list-group-item">Moje Ogłoszenia</a>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Panel title</h3>
+          </div>
+          <div class="panel-body">
+            <form method="POST" enctype="multipart/form-data">
+
+              <div class="form-group">
+                <label for="name">Nazwa Ogłoszenia</label>  
+                <input id="name" name="name" placeholder="" class="form-control input-md" required="" type="text">
+              </div>
+              
+              <div class="form-group">
+                <label for="description">Opis Ogłoszenia</label>                    
+                <textarea class="form-control" id="description" name="description"></textarea>
+              </div>
+              
+              <div class="form-group">
+                <label for="category">Kategoria</label>
+                  <select id="category" name="category" class="form-control" multiple="multiple">
+                    <option value="1">Metale</option>
+                    <option value="2">Plastyki</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                <label for="amount">Cena</label>  
+                <input id="amount" name="amount" placeholder="" class="form-control input-md" required="" type="text">
+              </div>
+
+              <div class="form-group">
+                <label for="weight">Ilość</label>  
+                <input id="weight" name="weight" placeholder="" class="form-control input-md" required="" type="text">
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-inline" for="checkboxes-0">
+                  <input name="checkboxes" id="checkboxes-0" value="add" type="checkbox">
+                  Wystawiam
+                </label>
+                <label class="checkbox-inline" for="checkboxes-1">
+                  <input name="checkboxes" id="checkboxes-1" value="offer" type="checkbox">
+                  Poszukuje
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label for="images">Zdjęcia</label>
+                <input id="images" name="images[]" multiple="multiple" class="input-file" type="file">
+              </div>
+
+              <div class="form-group">
+                <button id="add-advert" name="add-advert" class="btn btn-success">Dodaj Ogłoszenie</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</section>

@@ -2,12 +2,21 @@
 
 namespace Advert\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use Application\Controller\BaseController;
 use Zend\View\Model\ViewModel;
 
-class AdvertController extends AbstractActionController {
+class AdvertController extends BaseController {
   
   public function advertListAction() {
+    return new ViewModel();
+  }
+  
+  public function addAction() {
+    $request = $this->getRequest();
+    
+    if($request->isPost()){
+      
+    }
     return new ViewModel();
   }
 }
