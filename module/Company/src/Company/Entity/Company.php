@@ -2,7 +2,7 @@
 
 namespace Company\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Application\Entity\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="Company")
  *
  */
-class Company {
+class Company extends BaseEntity {
 
   /**
    * @var int
@@ -26,6 +26,18 @@ class Company {
    * @ORM\Column(type="string")
    */
   protected $name;
+  
+  /**
+   * @var string
+   * @ORM\Column(type="string")
+   */
+  protected $nip;
+  
+  /**
+   * @var string
+   * @ORM\Column(type="string")
+   */
+  protected $regon;
   
   /**
    * @var string
@@ -68,7 +80,7 @@ class Company {
   }
   
   public function getCountry() {
-    return $this->billing_info->country;
+    return $this->country;
   }
   
   public function setCountry($value){
@@ -76,7 +88,7 @@ class Company {
   }
 
   public function getAddress() {
-    return $this->billing_info->adreess;
+    return $this->adreess;
   }
   
   public function setAddress($value){
@@ -84,7 +96,7 @@ class Company {
   }
 
   public function getCity() {
-    return $this->billing_info->city;
+    return $this->city;
   }
   
   public function setCity($value){
@@ -92,7 +104,7 @@ class Company {
   }
 
   public function getPostCode() {
-    return $this->billing_info->zip;
+    return $this->zip;
   }
   
   public function setPostCode($value){

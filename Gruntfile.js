@@ -16,7 +16,7 @@ module.exports = function(grunt) {
     uglify: {
         my_target: {
             files: {
-                'public/js/scripts.min.js': ['public/js/*.js', 'public/js/vendor/*.js']
+                'public/js/scripts.min.js': ['public/js/jquery.js', 'public/js/*.js', 'public/js/vendor/*.js']
             }
         }
     },
@@ -29,6 +29,7 @@ module.exports = function(grunt) {
                   'public/css/vendor/slider.css',
                   'public/css/jquery.mCustomScrollbar.css',
                   'public/css/views/company/price-table.less',
+                  'public/css/views/advert/table-advert.less',
                   'public/css/style.css'
                 ]
             }

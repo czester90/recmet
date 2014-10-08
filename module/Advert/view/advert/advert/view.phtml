@@ -1,0 +1,198 @@
+<section id='page-title'>
+  <section class='container'>
+    <section class='row'>
+      <div class='col-md-6'>
+        <h1><?= $advert->getName() ?></h1>
+        <ul class="breadcrumb">
+          <li><a href="#">Ogłoszenia</a></li>
+          <li><a href="#">Sprzedam</a></li>
+          <li class="active">Metale</li>
+        </ul>
+      </div>
+    </section>
+  </section>
+</section>
+<section id='content' class='alternate-bg'>
+  <section class='container'>
+    <section class='row featured-items'>
+      <section class='col-md-9'>
+        <div class='property-box'>
+          <div class='top'>
+            <div class='row'>
+              <div class='left'>
+                <figure>
+                  <a rel="prettyPhoto[gallery]" href="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$advert->getImages()->get(0)->getName(); ?>">
+                    <img src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$advert->getImages()->get(0)->getName(); ?>" alt="" />
+                  </a>
+                  <div class='banner'><?= Advert\Entity\Advert::advertTypeArray($advert->getAdvertType()); ?></div>
+                </figure>
+                <div class='title-line'>
+                  <div class='pull-left'>
+                    <h2><?= $advert->getName() ?></h2> <br />
+                    <p>
+                      <span class="s12 border-ad-right">Polska</span>
+                      <span class="s12">Data wystawienia: 09-09-2014</span>
+                    </p>
+                  </div>
+                  <div class='pull-right price-wrapper'>
+                    <span class='price'>PLN <?= $advert->getAmount() ?></span>
+                    <div class="rate">/<?= Advert\Entity\Advert::amountTypeArray($advert->getAmountType()); ?></div>
+                  </div>
+                </div>
+                <div class='description'>
+                  <p><?= $advert->getDescription() ?></p>
+                </div>
+                <table class='table table-hover table-bordered'>
+                  <tr>
+                    <td>Ilość materiału</td>
+                    <td><?= $advert->getPieces() ?></td>
+                  </tr>
+                </table>
+              </div>
+              <div class='right'>
+                <h3>Zdjęcia <span>(<?= $advert->getImages()->count(); ?> zdjęć)</span></h3>
+                <div class='gallery'>
+                  <?php $index = 1; $group = 1; ?>
+                  <?php foreach($advert->getImages()->getValues() as $images): ?>
+                    <?php if($index == 1){ $index++; continue;} ?>
+                    <?php if($group){ echo "<div class='line'>";} ?>
+                      <figure>
+                        <a rel="prettyPhoto[gallery]" href="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$images->getName(); ?>">
+                          <img src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$images->getName(); ?>" alt="" />
+                        </a>
+                      </figure>
+                    <?php if(!$group): ?>
+                      <?= "</div>"; ?>
+                      <?php $group++; ?>
+                    <?php else: ?>
+                      <?php $group--; ?>
+                    <?php endif; ?>
+                  <?php $index++; ?>
+                  <?php endforeach; ?>
+                  <a rel="prettyPhoto[gallery]" class='more'>View all photos</a>
+                </div>
+              </div>
+              </div>
+            </div>
+          <div class='bottom'>
+            <div class='inner'>
+              <div class='row'>
+                <div class='pull-left update-box'>
+                  <p>Ogłoszenie zaktualizowane <?= $advert->getUpdated_at()->format('d-m-Y'); ?> | Ilość złożonych ofert: 1</p>
+                </div>
+                <div class='pull-right'>
+                  <?php if(!$this->UserIdentity()): ?>
+                    <p>Musisz być <a href="#">zalogowany</a> aby złożyć oferte</p>
+                  <?php endif;?>
+                  <div class='star-rating'>
+                    <button class='star blue'>1 Star</button>
+                    <button class='star active'>2 Star</button>
+                    <button class='star active'>3 Star</button>
+                    <button class='star'>4 Star</button>
+                    <button class='star'>5 Star</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='author-section big-margins'>
+          <div class='left'>
+            <div class='inner'>
+                <div class='text'>
+                  <h2 style="float: left; margin-right: 10px;">Testowy Kontrahent</h2>
+                  <div class='star-rating' style="float: none;">
+                    <button class='star blue'>1 Star</button>
+                    <button class='star'>2 Star</button>
+                    <button class='star'>3 Star</button>
+                    <button class='star'>4 Star</button>
+                    <button class='star'>5 Star</button>
+                  </div>
+                  <span class='job-title'>Polska, Oferta złożona: <?= $advert->getUpdated_at()->format('d-m-Y'); ?></span>
+                  <p>Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</p>
+                  <a href="#" class='follow btn btn-primary' style="right: 268px;"><i class='icon-white icon-plus'></i> Zobacz Ofertę</a>
+                  <a href="#" class='follow btn btn-primary' style="right: 167px;"><i class='icon-white icon-plus'></i> Negocjuj</a>
+                  <a href="#" class='follow btn btn-success'><i class='icon-white icon-plus'></i> Zaakceptuj Ofertę</a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <aside class='col-md-3'>
+        <section class='widget'>
+          <section class='widget-title uppercase'>
+            <div class='inner'>
+              <h2>Szukaj Ogłoszenia</h2>
+            </div>
+          </section>
+          <section class='widget-content'>
+            <form action="#">
+              <div class='widget-section'>
+                <div class='inner'>
+                  <label for="location">Słowo Kluczowe</label>
+                  <input type="text" name='location' id='location' class='input-block-level' value=''/>
+                </div>
+              </div>
+              <div class='widget-section'>
+                <div class='inner'>
+                  <label for="propertyType">Typ Ogłoszenia</label>
+                  <select name="propertyType" id="propertyType" class='btn-block selectpicker'>
+                    <option value="all">Wszystkie</option>
+                    <option value="all">Sprzedam</option>
+                    <option value="all">Poszukuje</option>
+                  </select>
+                </div>
+              </div>
+              <div class='widget-section'>
+                <div class='inner'>
+                  <label for="category">Kategorie</label>
+                  <select name="propertyType" id="category" class='btn-block selectpicker'>
+                    <option value="all">Metale</option>
+                    <option value="all">Plastik</option>
+                  </select>
+                </div>
+              </div>
+              <div class='widget-section first-half'>
+                <div class='inner'>
+                  <label for="minPrice">Min. Kwota</label>
+                  <select name="propertyType" id="minPrice" class='btn-block selectpicker'>
+                    <option value="all">PLN 1 tys.</option>
+                    <option value="all">PLN 2 tys.</option>
+                    <option value="all">PLN 3 tys.</option>
+                  </select>
+                </div>
+              </div>
+              <div class='widget-section second-half'>
+                <div class='inner'>
+                  <label for="maxPrice">Max. Kwota</label>
+                  <select name="propertyType" id="maxPrice" class='btn-block selectpicker'>
+                    <option value="all">PLN 5 tys.</option>
+                    <option value="all">PLN 6 tys.</option>
+                    <option value="all">PLN 7 tys.</option>
+                  </select>
+                </div>
+              </div>
+              <div class='widget-section'>
+                <div class='inner'>
+                  <label for="bedrooms">Ilość Tranzakcji</label>
+                  <select name="propertyType" id="bedrooms" class='btn-block selectpicker'>
+                    <option value="all">1-5</option>
+                    <option value="all">5-10</option>
+                    <option value="all">10-15</option>
+                    <option value="all">15+</option>
+                  </select>
+                </div>
+              </div>
+              <section class='widget-buttons'>
+                <div class='inner'>
+                  <a href="#" class='more-options'>Więcej Opcji</a> <br />
+                  <a href='#' class='btn btn-primary btn-large btn-block'>Wyszukaj</a>
+                </div>
+              </section>
+            </form>
+          </section>
+        </section>
+      </aside>
+    </section>
+  </section>
+</section>

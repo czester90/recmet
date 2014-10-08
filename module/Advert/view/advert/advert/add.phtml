@@ -1,17 +1,9 @@
 <section role="main" id="main">
   <section class="container">
     <section class="row featured-items ">
-      <div class="col-md-4">
-        <div class="list-group">
-          <a href="#" class="list-group-item active">
-            Dashboard
-          </a>
-          <a href="#" class="list-group-item">Dodaj Ogłoszenie</a>
-          <a href="#" class="list-group-item">Moje Ogłoszenia</a>
-        </div>
-      </div>
+      <?= $this->partial('advert/advert/partial/menu.phtml'); ?>
 
-      <div class="col-md-8">
+      <div class="col-md-9">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Panel title</h3>
@@ -43,18 +35,29 @@
               </div>
 
               <div class="form-group">
-                <label for="weight">Ilość</label>  
-                <input id="weight" name="weight" placeholder="" class="form-control input-md" required="" type="text">
+                <label for="pieces">Ilość</label>  
+                <input id="weight" name="pieces" placeholder="" class="form-control input-md" required="" type="text">
               </div>
 
               <div class="form-group">
-                <label class="checkbox-inline" for="checkboxes-0">
-                  <input name="checkboxes" id="checkboxes-0" value="add" type="checkbox">
+                <label class="checkbox-inline" for="advert_type">
+                  <input name="advert_type" id="checkboxes-0" value="1" type="checkbox">
                   Wystawiam
                 </label>
-                <label class="checkbox-inline" for="checkboxes-1">
-                  <input name="checkboxes" id="checkboxes-1" value="offer" type="checkbox">
+                <label class="checkbox-inline" for="advert_type">
+                  <input name="advert_type" id="checkboxes-1" value="2" type="checkbox">
                   Poszukuje
+                </label>
+              </div>
+              
+              <div class="form-group">
+                <label class="checkbox-inline" for="amount_type">
+                  <input name="amount_type" id="checkboxes-0" value="1" type="checkbox">
+                  Jednorazowo
+                </label>
+                <label class="checkbox-inline" for="amount_type">
+                  <input name="amount_type" id="checkboxes-1" value="2" type="checkbox">
+                  Miesiecznie
                 </label>
               </div>
 

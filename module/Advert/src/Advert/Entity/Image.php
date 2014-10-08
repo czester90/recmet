@@ -1,6 +1,6 @@
 <?php
 
-namespace Company\Entity;
+namespace Advert\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  */
 class Image {
+  
+  const IMAGE_PATH = '/public/images/user/';
+  const IMAGE_PATH_VIEW = '/images/user/';
 
   /**
    * @var int
@@ -23,13 +26,17 @@ class Image {
 
   /**
    * @ORM\Column(type="integer")
-   * @ORM\ManyToOne(targetEntity="Users")
+   * @ORM\ManyToOne(targetEntity="User\Entity\Users")
    */
   protected $user_id;
 
   /**
-   * @ORM\Column(type="integer")
-   * @ORM\ManyToOne(targetEntity="Advert")
+   * @var \Doctrine\Common\Collections\Collection
+   * @ORM\ManyToMany(targetEntity="Advert\Entity\Advert", inversedBy="images", cascade={"persist", "remove"})
+   * @ORM\JoinTable(name="Advert_image",
+   *    joinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id")},
+   *    inverseJoinColumns={@ORM\JoinColumn(name="advert_id", referencedColumnName="id")}
+   * )
    */
   protected $advert_id;
 
@@ -42,6 +49,22 @@ class Image {
    * @ORM\Column(type="string")
    */
   protected $type;
+  
+  /**
+   * @ORM\Column(type="datetime")
+   */
+  protected $updated_at;
+
+  /**
+   * @ORM\Column(type="datetime")
+   */
+  protected $created_at;
+  
+  public function __construct() {
+    $this->advert_id = new ArrayCollection();
+    $this->updated_at = new \DateTime();
+    $this->created_at  = new \DateTime();
+  }
 
   public function getId() {
     return $this->id;
@@ -83,4 +106,21 @@ class Image {
     $this->type = $type;
   }
 
+  public function getUpdated_at() {
+    return $this->updated_at;
+  }
+
+  public function getCreated_at() {
+    return $this->created_at;
+  }
+
+  public function setUpdated_at($updated_at) {
+    $this->updated_at = $updated_at;
+  }
+
+  public function setCreated_at($created_at) {
+    $this->created_at = $created_at;
+  }
+
+  
 }

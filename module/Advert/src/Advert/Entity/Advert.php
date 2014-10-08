@@ -1,9 +1,10 @@
 <?php
 
-namespace Company\Entity;
+namespace Advert\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Application\Entity\BaseEntity;
 
 /**
  *
@@ -11,8 +12,24 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="Adverts")
  *
  */
-class Advert {
+class Advert extends BaseEntity {
 
+  const AMOUNT_TYPE_ONE = 'Jednorazowo';
+  const AMOUNT_TYPE_MONTH = 'Miesięcznie';
+  
+  const ADVERT_TYPE_SELL = 'Sprzedaje';
+  const ADVERT_TYPE_BUY = 'Poszukuje';
+
+  private static $advert_type_arr = array(
+    1 => Advert::ADVERT_TYPE_SELL,
+    2 => Advert::ADVERT_TYPE_BUY
+  );
+  
+  private static $amount_type_arr = array(
+    1 => Advert::AMOUNT_TYPE_ONE,
+    2 => Advert::AMOUNT_TYPE_MONTH
+  );
+  
   /**
    * @var int
    * @ORM\Id
@@ -49,6 +66,12 @@ class Advert {
    * @ORM\Column(type="string")
    */
   protected $url;
+  
+  /**
+   * 
+  * @ORM\ManyToMany(targetEntity="Image", mappedBy="advert_id")
+  */
+  protected $images; 
 
   /**
    * @ORM\Column(type="boolean")
@@ -63,12 +86,17 @@ class Advert {
   /**
    * @ORM\Column(type="integer")
    */
-  protected $days;
+  protected $advert_type;
   
   /**
-   * @ORM\ManyToOne(targetEntity="Image")
+   * @ORM\Column(type="integer")
    */
-  protected $images;
+  protected $amount_type;
+  
+  /**
+   * @ORM\Column(type="integer")
+   */
+  protected $days;
   
   /**
    * @ORM\Column(type="float")
@@ -91,10 +119,22 @@ class Advert {
   protected $created_at;
   
   public function __construct() {
-    $this->modified_at = new \DateTime();
+    $this->updated_at = new \DateTime();
     $this->created_at  = new \DateTime();
+    $this->images = new ArrayCollection();
   }
 
+  public static function amountTypeArray($type){
+    return self::$amount_type_arr[$type];
+  }
+  
+  public static function advertTypeArray($type){
+    return self::$advert_type_arr[$type];
+  }
+
+  public function getImagesValue() {
+    return $this->images->getValues();
+  }
 
   public function getId() {
     return $this->id;
@@ -205,6 +245,22 @@ class Advert {
 
   public function setCreated_at($created_at) {
     $this->created_at = $created_at;
+  }
+
+  public function getAmountType() {
+    return $this->amount_type;
+  }
+
+  public function setAmountType($amount_type) {
+    $this->amount_type = $amount_type;
+  }
+
+  public function getAdvertType() {
+    return $this->advert_type;
+  }
+
+  public function setAdvertType($advert_type) {
+    $this->advert_type = $advert_type;
   }
 
 

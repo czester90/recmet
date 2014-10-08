@@ -62,7 +62,7 @@ class Login extends ProvidesEventsForm
             ->setAttributes(array(
                 'type'  => 'submit',                
                 'class' => 'login_submit formFooterButtons rounded Button primary Module large hasText btn',
-                'value' => 'Log in'
+                'value' => 'Zaloguj'
             ));
 
         $this->add($submitElement, array(

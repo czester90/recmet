@@ -1,0 +1,64 @@
+<section role="main" id="main">
+  <section class="container">
+    <section class="row featured-items ">
+      <?= $this->partial('advert/advert/partial/menu.phtml'); ?>
+
+      <div class="col-md-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">List Ogłoszeń</h3>
+          </div>
+          <div class="panel-body">
+            
+            <div class="row">
+            <div class="col-md-12 featured-item-list">
+            <?php foreach($this->adverts as $advert): ?>
+            <div class="featured-item featured-list noshadow">
+              <div class="f8col">
+                <div class="inner-border noborder">
+                  <div class="inner-padding">
+                    <figure>
+                      <img alt="" src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$advert->getImages()->get(0)->getName(); ?>">
+                      <div class="banner"><?= Advert\Entity\Advert::advertTypeArray($advert->getAdvertType()); ?></div>
+                      <a class="figure-hover" href="<?= $this->url('advert/view', array('id' => $advert->getId(), 'url' => $advert->getUrl())); ?>">Zoom</a>
+                    </figure>
+                    <div class="right">
+                      <h3><a href="<?= $this->url('advert/view', array('id' => $advert->getId(), 'url' => $advert->getUrl())); ?>" class="blue-tcol"><?= $advert->getName(); ?></a></h3>
+                      <?php $company = $this->company->find($this->UserIdentity()->getCompany_id()); ?>
+                      <p class="s12">Kraj: <?= $company->getCountry(); ?> | Data wystawienia: <?= $advert->getCreated_at()->format('d-m-Y'); ?></p>
+                      <div class="description">
+                        <p><?= $advert->getDescription(); ?></p>
+                      </div>
+                      <div class="price-wrapper">
+                        <div class="price">PLN <?= $advert->getAmount(); ?></div>
+                        <div class="rate">/<?= Advert\Entity\Advert::amountTypeArray($advert->getAmountType()); ?></div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-10">
+                        <?php $category = $this->category->find($advert->getCategory_id()); ?>
+                        <span class="s12 border-ad-right">Kategoria: <?= $category->getName(); ?></span>
+                        <span class="s12 border-ad-right">Wizyt: <?= $advert->getVisits(); ?></span>
+                        <span class="s12 border-ad-right">Ofert: 0</span>
+                        <span class="s12 border-ad-right">Najwyższa Oferta: Brak</span>
+                        <span class="s12">Status: Wystawione</span>
+                      </div>
+                      <div class="col-md-2">
+                        <a href="<?= $this->url('advert/edit', array('id' => $advert->getId())) ?>" type="button" class="btn btn-xs btn-primary">Edytuj</a>
+                        <a href="<?= $this->url('advert/delete', array('id' => $advert->getId())) ?>" type="button" class="btn btn-xs btn-danger">Usuń</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <?php endforeach; ?>
+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</section>

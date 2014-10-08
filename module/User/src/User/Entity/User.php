@@ -18,6 +18,7 @@ class User implements UserInterface, ProviderInterface {
    * Initialies the roles variable.
    */
   public function __construct() {
+    $this->company_id = new ArrayCollection();
     $this->roles = new ArrayCollection();
     $this->modified_at = new \DateTime();
     $this->created_at  = new \DateTime();
@@ -29,6 +30,12 @@ class User implements UserInterface, ProviderInterface {
    * @ORM\Column(type="integer")
    */
   protected $id;
+  
+  /**
+   * @ORM\Column(type="integer")
+   * @ORM\ManyToOne(targetEntity="Company/Entity/Company")
+   */
+  protected $company_id;
 
   /**
    * @var string
@@ -98,6 +105,14 @@ class User implements UserInterface, ProviderInterface {
 
   public function setId($id) {
     return $this->id = $id;
+  }
+  
+  public function getCompany_id() {
+    return $this->company_id;
+  }
+
+  public function setCompany_id($company_id) {
+    $this->company_id = $company_id;
   }
 
   public function getUsername() {

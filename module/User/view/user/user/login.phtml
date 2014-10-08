@@ -6,81 +6,107 @@ $form->setAttribute('method', 'post');
 $form->setAttribute('class', 'loginForm');
 $form->setAttribute('id', 'login-form-user-show');
 ?>
-<section class='container'>
-<div class="contents">
-  <div class="login--user">
-    <form id="login-form-user-hide" class="loginForm <?php if($this->id !== 'password') echo 'hide'; ?>" method="POST" action="<?= $this->url('user/reset') ?>">
-      <h1>Enter your email</h1>
-
-
-      <ul class="userLogin">
-        <li class="loginUsername">
-          <input type="text" value="" placeholder="Email" class="login_username" name="email">
-        </li>
-      </ul>
-
-      <div class="formFooter">
-        <div class="formFooterButtons">
-
-          <input type="submit" value="Send Password" class="login_submit formFooterButtons rounded Button primary Module large hasText btn" name="submit">
+<section role="main" id="main">
+  <section class="container">
+    <section class="row featured-items "> 
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Rejestracja Firmy</h3>
         </div>
+        <div class="panel-body">
+          <div class="contents">
+            <div class="login--user">
+              <form id="login-form-user-hide" class="loginForm <?php if($this->id !== 'password') echo 'hide'; ?>" method="POST" action="<?= $this->url('user/reset') ?>">
+                <h1>Enter your email</h1>
 
-        <span class="loginpanel">Log In Panel</span>
-      </div>      
-    </form>
-    <?php if($this->id !== 'password'): ?>
-    <?php echo $this->form()->openTag($form) ?>
-    <h1>Zaloguj się</h1>
-    <?php if ($this->flashMessenger()->getInfoMessages()): ?>
-      <?php foreach ($this->flashMessenger()->getInfoMessages() as $message): ?>
-        <div class="alert">
-          <?php echo $message; ?>
+
+                <ul class="userLogin">
+                  <li class="loginUsername">
+                    <input type="text" value="" placeholder="Email" class="login_username" name="email">
+                  </li>
+                </ul>
+
+                <div class="formFooter">
+                  <div class="formFooterButtons">
+
+                    <input type="submit" value="Send Password" class="login_submit formFooterButtons rounded Button primary Module large hasText btn" name="submit">
+                  </div>
+
+                  <span class="loginpanel">Log In Panel</span>
+                </div>      
+              </form>
+              <?php if($this->id !== 'password'): ?>
+                <?php echo $this->form()->openTag($form) ?>
+                <?php if($this->flashMessenger()->getInfoMessages()): ?>
+                  <?php foreach($this->flashMessenger()->getInfoMessages() as $message): ?>
+                    <div class="alert">
+                      <?php echo $message; ?>
+                    </div>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+
+                <?php if($this->flashMessenger()->getErrorMessages()): ?>
+                  <?php foreach($this->flashMessenger()->getErrorMessages() as $message): ?>
+                    <div class="alert alert-error">
+                      <?php echo $message; ?>
+                    </div>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+
+                <?php if($this->flashMessenger()->getSuccessMessages()): ?>
+                  <?php foreach($this->flashMessenger()->getSuccessMessages() as $message): ?>
+                    <div class="alert alert-success">
+                      <?php echo $message; ?>
+                    </div>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label" for="identity">Email</label>  
+                  <div class="col-md-4">
+                    <input id="email" name="identity" class="form-control input-md" type="text">
+
+                  </div>
+                </div>
+
+                <!-- Password input-->
+                <div class="form-group">
+                  <label class="col-md-12 control-label" for="credential">Hasło</label>
+                  <div class="col-md-4">
+                    <input id="password" name="credential" class="form-control input-md" type="password">
+
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-md-12 control-label" for="remember">&nbsp;</label>
+                  <div class="col-md-4">
+                    <?php echo $this->formRow($form->get('remember')) ?>
+                    <span>Zapamiętaj Logowanie</span>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label" for="remember">&nbsp;</label>
+                  <div class="col-md-12">
+                <div class="formFooter">
+                  <div class="formFooterButtons">
+                    <?php if($this->redirect): ?>
+                      <input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" />
+                    <?php endif ?>
+
+                    <?php echo $this->formSubmit($form->get('submit')) ?>
+                  </div>
+                </div>
+                  </div>
+                </div>
+                <?php echo $this->form()->closeTag() ?>
+              <?php endif; ?>
+            </div>
+          </div>
         </div>
-      <?php endforeach; ?>
-    <?php endif; ?>
-
-    <?php if ($this->flashMessenger()->getErrorMessages()): ?>
-      <?php foreach ($this->flashMessenger()->getErrorMessages() as $message): ?>
-        <div class="alert alert-error">
-          <?php echo $message; ?>
-        </div>
-      <?php endforeach; ?>
-    <?php endif; ?>
-    
-    <?php if ($this->flashMessenger()->getSuccessMessages()): ?>
-      <?php foreach ($this->flashMessenger()->getSuccessMessages() as $message): ?>
-        <div class="alert alert-success">
-          <?php echo $message; ?>
-        </div>
-      <?php endforeach; ?>
-    <?php endif; ?>
-
-    <ul class="userLogin">
-      <li class="loginUsername">
-        <?php echo $this->formRow($form->get('identity')) ?>
-      </li>
-      <li class="loginPassword">
-        <?php echo $this->formRow($form->get('credential')) ?>
-      </li>
-      <li class="loginRemember">
-        <?php echo $this->formRow($form->get('remember')) ?>
-        <span>Remember me</span>
-      </li>
-    </ul>
-
-    <div class="formFooter">
-      <div class="formFooterButtons">
-        <?php if ($this->redirect): ?>
-          <input type="hidden" name="redirect" value="<?php echo $this->escapeHtml($this->redirect) ?>" />
-        <?php endif ?>
-
-        <?php echo $this->formSubmit($form->get('submit')) ?>
-      </div>
-
-      <span class="forgotPassword">Forgot your password?</span>
-    </div>
-    <?php echo $this->form()->closeTag() ?>
-    <?php endif; ?>
-  </div>
-</div>
+    </section>
+  </section>
 </section>

@@ -32,6 +32,51 @@ return array(
                             ),
                         ),
                     ),
+                    'edit' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/edit/[:id]',
+                            'defaults' => array(
+                                'action' => 'edit'
+                            ),
+                        ),
+                    ),
+                    'delete' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/delete/[:id]',
+                            'defaults' => array(
+                                'action' => 'delete'
+                            ),
+                        ),
+                    ),
+                    'dashboard' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/dashboard',
+                            'defaults' => array(
+                                'action' => 'dashboard'
+                            ),
+                        ),
+                    ),
+                    'manager' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/manager',
+                            'defaults' => array(
+                                'action' => 'manager-list'
+                            ),
+                        ),
+                    ),
+                    'view' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/view/[:id]/[:url]',
+                            'defaults' => array(
+                                'action' => 'view'
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),
