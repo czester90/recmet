@@ -22,14 +22,23 @@ class Module {
 
     $application = $e->getApplication();
     $em = $application->getEventManager();
-    
+
     $em->attach('dispatch', function($e) {
       $routeMatch = $e->getRouteMatch();
       $viewModel = $e->getViewModel();
       $viewModel->setVariable('controller', $routeMatch->getParam('controller'));
       $viewModel->setVariable('action', $routeMatch->getParam('action'));
-      
+
     }, -100);
+
+    $serviceManager = $e->getApplication()->getServiceManager();
+
+    $serviceManager->get('viewhelpermanager')->setFactory('MetaTags', function ($sm) use ($e) {
+      return new View\Helper\MetaTags($e, $sm);
+    });
+    $serviceManager->get('viewhelpermanager')->setFactory('getRepos', function ($sm) use ($e) {
+      return new View\Helper\getRepos($e, $sm);
+    });
   }
 
   public function loadConfiguration(MvcEvent $e) {

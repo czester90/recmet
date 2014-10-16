@@ -9,9 +9,10 @@ use Zend\View\Model\ViewModel;
 use User\Service\User as UserService;
 use User\Options\UserControllerOptionsInterface;
 use Zend\Crypt\Password\Bcrypt;
+use Application\Controller\BaseController;
 use Zend\Mvc\Controller\AbstractActionController;
 
-class UserController extends AbstractActionController {
+class UserController extends BaseController {
 
   const ROUTE_LOGIN = 'user/login';
   const ROUTE_PROFILE = 'user/profile';  
@@ -72,9 +73,8 @@ class UserController extends AbstractActionController {
    */
   public function profileAction() {
 
-
-
     return new ViewModel(array(
+        'company' => $this->em('Company\Entity\Company')->find($this->user()->getIdentity()->getCompany_id())
     ));
   }
 
@@ -100,6 +100,7 @@ class UserController extends AbstractActionController {
     }
 
     $post = $request->getPost();
+
     $post->set('credential', trim($post->get('credential')));
     $form->setData($post);
 

@@ -71,6 +71,22 @@ class Company extends BaseEntity {
     $this->id = (int) $id;
   }
 
+    public function getNip() {
+        return $this->nip;
+    }
+
+    public function setNip($value) {
+        $this->nip = $value;
+    }
+
+    public function getRegon() {
+        return $this->regon;
+    }
+
+    public function setRegon($value) {
+        $this->regon = $value;
+    }
+
   public function getName() {
     return $this->name;
   }
@@ -88,7 +104,7 @@ class Company extends BaseEntity {
   }
 
   public function getAddress() {
-    return $this->adreess;
+    return $this->address;
   }
   
   public function setAddress($value){
@@ -104,7 +120,7 @@ class Company extends BaseEntity {
   }
 
   public function getPostCode() {
-    return $this->zip;
+    return $this->post_code;
   }
   
   public function setPostCode($value){

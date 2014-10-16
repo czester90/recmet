@@ -1,154 +1,167 @@
 <section role="main" id="main">
   <section class="container">
-    <section class="row featured-items "> 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Rejestracja Firmy</h3>
-        </div>
-        <div class="panel-body">
-          <form method="POST">
-            <p class="text-muted" style="margin: 10px 30px 30px;">Zarejestruj Firme w Serwisie RecMetals by móc korzystarz z wszystkich funkcjonalności.</p>
+  <section class="row featured-items">
 
-            <?= $this->status; ?>
-            <!-- Text input-->
-            <div class="col-md-4">
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="company">Nazwa Firmy</label>  
-                <div class="col-md-12">
-                  <input id="company" name="name" class="form-control input-md" type="text">
-
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="company">REGON</label>  
-                <div class="col-md-12">
-                  <input id="company" name="regon" class="form-control input-md" type="text">
-
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="company">NIP</label>  
-                <div class="col-md-12">
-                  <input id="company" name="nip" class="form-control input-md" type="text">
-
-                </div>
-              </div>
-
-              <!-- Select Basic -->
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="country">Państwo</label>
-                <div class="col-md-12">
-                  <select id="country" name="country" class="form-control">
-                    <option value="Polska">Polska</option>
-                  </select>
-                </div>
-              </div>
-
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="city">Miasto</label>  
-                <div class="col-md-12">
-                  <input id="city" name="city" class="form-control input-md" type="text">
-
-                </div>
-              </div>
-
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="address">Adres Firmy</label>  
-                <div class="col-md-12">
-                  <input id="address" name="address" class="form-control input-md" type="text">
-
-                </div>
-              </div>
-
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="post_code">Kod Pocztowy</label>  
-                <div class="col-md-6">
-                  <input id="post_code" name="post_code" class="form-control input-md" type="text">
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="username">Imię</label>  
-                <div class="col-md-12">
-                  <input id="username" name="first_name" class="form-control input-md" type="text">
-
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="username">Nazwisko</label>  
-                <div class="col-md-12">
-                  <input id="username" name="last_name" class="form-control input-md" type="text">
-
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="username">Nazwa Użytkownika</label>  
-                <div class="col-md-12">
-                  <input id="username" name="username" class="form-control input-md" type="text">
-
-                </div>
-              </div>
-
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="email">Email</label>  
-                <div class="col-md-12">
-                  <input id="email" name="email" class="form-control input-md" type="text">
-
-                </div>
-              </div>
-
-              <!-- Password input-->
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="password">Hasło</label>
-                <div class="col-md-12">
-                  <input id="password" name="password" class="form-control input-md" type="password">
-
-                </div>
-              </div>
-
-              <!-- Password input-->
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="password2">Powtórz Hasło</label>
-                <div class="col-md-12">
-                  <input id="password2" name="password2" class="form-control input-md" type="password">
-
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-md-12 control-label" for="checkboxes">&nbsp;</label>
-                <div class="col-md-12">
-                  <div class="checkbox">
-                    <label for="checkboxes-0">
-                      <input name="checkboxes" id="checkboxes-0" value="1" type="checkbox">
-                      Akceptacja Regulaminu
-                    </label>
+      <div class="flash-messages">
+          <?php if ($this->flashMessenger()->getErrorMessages()): ?>
+              <?php foreach ($this->flashMessenger()->getErrorMessages() as $message): ?>
+                  <div class="alert alert-danger">
+                      <?php echo $message; ?>
                   </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-md-12 control-label">&nbsp;</label>
-                <div class="col-md-4">
-                  <button id="register" name="register" class="btn btn-success">Rejestruj Firme</button>
-                </div>
-              </div>
-            </div>
-
-          </form>
-        </div>
+              <?php endforeach; ?>
+          <?php endif; ?>
       </div>
-    </section>
+      <div class="toolbar">
+          <ol class="breadcrumb">
+              <li class="home"><a href="/"><i class="fa fa-home"></i><span> Home</span></a></li>
+              <li class="active"><a href="/user/login" class=" active">Rejestracja Firmy</a></li>
+          </ol>
+      </div>
+      <div class="wrapper">
+          <div class="primary">
+              <section class="module">
+                  <div class="module-content">
+                      <h2 class="page-heading">Rejestracja Firmy</h2>
+                      <div class="conwrap">
+                        <form method="POST" role="form">
+                          <!-- Text input-->
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label class="col-md-12 control-label" for="company">Nazwa Firmy</label>
+                                  <div class="col-md-12">
+                                      <input id="company" name="name" class="form-control input-md" type="text">
+
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <label class="col-md-12 control-label" for="company">REGON</label>
+                                  <div class="col-md-12">
+                                      <input id="company" name="regon" class="form-control input-md" type="text">
+
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <label class="col-md-12 control-label" for="company">NIP</label>
+                                  <div class="col-md-12">
+                                      <input id="company" name="nip" class="form-control input-md" type="text">
+
+                                  </div>
+                              </div>
+
+                              <!-- Select Basic -->
+                              <div class="form-group">
+                                  <label class="col-md-12 control-label" for="country">Państwo</label>
+                                  <div class="col-md-12">
+                                      <select id="country" name="country" class="form-control">
+                                          <option value="Polska">Polska</option>
+                                      </select>
+                                  </div>
+                              </div>
+
+                              <!-- Text input-->
+                              <div class="form-group">
+                                  <label class="col-md-12 control-label" for="city">Miasto</label>
+                                  <div class="col-md-12">
+                                      <input id="city" name="city" class="form-control input-md" type="text">
+
+                                  </div>
+                              </div>
+
+                              <!-- Text input-->
+                              <div class="form-group">
+                                  <label class="col-md-12 control-label" for="address">Adres Firmy</label>
+                                  <div class="col-md-12">
+                                      <input id="address" name="address" class="form-control input-md" type="text">
+
+                                  </div>
+                              </div>
+
+                              <!-- Text input-->
+                              <div class="form-group">
+                                  <label class="col-md-12 control-label" for="post_code">Kod Pocztowy</label>
+                                  <div class="col-md-6">
+                                      <input id="post_code" name="post_code" class="form-control input-md" type="text">
+
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label class="col-md-12 control-label" for="username">Imię</label>
+                                  <div class="col-md-12">
+                                      <input id="username" name="first_name" class="form-control input-md" type="text">
+
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <label class="col-md-12 control-label" for="username">Nazwisko</label>
+                                  <div class="col-md-12">
+                                      <input id="username" name="last_name" class="form-control input-md" type="text">
+
+                                  </div>
+                              </div>
+
+                              <!-- Text input-->
+                              <div class="form-group">
+                                  <label class="col-md-12 control-label" for="email">Email</label>
+                                  <div class="col-md-12">
+                                      <input id="email" name="email" class="form-control input-md" type="text">
+
+                                  </div>
+                              </div>
+
+                              <!-- Password input-->
+                              <div class="form-group">
+                                  <label class="col-md-12 control-label" for="password">Hasło</label>
+                                  <div class="col-md-12">
+                                      <input id="password" name="password" class="form-control input-md" type="password">
+
+                                  </div>
+                              </div>
+
+                              <!-- Password input-->
+                              <div class="form-group">
+                                  <label class="col-md-12 control-label" for="password2">Powtórz Hasło</label>
+                                  <div class="col-md-12">
+                                      <input id="password2" name="password2" class="form-control input-md" type="password">
+
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <label class="col-md-12 control-label" for="checkboxes">&nbsp;</label>
+                                  <div class="col-md-12">
+                                      <div class="checkbox">
+                                          <label for="checkboxes-0">
+                                              <input name="checkboxes" id="checkboxes-0" value="1" type="checkbox">
+                                              Akceptacja Regulaminu
+                                          </label>
+                                      </div>
+                                      <button id="register" name="register" class="btn btn-primary">Rejestruj Firmę</button>
+                                  </div>
+                              </div>
+
+
+                          </div>
+
+                      </form>
+                      </div>
+                  </div>
+              </section>
+          </div>
+          <aside class="secondary">
+              <section class="module module-narrow module-shallow">
+                  <h2 class="module-heading">Dlaczego Rejestracja?</h2>
+                  <div class="module-content">
+                      <p>Rejestracja Firmy w naszym serwisie pozwoli Ci na skorzystaniu z dużego wachlarzu naszych funkcji przygotowanych, dla usprawnienia działania twojej firmy.</p>
+                  </div>
+              </section>
+          </aside>
+      </div>
+  </section>
   </section>
 </section>

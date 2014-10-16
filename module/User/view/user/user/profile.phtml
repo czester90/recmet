@@ -1,9 +1,50 @@
 <section role="main" id="main">
-  <section class="container">
-    <section class="row featured-items">
-      <div class="col-md-12">
-        <h2>Profile</h2>
-      </div>
+    <section class="container">
+        <section class="row featured-items">
+
+            <div class="flash-messages">
+                <div class="alert alert-warning text-center">
+                    <p>Nie możesz korzystać z wybrane pakietu. Pakiet jest <strong><abbr title="Przejdź do zakładki Płatności aby w szybki sposób móc aktywować usługę.">Nieaktywny</abbr></strong>. Opłać pakiet by móc w pełni korzystać z funkcjonalności serwisu.</p>
+                </div>
+            </div>
+            <div class="toolbar">
+                <ol class="breadcrumb">
+                    <li class="home"><a href="/"><i class="fa fa-home"></i><span> Home</span></a></li>
+                    <li class="active"><a href="/user/login" class=" active">Firma</a></li>
+                    <li class="active"><a href="/user/profile" class=" active">Profil</a></li>
+                </ol>
+            </div>
+            <div class="wrapper">
+                <div class="primary">
+                    <section class="module">
+                        <div class="module-content">
+                            <h2 class="page-heading">Rejestracja Firmy</h2>
+                            <div class="conwrap">
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <aside class="secondary">
+                    <section class="module module-narrow module-shallow">
+                        <h2 class="module-heading">Dane Firmy <a href="" class="btn btn-primary btn-xs right">Edytuj</a></h2>
+                        <div class="module-content">
+                            <p><span><strong>Nazwa:</strong> <?= $this->company->getName(); ?></span></p>
+                            <hr>
+                            <p><span><strong>Nip:</strong> <?= $this->company->getNip(); ?></span></p>
+                            <p><span><strong>Regon:</strong> <?= $this->company->getRegon(); ?></span></p>
+                            <p><span><strong>Miasto:</strong> <?= $this->company->getCity(); ?></span></p>
+                            <p><span><strong>Adres:</strong> <?= $this->company->getAddress(); ?></span></p>
+                            <p><span><strong>Kod Pocztowy:</strong> <?= $this->company->getPostCode(); ?></span></p>
+                        </div>
+                    </section>
+                    <section class="module module-narrow module-shallow">
+                        <h2 class="module-heading">Główny Przedstawiciel</h2>
+                        <div class="module-content">
+                            <p>Rejestracja Firmy w naszym serwisie pozwoli Ci na skorzystaniu z dużego wachlarzu naszych funkcji przygotowanych, dla usprawnienia działania twojej firmy.</p>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </section>
     </section>
-  </section>
 </section>

@@ -80,6 +80,13 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    'view_helpers' => array(
+        'invokables' => array(
+            'MetaTags' => 'Application\View\Helper\MetaTags',
+            'getRepos' => 'Application\View\Helper\getRepos',
+            'LayoutIni' => 'Application\View\Helper\LayoutIni',
+        )
+    ),
     'console' => array(
         'router' => array(
             'routes' => array(

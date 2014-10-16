@@ -30,6 +30,7 @@ module.exports = function(grunt) {
                   'public/css/jquery.mCustomScrollbar.css',
                   'public/css/views/company/price-table.less',
                   'public/css/views/advert/table-advert.less',
+                  'public/css/font-awesome.min.css',
                   'public/css/style.css'
                 ]
             }
