@@ -17,30 +17,126 @@
             <div class="wrapper">
                 <div class="primary">
                     <section class="module">
-                        <div class="module-content">
-                            <h2 class="page-heading">Rejestracja Firmy</h2>
-                            <div class="conwrap">
+                        <div class="module-content dashboard-profile dis-table col-lg-12">
+                            <div class="col-lg-4">
+                                <h3>Informacje</h3>
+                                <ul class="list-unstyled">
+                                    <li><strong>Pakiet:</strong> <span class="text-right"><span class="pakiet pakiet-premium">Premium</span></span></li>
+                                    <li><strong>Ranking:</strong> <span class="text-right">Premium</span></li>
+                                    <li><strong>Propozycje:</strong> <span class="text-right">10</span></li>
+                                    <li><strong>Oferty:</strong> <span class="text-right">10</span></li>
+                                    <li><strong>Wiadomości:</strong> <span class="text-right">4</span></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4">
+                                <h3>Magazyn</h3>
+                            </div>
+                            <div class="col-lg-4">
+                                <h3>Płatności <span class="labelbox red pull-right">340,50 zł</span></h3>
+                                <ul class="list-unstyled">
+                                    <li><strong>Pakiet:</strong> <span class="text-right color-red"><b>-360,50 zł</b></span></li>
+                                    <li><strong>Tranzakcje:</strong> <span class="text-right">0 zł</span></li>
+                                    <li><strong>Transport:</strong> <span class="text-right">0 zł</span></li>
+                                    <li><strong>Dodatki:</strong> <span class="text-right">0 zł</span></li>
+                                    <li><strong>Poleceni:</strong> <span class="text-right color-green"><b>+20 zł</b></span></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-12">
+                                <h3>Ogłoszenia <button type="button" link="<?= $this->url('advert/dashboard') ?>" class="buttonPoint btn btn-primary btn-xs pull-right">Zarządzanie Ogłoszeniami</button></h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Nazwa</th>
+                                        <th>Kategoria</th>
+                                        <th>Publikacja</th>
+                                        <th>Oferty</th>
+                                        <th>Akcja</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><a class="name" href="#">Nowe duże zgary</a></td>
+                                        <td>Metale</td>
+                                        <td>23/10/2014 12:34:12</td>
+                                        <td><span class="labelbox grey">0</span></td>
+                                        <td><button type="button" class="btn btn-primary btn-xs">Edytuj</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a class="name" href="#">Sprzedam super ciężarówkę miedzi</a></td>
+                                        <td>Metale</td>
+                                        <td>23/10/2014 12:34:12</td>
+                                        <td><span class="labelbox grey">0</span></td>
+                                        <td><button type="button" class="btn btn-primary btn-xs">Edytuj</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a class="name" href="#">Duży zakład pokryty złotem do sprzedania</a></td>
+                                        <td>Metale</td>
+                                        <td>23/10/2014 12:34:12</td>
+                                        <td><span class="labelbox green">9</span></td>
+                                        <td><button type="button" class="btn btn-primary btn-xs">Edytuj</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-12">
+                                <h3>Tranzacje</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Username</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td colspan="2">Larry the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </section>
                 </div>
                 <aside class="secondary">
                     <section class="module module-narrow module-shallow">
-                        <h2 class="module-heading">Dane Firmy <a href="" class="btn btn-primary btn-xs right">Edytuj</a></h2>
+                        <h2 class="module-heading">Dane Firmy <button type="button" class="btn btn-primary btn-xs pull-right">Edytuj</button></h2>
                         <div class="module-content">
-                            <p><span><strong>Nazwa:</strong> <?= $this->company->getName(); ?></span></p>
-                            <hr>
-                            <p><span><strong>Nip:</strong> <?= $this->company->getNip(); ?></span></p>
-                            <p><span><strong>Regon:</strong> <?= $this->company->getRegon(); ?></span></p>
-                            <p><span><strong>Miasto:</strong> <?= $this->company->getCity(); ?></span></p>
-                            <p><span><strong>Adres:</strong> <?= $this->company->getAddress(); ?></span></p>
-                            <p><span><strong>Kod Pocztowy:</strong> <?= $this->company->getPostCode(); ?></span></p>
+                            <ul class="list-unstyled lineheight">
+                                <li><span><strong>Nazwa:</strong> <?= $this->company->getName(); ?></span></li>
+                                <li><span><strong>Nip:</strong> <?= $this->company->getNip(); ?></span></li>
+                                <li><span><strong>Regon:</strong> <?= $this->company->getRegon(); ?></span></li>
+                                <li><span><strong>Miasto:</strong> <?= $this->company->getCity(); ?></span></li>
+                                <li><span><strong>Adres:</strong> <?= $this->company->getAddress(); ?></span></li>
+                                <li><span><strong>Kod Pocztowy:</strong> <?= $this->company->getPostCode(); ?></span></li>
+                            </ul>
                         </div>
                     </section>
                     <section class="module module-narrow module-shallow">
                         <h2 class="module-heading">Główny Przedstawiciel</h2>
                         <div class="module-content">
-                            <p>Rejestracja Firmy w naszym serwisie pozwoli Ci na skorzystaniu z dużego wachlarzu naszych funkcji przygotowanych, dla usprawnienia działania twojej firmy.</p>
+                            <img src="<?= $this->basePath(); ?>/img/avatar.jpg" class="img-profile" />
+                            <ul class="list-unstyled lineheight">
+                                <li><span><strong>Imię:</strong> <?= $this->UserIdentity()->getFirstName(); ?></span></li>
+                                <li><span><strong>Nazwisko:</strong> <?= $this->UserIdentity()->getLastName(); ?></span></li>
+                                <li><span><strong>Email:</strong> <?= $this->UserIdentity()->getEmail(); ?></span></li>
+                                <li><span><strong>Logowanie:</strong> <?= $this->UserIdentity()->getLastLogin()->format('d/m/Y'); ?></span></li>
+                            </ul>
                         </div>
                     </section>
                 </aside>

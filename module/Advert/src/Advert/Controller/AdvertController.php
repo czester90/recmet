@@ -42,7 +42,7 @@ class AdvertController extends BaseController {
 
       foreach($files['images'] as $file) {
         $filter = new RenameUpload(array(
-            "target"    => $path.date('YmdHis').".".pathinfo($file['name'], PATHINFO_EXTENSION),
+            "target"    => $path.DIRECTORY_SEPARATOR.date('YmdHis').".".pathinfo($file['name'], PATHINFO_EXTENSION),
             "randomize" => true,
         ));
         $FileSaved = $filter->filter($file);
@@ -62,36 +62,34 @@ class AdvertController extends BaseController {
     ));
   }
   
-  public function managerListAction() {
-    $adverts = $this->em('Advert\Entity\Advert')->findAll();
-    return new ViewModel(array(
-      'adverts' => $adverts,
-      'action' => $this->params('action'),
-      'images' => $this->em('Advert\Entity\Image'),
-      'company' => $this->em('Company\Entity\Company'),
-      'category' => $this->em('Advert\Entity\Category')
-    ));
-  }
-  
   public function deleteAction() {
     $id = $this->params()->fromRoute('id');
-    $advert = $this->em('Advert\Entity\Advert')->find($id);
+    $advert = $this->em('Advert\Entity\Advert')->findOneBy(array('id' => $id, 'user_id' => $this->user()->getIdentity()->getId()));
     $advert->getImages()->clear();
     $this->em()->remove($advert);
     $this->em()->flush();
     
-    $this->redirect()->toRoute('advert/manager');
+    $this->redirect()->toRoute('advert/dashboard');
   }
   
   public function editAction() {
     $id = $this->params()->fromRoute('id');
-    
+    $advert = $this->em('Advert\Entity\Advert')->findOneBy(array('id' => $id, 'user_id' => $this->user()->getIdentity()->getId()));
+
+    return new ViewModel(array(
+      'advert' => $advert
+    ));
   }
   
   public function dashboardAction() {
-    return new ViewModel(array(
-      'action' => $this->params('action')
-    ));
+      $adverts = $this->em('Advert\Entity\Advert')->findBy(array('user_id' => $this->user()->getIdentity()->getId()));
+      return new ViewModel(array(
+          'adverts' => $adverts,
+          'action' => $this->params('action'),
+          'images' => $this->em('Advert\Entity\Image'),
+          'company' => $this->em('Company\Entity\Company'),
+          'category' => $this->em('Advert\Entity\Category')
+      ));
   }
   
   public function viewAction() {
@@ -101,4 +99,18 @@ class AdvertController extends BaseController {
       'advert' => $this->em('Advert\Entity\Advert')->find($id)
     ));
   }
+
+    public function offerAction() {
+        return new ViewModel(array(
+
+        ));
+    }
+
+    public function magazineAction() {
+
+    }
+
+    public function transationsAction() {
+
+    }
 }

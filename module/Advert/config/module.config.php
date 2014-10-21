@@ -77,6 +77,33 @@ return array(
                             ),
                         ),
                     ),
+                    'offer' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/offer',
+                            'defaults' => array(
+                                'action' => 'offer'
+                            ),
+                        ),
+                    ),
+                    'magazine' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/magazine',
+                            'defaults' => array(
+                                'action' => 'magazine'
+                            ),
+                        ),
+                    ),
+                    'transations' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/transations',
+                            'defaults' => array(
+                                'action' => 'transations'
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),

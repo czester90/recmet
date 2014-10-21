@@ -8,9 +8,7 @@ use Zend\Stdlib\Parameters;
 use Zend\View\Model\ViewModel;
 use User\Service\User as UserService;
 use User\Options\UserControllerOptionsInterface;
-use Zend\Crypt\Password\Bcrypt;
 use Application\Controller\BaseController;
-use Zend\Mvc\Controller\AbstractActionController;
 
 class UserController extends BaseController {
 
@@ -61,10 +59,8 @@ class UserController extends BaseController {
    * User page
    */
   public function indexAction() {
+    $this->isLogin();
 
-    if(!$this->UserAuthentication()->hasIdentity()) {
-      return $this->redirect()->toRoute(static::ROUTE_LOGIN);
-    }
     return new ViewModel();
   }
 
@@ -72,6 +68,7 @@ class UserController extends BaseController {
    * Profile User
    */
   public function profileAction() {
+    $this->isLogin();
 
     return new ViewModel(array(
         'company' => $this->em('Company\Entity\Company')->find($this->user()->getIdentity()->getCompany_id())

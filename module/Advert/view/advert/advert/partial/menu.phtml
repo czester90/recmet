@@ -1,12 +1,7 @@
-<div class="col-md-3">
-  <div class="list-group">
-    <a href="<?= $this->url('advert/dashboard') ?>" class="list-group-item <?php if($this->action == 'dashboard'): ?>active<?php endif; ?>">
-      Dashboard
-    </a>
-    <a href="<?= $this->url('advert/add') ?>" class="list-group-item <?php if($this->action == 'add'): ?>active<?php endif; ?>">Dodaj Ogłoszenie</a>
-    <a href="<?= $this->url('advert/manager') ?>" class="list-group-item <?php if($this->action == 'manager-list'): ?>active<?php endif; ?>">Ogłoszenia</a>
-    <a href="<?= $this->url('advert/manager') ?>" class="list-group-item">Zakończone</a>
-    <a href="<?= $this->url('advert/manager') ?>" class="list-group-item">Obserwowane</a>
-    <a href="<?= $this->url('advert/manager') ?>" class="list-group-item">Proponowane</a>
-  </div>
-</div>
+<h2 class="module-heading">Menu</h2>
+<ul class="list-unstyled menu-grey">
+    <li><a href="<?= $this->url('advert/dashboard') ?>" class="<?php if($this->action == 'dashboard'): ?>active<?php endif; ?>">Dashboard</a></li>
+    <li><a href="<?= $this->url('advert/add') ?>" class="<?php if($this->action == 'add'): ?>active<?php endif; ?>">Dodaj Ogłoszenie</a></li>
+    <li><a href="<?= $this->url('advert/manager') ?>" class="">Obserwowane</a></li>
+    <li><a href="<?= $this->url('advert/manager') ?>" class="">Proponowane</a></li>
+</ul>

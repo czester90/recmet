@@ -1,18 +1,77 @@
 <section role="main" id="main">
-  <section class="container">
-    <section class="row featured-items ">
-      <?= $this->partial('advert/advert/partial/menu.phtml'); ?>
+    <section class="container">
+        <section class="row featured-items">
 
-      <div class="col-md-9">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Dashboard</h3>
-          </div>
-          <div class="panel-body">
-            
-          </div>
-        </div>
-      </div>
+            <div class="flash-messages">
+                <div class="alert alert-warning text-center">
+                    <p>Nie możesz korzystać z wybrane pakietu. Pakiet jest <strong><abbr title="Przejdź do zakładki Płatności aby w szybki sposób móc aktywować usługę.">Nieaktywny</abbr></strong>. Opłać pakiet by móc w pełni korzystać z funkcjonalności serwisu.</p>
+                </div>
+            </div>
+            <div class="toolbar">
+                <ol class="breadcrumb">
+                    <li class="home"><a href="/"><i class="fa fa-home"></i><span> Home</span></a></li>
+                    <li class="active"><a href="/user/login" class=" active">Firma</a></li>
+                    <li class="active"><a href="/user/profile" class=" active">Zarządzanie Ogłoszeniami</a></li>
+                </ol>
+            </div>
+            <div class="wrapper">
+                <div class="primary">
+                    <section class="module">
+                        <div class="module-content dashboard-profile dis-table col-lg-12">
+                            <div class="col-lg-12">
+                                <h3>Ogłoszenia <button type="button" class="btn btn-primary btn-xs pull-right">Dodaj Ogłoszenie</button></h3>
+                                <?php foreach($this->adverts as $advert): ?>
+                                    <div class="featured-item featured-list noshadow">
+                                        <div class="f8col">
+                                            <div class="inner-border noborder">
+                                                <div class="inner-padding">
+                                                    <figure>
+                                                        <img alt="" src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$advert->getImages()->get(0)->getName(); ?>">
+                                                        <div class="banner"><?= Advert\Entity\Advert::advertTypeArray($advert->getAdvertType()); ?></div>
+                                                        <a class="figure-hover" href="<?= $this->url('advert/view', array('id' => $advert->getId(), 'url' => $advert->getUrl())); ?>">Zoom</a>
+                                                    </figure>
+                                                    <div class="right">
+                                                        <h3><a href="<?= $this->url('advert/view', array('id' => $advert->getId(), 'url' => $advert->getUrl())); ?>" class="blue-tcol"><?= $advert->getName(); ?></a></h3>
+                                                        <?php $company = $this->company->find($this->UserIdentity()->getCompany_id()); ?>
+                                                        <p class="s12">Kraj: <?= $company->getCountry(); ?> | Data wystawienia: <?= $advert->getCreated_at()->format('d-m-Y'); ?></p>
+                                                        <div class="description">
+                                                            <p><?= $advert->getDescription(); ?></p>
+                                                        </div>
+                                                        <div class="price-wrapper">
+                                                            <div class="price">PLN <?= $advert->getAmount(); ?></div>
+                                                            <div class="rate">/<?= Advert\Entity\Advert::amountTypeArray($advert->getAmountType()); ?></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 footer">
+                                                        <div class="col-md-10">
+                                                            <?php $category = $this->category->find($advert->getCategory_id()); ?>
+                                                            <span class="s12 border-ad-right">Kategoria: <?= $category->getName(); ?></span>
+                                                            <span class="s12 border-ad-right">Wizyt: <?= $advert->getVisits(); ?></span>
+                                                            <span class="s12 border-ad-right">Ofert: 0</span>
+                                                            <span class="s12 border-ad-right">Najwyższa Oferta: Brak</span>
+                                                            <span class="s12">Status: Wystawione</span>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <a href="<?= $this->url('advert/delete', array('id' => $advert->getId())) ?>" type="button" class="btn btn-xs btn-danger mar-left5 pull-right">Usuń</a>
+                                                            <a href="<?= $this->url('advert/edit', array('id' => $advert->getId())) ?>" type="button" class="btn btn-xs btn-primary pull-right">Edytuj</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <aside class="secondary">
+                    <section class="module module-narrow module-shallow">
+                        <?= $this->partial('advert/advert/partial/menu.phtml'); ?>
+                    </section>
+                </aside>
+            </div>
+        </section>
     </section>
-  </section>
 </section>

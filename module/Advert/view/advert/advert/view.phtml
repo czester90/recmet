@@ -1,31 +1,11 @@
-<section id='page-title'>
-  <section class='container'>
-    <section class='row'>
-      <div class='col-md-6'>
-        <h1><?= $advert->getName() ?></h1>
-        <ul class="breadcrumb">
-          <li><a href="#">Ogłoszenia</a></li>
-          <li><a href="#">Sprzedam</a></li>
-          <li class="active">Metale</li>
-        </ul>
-      </div>
-    </section>
-  </section>
-</section>
 <section id='content' class='alternate-bg'>
   <section class='container'>
     <section class='row featured-items'>
       <section class='col-md-9'>
-        <div class='property-box'>
+        <div class='property-box wrapper-view'>
           <div class='top'>
             <div class='row'>
               <div class='left'>
-                <figure>
-                  <a rel="prettyPhoto[gallery]" href="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$advert->getImages()->get(0)->getName(); ?>">
-                    <img src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$advert->getImages()->get(0)->getName(); ?>" alt="" />
-                  </a>
-                  <div class='banner'><?= Advert\Entity\Advert::advertTypeArray($advert->getAdvertType()); ?></div>
-                </figure>
                 <div class='title-line'>
                   <div class='pull-left'>
                     <h2><?= $advert->getName() ?></h2> <br />
@@ -52,24 +32,21 @@
               <div class='right'>
                 <h3>Zdjęcia <span>(<?= $advert->getImages()->count(); ?> zdjęć)</span></h3>
                 <div class='gallery'>
-                  <?php $index = 1; $group = 1; ?>
+                  <?php $group = 1; ?>
                   <?php foreach($advert->getImages()->getValues() as $images): ?>
-                    <?php if($index == 1){ $index++; continue;} ?>
                     <?php if($group){ echo "<div class='line'>";} ?>
                       <figure>
                         <a rel="prettyPhoto[gallery]" href="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$images->getName(); ?>">
                           <img src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$images->getName(); ?>" alt="" />
                         </a>
                       </figure>
-                    <?php if(!$group): ?>
-                      <?= "</div>"; ?>
+                    <?php if(!$group || $advert->getImages()->count() == 1): ?>
+                      </div>
                       <?php $group++; ?>
                     <?php else: ?>
                       <?php $group--; ?>
                     <?php endif; ?>
-                  <?php $index++; ?>
                   <?php endforeach; ?>
-                  <a rel="prettyPhoto[gallery]" class='more'>View all photos</a>
                 </div>
               </div>
               </div>
@@ -96,7 +73,7 @@
             </div>
           </div>
         </div>
-        <div class='author-section big-margins'>
+        <div class='author-section big-margins wrapper-view'>
           <div class='left'>
             <div class='inner'>
                 <div class='text'>
@@ -119,7 +96,7 @@
         </div>
       </section>
       <aside class='col-md-3'>
-        <section class='widget'>
+        <section class='widget wrapper-view'>
           <section class='widget-title uppercase'>
             <div class='inner'>
               <h2>Szukaj Ogłoszenia</h2>

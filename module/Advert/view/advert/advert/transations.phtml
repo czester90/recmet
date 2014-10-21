@@ -1,0 +1,35 @@
+<section role="main" id="main">
+    <section class="container">
+        <section class="row featured-items">
+
+            <div class="flash-messages">
+                <div class="alert alert-warning text-center">
+                    <p>Nie możesz korzystać z wybrane pakietu. Pakiet jest <strong><abbr title="Przejdź do zakładki Płatności aby w szybki sposób móc aktywować usługę.">Nieaktywny</abbr></strong>. Opłać pakiet by móc w pełni korzystać z funkcjonalności serwisu.</p>
+                </div>
+            </div>
+            <div class="toolbar">
+                <ol class="breadcrumb">
+                    <li class="home"><a href="/"><i class="fa fa-home"></i><span> Home</span></a></li>
+                    <li class="active"><a href="/user/login" class=" active">Firma</a></li>
+                    <li class="active"><a href="/user/profile" class=" active">Transakcje</a></li>
+                </ol>
+            </div>
+            <div class="wrapper">
+                <div class="primary">
+                    <section class="module">
+                        <div class="module-content dashboard-profile dis-table col-lg-12">
+                            <div class="col-lg-12">
+                                <h3>Transakcje</h3>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <aside class="secondary">
+                    <section class="module module-narrow module-shallow">
+                        <?= $this->partial('advert/advert/partial/menu.phtml'); ?>
+                    </section>
+                </aside>
+            </div>
+        </section>
+    </section>
+</section>
