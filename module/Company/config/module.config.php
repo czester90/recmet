@@ -23,6 +23,16 @@ return array(
                     ),
                 ),
             ),
+            'rules' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/rules',
+                    'defaults' => array(
+                        'controller' => 'company\company',
+                        'action' => 'rules',
+                    ),
+                ),
+            ),
             'company' => array(
                 'type' => 'Literal',
                 'options' => array(

@@ -2,11 +2,10 @@
     <section class="container">
         <section class="row featured-items">
 
-            <div class="flash-messages">
-                <div class="alert alert-warning text-center">
-                    <p>Nie możesz korzystać z wybrane pakietu. Pakiet jest <strong><abbr title="Przejdź do zakładki Płatności aby w szybki sposób móc aktywować usługę.">Nieaktywny</abbr></strong>. Opłać pakiet by móc w pełni korzystać z funkcjonalności serwisu.</p>
-                </div>
-            </div>
+            <?= $this->partial('user/user/partial/top_message.phtml'); ?>
+            <?php
+                $pakiet = $this->getRepos('Company\Entity\BundleDetails')->find($this->bundlePayments->getPakiet());
+            ?>
             <div class="toolbar">
                 <ol class="breadcrumb">
                     <li class="home"><a href="/"><i class="fa fa-home"></i><span> Home</span></a></li>
@@ -21,8 +20,14 @@
                             <div class="col-lg-4">
                                 <h3>Informacje</h3>
                                 <ul class="list-unstyled">
-                                    <li><strong>Pakiet:</strong> <span class="text-right"><span class="pakiet pakiet-premium">Premium</span></span></li>
-                                    <li><strong>Ranking:</strong> <span class="text-right">Premium</span></li>
+                                    <li><strong>Pakiet:</strong> <span class="text-right"><span class="pakiet pakiet-premium"><?= $pakiet->getName(); ?></span></span></li>
+                                    <li><strong>Ranking:</strong> <span class="text-right">
+                                            <?php $stars = \Company\Entity\Company::rank($this->company->getRank());  ?>
+                                            <div class='star-rating'>
+                                                <?php foreach($stars as $key => $star): ?>
+                                                    <button class='star <?= $star; ?>'><?= ++$key; ?> Star</button>
+                                                <?php endforeach; ?>
+                                            </div></span></li>
                                     <li><strong>Propozycje:</strong> <span class="text-right">10</span></li>
                                     <li><strong>Oferty:</strong> <span class="text-right">10</span></li>
                                     <li><strong>Wiadomości:</strong> <span class="text-right">4</span></li>
@@ -32,16 +37,22 @@
                                 <h3>Magazyn</h3>
                             </div>
                             <div class="col-lg-4">
-                                <h3>Płatności <span class="labelbox red pull-right">340,50 zł</span></h3>
+                                <h3>Płatności
+                                    <?php if(!$this->bundlePayments->getPaid()): ?>
+                                        <span class="labelbox red pull-right"><?= -$this->bundlePayments->getAmount() ?> zł</span>
+                                    <?php else: ?>
+                                        <span class="labelbox green pull-right">Brak Należności</span>
+                                    <?php endif; ?>
+                                </h3>
                                 <ul class="list-unstyled">
-                                    <li><strong>Pakiet:</strong> <span class="text-right color-red"><b>-360,50 zł</b></span></li>
+                                    <li><strong>Pakiet:</strong> <span class="text-right color-red"><b><?= $this->bundlePayments->getAmount() ?> zł</b></span></li>
                                     <li><strong>Tranzakcje:</strong> <span class="text-right">0 zł</span></li>
                                     <li><strong>Transport:</strong> <span class="text-right">0 zł</span></li>
                                     <li><strong>Dodatki:</strong> <span class="text-right">0 zł</span></li>
                                     <li><strong>Poleceni:</strong> <span class="text-right color-green"><b>+20 zł</b></span></li>
                                 </ul>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 mar-top15">
                                 <h3>Ogłoszenia <button type="button" link="<?= $this->url('advert/dashboard') ?>" class="buttonPoint btn btn-primary btn-xs pull-right">Zarządzanie Ogłoszeniami</button></h3>
                                 <table class="table table-hover">
                                     <thead>
@@ -135,7 +146,7 @@
                                 <li><span><strong>Imię:</strong> <?= $this->UserIdentity()->getFirstName(); ?></span></li>
                                 <li><span><strong>Nazwisko:</strong> <?= $this->UserIdentity()->getLastName(); ?></span></li>
                                 <li><span><strong>Email:</strong> <?= $this->UserIdentity()->getEmail(); ?></span></li>
-                                <li><span><strong>Logowanie:</strong> <?= $this->UserIdentity()->getLastLogin()->format('d/m/Y'); ?></span></li>
+                                <li><span><strong>Logowanie:</strong> <?php if($this->UserIdentity()->getLastLogin()):?><?= $this->UserIdentity()->getLastLogin()->format('d/m/Y'); ?><?php else: ?><?= date('d/m/Y'); ?><?php endif; ?></span></li>
                             </ul>
                         </div>
                     </section>

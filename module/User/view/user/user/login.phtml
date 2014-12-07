@@ -78,7 +78,7 @@
                 <div class="module-content">
                     <p>Aby móc korzystać z serwisu, potrzebne jest zarejestrowanie firmy w naszym serwisie.</p>
                     <p class="action">
-                        <a href="/user/register" class="btn">Zarejestruj Firmę</a>
+                        <a href="<?= $this->url('company/register'); ?>" class="btn">Zarejestruj Firmę</a>
                     </p>
                 </div>
             </section>
@@ -88,7 +88,7 @@
                 <div class="module-content">
                     <p>Żaden problem, w łatwy sposób pozwalimy Ci je zmienić.</p>
                     <p class="action">
-                        <a href="/user/reset" class="btn">Przypomnij Hasło</a>
+                        <a href="<?= $this->url('user/changepassword'); ?>" class="btn">Przypomnij Hasło</a>
                     </p>
                 </div>
             </section>

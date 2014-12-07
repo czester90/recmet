@@ -18,7 +18,8 @@ return array(
     'module_listener_options' => array(
         'module_paths' => array(
             './module',
-            './vendor'
+            './vendor',
+            './library'
         ),
         'config_glob_paths' => array(
             'config/autoload/{,*.}{global,local}.php'

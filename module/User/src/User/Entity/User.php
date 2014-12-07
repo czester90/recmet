@@ -20,7 +20,7 @@ class User implements UserInterface, ProviderInterface {
   public function __construct() {
     $this->company_id = new ArrayCollection();
     $this->roles = new ArrayCollection();
-    $this->modified_at = new \DateTime();
+    $this->updated_at = new \DateTime();
     $this->created_at  = new \DateTime();
   }
   
@@ -92,7 +92,7 @@ class User implements UserInterface, ProviderInterface {
   /**
    * @ORM\Column(type="datetime")
    */
-  protected $modified_at;
+  protected $updated_at;
 
   /**
    * @ORM\Column(type="datetime")
@@ -182,5 +182,69 @@ class User implements UserInterface, ProviderInterface {
   public function setDisplayName($displayName) {
     
   }
+
+    /**
+     * @param mixed $updated_at
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * @param mixed $company_id
+     */
+    public function setCompanyId($company_id)
+    {
+        $this->company_id = $company_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCompanyId()
+    {
+        return $this->company_id;
+    }
+
+    /**
+     * @param mixed $created_at
+     */
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * @param string $password_recovery_hash
+     */
+    public function setPasswordRecoveryHash($password_recovery_hash)
+    {
+        $this->password_recovery_hash = $password_recovery_hash;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPasswordRecoveryHash()
+    {
+        return $this->password_recovery_hash;
+    }
 
 }

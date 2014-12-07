@@ -1,0 +1,25 @@
+<section role="main" id="main">
+    <section class="container">
+        <section class="row featured-items">
+            <div class="wrapper">
+                <div class="primary">
+                    <section class="module">
+                        <div class="module-content dashboard-profile dis-table col-lg-12">
+                            <div class="col-lg-12">
+                                <h3>Instalacja Kategorii</h3>
+
+                                <h2>Kategorie</h2>
+                                <p>Wgrywanie kategorii do bazy danych.</p>
+                                <p><strong>Liczba Kategorii:</strong> <?= count($this->categoryList, COUNT_RECURSIVE); ?></p>
+                                <form method="POST">
+                                    <input type="hidden" name="type" value="category" />
+                                    <input type="submit" value="Instaluj" name="install" />
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </section>
+</section>

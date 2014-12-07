@@ -41,6 +41,15 @@ return array(
                             ),
                         ),
                     ),
+                    'sublist' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/r/[:id]/[:url]',
+                            'defaults' => array(
+                                'action' => 'advertList'
+                            ),
+                        ),
+                    ),
                     'delete' => array(
                         'type'    => 'Segment',
                         'options' => array(
@@ -101,6 +110,24 @@ return array(
                             'route'    => '/transations',
                             'defaults' => array(
                                 'action' => 'transations'
+                            ),
+                        ),
+                    ),
+                    'observe' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/observe',
+                            'defaults' => array(
+                                'action' => 'observe'
+                            ),
+                        ),
+                    ),
+                    'observe-list' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/observe-list',
+                            'defaults' => array(
+                                'action' => 'observe-list'
                             ),
                         ),
                     ),

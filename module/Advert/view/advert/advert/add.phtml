@@ -18,6 +18,10 @@
                 <div class="primary">
                     <section class="module">
                         <div class="module-content dis-table col-lg-12">
+                            <div class="alert alert-info text-center info-message-content mar-bottom15">
+                                <p>Tutaj możesz <strong>Dodać Ogłoszenie</strong>. Uzupełnij <strong>wymagane pola</strong> by móc wystawić Ogłoszenie.</p>
+                            </div>
+
                             <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
                                 <div class="col-lg-8">
                                     <div class="form-group">
@@ -31,8 +35,9 @@
                                         <label for="category" class="col-sm-4 control-label">Kategoria</label>
                                         <div class="col-sm-7">
                                             <select id="category" name="category" class="form-control">
-                                                <option value="1">Metale</option>
-                                                <option value="2">Plastyki</option>
+                                                <?php foreach($this->categories as $category): ?>
+                                                    <option value="<?= $category->getId(); ?>"><?= $category->getName(); ?></option>
+                                                <?php endforeach; ?>
                                             </select>
                                         </div>
                                     </div>
@@ -99,7 +104,7 @@
                 </div>
                 <aside class="secondary">
                     <section class="module module-narrow module-shallow">
-                        <?= $this->partial('advert/advert/partial/menu.phtml'); ?>
+                        <?= $this->partial('advert/advert/partial/offer.phtml'); ?>
                     </section>
                 </aside>
             </div>

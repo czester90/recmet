@@ -3,9 +3,12 @@
 namespace Company\Controller;
 
 use Application\Controller\BaseController;
+use Company\Entity\BundleDetails;
+use Company\Entity\BundlePayments;
 use Company\Entity\City;
 use Company\Entity\Province;
 use Library\Przelewy24;
+use Zend\Json\Server\Exception\HttpException;
 use Zend\View\Model\ViewModel;
 use Library\MessageStatus;
 use Zend\Crypt\Password\Bcrypt;
@@ -20,6 +23,12 @@ class CompanyController extends BaseController {
       
     ));
   }
+
+    public function rulesAction() {
+        return new ViewModel(array(
+
+        ));
+    }
 
   public function paymentsAction() {
       session_start();
@@ -119,18 +128,37 @@ class CompanyController extends BaseController {
 
   }
   
-  public function priceTableAction() {
-    return new ViewModel();
-  }
-  
   public function registerAction() {
-      set_time_limit(7000);
+    //set_time_limit(7000);
     $request = $this->getRequest();
     $message = new MessageStatus();
-      $this->convert();
+      //$this->convert();
     
     if($request->isPost()){
+        $request->getPost()->rank = 0;
+
         try{
+            $validate_nip = $this->em('Company\Entity\Company')->findOneBy(array('nip' => $request->getPost('nip')));
+            $validate_regon = $this->em('Company\Entity\Company')->findOneBy(array('regon' => $request->getPost('regon')));
+            if(count($validate_nip)){
+                return new ViewModel(array(
+                    'error_message' => 'Firma o podanym NIPie już istnieje w naszym systemie.'
+                ));
+
+            }
+            if(count($validate_regon)){
+                return new ViewModel(array(
+                    'error_message' => 'Firma o podanym REGONie już istnieje w naszym systemie.'
+                ));
+            }
+
+            $bundle = $this->em('Company\Entity\BundleDetails')->find($request->getPost('bundle_details_id'));
+            if(!$bundle) {
+                return new ViewModel(array(
+                    'error_message' => 'Wystąpił błąd z wyborem pakietu prosze spróbować ponownie bądź skonsultować się z Administratorem.'
+                ));
+            }
+
             $company = new Company();
             $company->setData($request->getPost());
             $this->em()->persist($company);
@@ -149,6 +177,15 @@ class CompanyController extends BaseController {
             $roles = $this->em('User\Entity\Role')->find(1);
             $user->getRolesAdd()->add($roles);
             $this->em()->persist($user);
+
+            $amount = $bundle->getAmount();
+
+            $bundle_pay = new BundlePayments();
+            $bundle_pay->setCompanyId($company->id);
+            $bundle_pay->setAmount(-$amount);
+            $bundle_pay->setPaid(false);
+            $bundle_pay->setPakiet($bundle->getId());
+            $this->em()->persist($bundle_pay);
             $this->em()->flush();
 
             $request->setPost(new Parameters(array(
@@ -163,14 +200,18 @@ class CompanyController extends BaseController {
             $adapter->prepareForAuthentication($this->getRequest());
 
             $this->UserAuthentication()->getAuthService()->authenticate($adapter);
+
+            $this->redirect()->toRoute('user/profile');
         }catch(\Exception $e){
-            $this->flashMessenger()->addErrorMessage('Wystapił błąd Firma nie może zostać zarejestrowana.');
+            throw new HttpException($e->getMessage());
+
+            return new ViewModel(array(
+                'error_message' => 'Przepraszamy wystapił błąd. Firma nie może zostać zarejestrowana. Spróbuj ponownie, bądź skontaktuj się z nami.'
+            ));
         }
     }
     
-    return new ViewModel(array(
-      'status' => $message->getMessage()
-    ));
+    return new ViewModel();
   }
 
     public function convert() {

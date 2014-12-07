@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: szwester
- * Date: 16/10/14
- * Time: 20:08
- */
 
 namespace Company\Entity;
 
@@ -38,4 +32,52 @@ class City extends BaseEntity {
      * @ORM\Column(type="string")
      */
     protected $name;
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $province_id
+     */
+    public function setProvinceId($province_id)
+    {
+        $this->province_id = $province_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProvinceId()
+    {
+        return $this->province_id;
+    }
 } 

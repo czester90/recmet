@@ -3,15 +3,27 @@
 namespace Application\Controller;
 
 use User\Controller\UserController;
+use Zend\Json\Server\Exception\HttpException;
 use Zend\Mvc\Controller\AbstractActionController;
-use Library\access\Access;
+use Zend\Session\Container;
+use Zend\View\Model\JsonModel;
 
 class BaseController extends AbstractActionController
 {
-    public function isLogin() {
-        if(!$this->UserAuthentication()->hasIdentity()) {
-            return $this->redirect()->toRoute(UserController::ROUTE_LOGIN);
-        }
+    public $request;
+    public $param_id;
+    public $session;
+
+    public function __construct()
+    {
+        $this->session = new Container('advert');
+        $this->request = $this->getRequest();
+    }
+
+    public function getParam($param)
+    {
+        $paramValue = $this->params()->fromRoute($param);
+        return $paramValue ? $paramValue : null;
     }
 
     public function em($namespace = null, $database = 'default')
@@ -23,9 +35,29 @@ class BaseController extends AbstractActionController
         }
     }
 
+    public function jsonResponse(array $param)
+    {
+        return new JsonModel(array(
+            'param' => $param,
+            'success' => true,
+        ));
+    }
+
     public function user()
     {
         $sm = $this->getServiceLocator();
         return $sm->get('user_auth_service');
+    }
+
+    public function isUser()
+    {
+        if (!$this->UserAuthentication()->hasIdentity()) {
+            /*return $this->redirect()->toRoute(UserController::ROUTE_LOGIN, array(), array( 'query' => array(
+                    'redirect' => $this->request->getUri()->getPath()
+                )));*/
+            return $this->redirect()->toRoute(UserController::ROUTE_LOGIN);
+        }
+
+        return false;
     }
 }

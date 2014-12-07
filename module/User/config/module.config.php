@@ -55,7 +55,7 @@ return array(
                     'profile' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '/profile[/:id]/',
+                            'route' => '/profile/',
                             'defaults' => array(
                                 'controller' => 'user',
                                 'action' => 'profile',
@@ -100,16 +100,6 @@ return array(
                             'defaults' => array(
                                 'controller' => 'user',
                                 'action' => 'changepassword',
-                            ),
-                        ),
-                    ),
-                    'changeemail' => array(
-                        'type' => 'Literal',
-                        'options' => array(
-                            'route' => '/change-email/',
-                            'defaults' => array(
-                                'controller' => 'user',
-                                'action' => 'changeemail',
                             ),
                         ),
                     ),

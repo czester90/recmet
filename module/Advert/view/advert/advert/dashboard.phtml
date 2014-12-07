@@ -19,7 +19,19 @@
                     <section class="module">
                         <div class="module-content dashboard-profile dis-table col-lg-12">
                             <div class="col-lg-12">
-                                <h3>Ogłoszenia <button type="button" class="btn btn-primary btn-xs pull-right">Dodaj Ogłoszenie</button></h3>
+                                <h3>Ogłoszenia <button type="button" link="<?= $this->url('advert/add'); ?>" class="buttonPoint btn btn-primary btn-xs pull-right">Dodaj Ogłoszenie</button></h3>
+                                <?php if(!$this->adverts): ?>
+                                    <div class="alert alert-info text-center info-message-content mar-top15 mar-bottom15">
+                                        <p>Obecnie nie posiadasz żadnego ogłoszenia.</p>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if($this->alert): ?>
+                                    <div class="alert alert-<?= $this->alert['alert']; ?> text-center info-message-content mar-top15 mar-bottom15">
+                                        <p><?= $this->alert['message']; ?></p>
+                                    </div>
+                                <?php endif; ?>
+
                                 <?php foreach($this->adverts as $advert): ?>
                                     <div class="featured-item featured-list noshadow">
                                         <div class="f8col">
@@ -68,7 +80,7 @@
                 </div>
                 <aside class="secondary">
                     <section class="module module-narrow module-shallow">
-                        <?= $this->partial('advert/advert/partial/menu.phtml'); ?>
+                        <?= $this->partial('advert/advert/partial/offer.phtml'); ?>
                     </section>
                 </aside>
             </div>

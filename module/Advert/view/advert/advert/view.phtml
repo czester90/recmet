@@ -28,29 +28,59 @@
                     <td><?= $advert->getPieces() ?></td>
                   </tr>
                 </table>
-              </div>
-              <div class='right'>
-                <h3>Zdjęcia <span>(<?= $advert->getImages()->count(); ?> zdjęć)</span></h3>
-                <div class='gallery'>
-                  <?php $group = 1; ?>
-                  <?php foreach($advert->getImages()->getValues() as $images): ?>
-                    <?php if($group){ echo "<div class='line'>";} ?>
+                  <div class='gallery'>
+                      <?php $group = 1; ?>
+                      <?php foreach($advert->getImages()->getValues() as $images): ?>
+                      <?php if($group){ echo "<div class='line'>";} ?>
                       <figure>
-                        <a rel="prettyPhoto[gallery]" href="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$images->getName(); ?>">
-                          <img src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$images->getName(); ?>" alt="" />
-                        </a>
+                          <a rel="prettyPhoto[gallery]" href="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$images->getName(); ?>">
+                              <img src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$images->getName(); ?>" alt="" />
+                          </a>
                       </figure>
-                    <?php if(!$group || $advert->getImages()->count() == 1): ?>
-                      </div>
-                      <?php $group++; ?>
-                    <?php else: ?>
+                      <?php if(!$group || $advert->getImages()->count() == 1): ?>
+                  </div>
+                  <?php $group++; ?>
+                  <?php else: ?>
                       <?php $group--; ?>
-                    <?php endif; ?>
+                  <?php endif; ?>
                   <?php endforeach; ?>
+              </div>
+                </div>
+              <div class='right'>
+                  <form role="form">
+                      <div class="form-group">
+                          <label>Proponowana Cena</label>
+                          <input type="text" class="form-control" <?php if($advert->getUser_id() == $this->UserIdentity()->getId()): ?>disabled<?php endif; ?>>
+                          <p class="help-block">
+                              <?php if($advert->getUser_id() == $this->UserIdentity()->getId()): ?>
+                              Właściciel ogłoszenia nie może składać oferty.
+                              <?php else: ?>
+                              Cena nie może być niższa niż sugerowana.
+                              <?php endif; ?>
+                          </p>
+                      </div>
+                      <button type="submit" class="btn btn-default btn-primary <?php if($advert->getUser_id() == $this->UserIdentity()->getId()): ?>disabled<?php endif; ?>">Złóż Ofertę</button>
+                  </form>
+                  <div class="form-group mar-top15">
+                      <label>Zarządzanie</label>
+                  </div>
+                  <ul class="list-unstyled view-menu">
+                      <?php if($advert->getUser_id() !== $this->UserIdentity()->getId()): ?>
+                          <li><button type="button" class="btn btn-xs ajaxSender" data-id="<?= $advert->getId(); ?>" data-href="<?= $this->url('advert/observe'); ?>"><?php if($this->observe): ?>Zakończ Obserwowanie<?php else: ?>Obserwuj Ogłoszenie<?php endif; ?></button></li>
+                          <li><button type="button" class="btn btn-xs">Zobacz Inne Ogłoszenia</button></li>
+                          <li><button type="button" class="btn btn-xs disabled">Przejdź do Magazynu</button></li>
+                          <li><button type="button" class="btn btn-xs disabled">Strona Firmy</button></li>
+                          <li><button type="button" class="btn btn-xs">Wyślij wiadomość</button></li>
+                      <?php else: ?>
+                          <li><button type="button" class="btn btn-xs disabled">Zobacz Oferty</button></li>
+                          <li><button type="button" class="btn btn-xs">Dodatkowa Promocja</button></li>
+                          <li><button type="button" link="<?= $this->url('advert/edit', array('id' => $advert->getId())); ?>" class="buttonPoint btn btn-xs btn-primary">Edytuj Ogłoszenie</button></li>
+                          <li><button type="button" link="<?= $this->url('advert/delete', array('id' => $advert->getId())); ?>" class="buttonPoint btn btn-xs btn-danger">Usuń Ogłoszenie</button></li>
+                      <?php endif; ?>
+                  </ul>
                 </div>
               </div>
               </div>
-            </div>
           <div class='bottom'>
             <div class='inner'>
               <div class='row'>

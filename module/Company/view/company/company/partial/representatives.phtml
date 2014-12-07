@@ -1,0 +1,7 @@
+<h2 class="module-heading">Menu<?= $this->action; ?></h2>
+<ul class="list-unstyled menu-grey">
+    <li class="<?php if($this->action == 'dashboard'): ?>active<?php endif; ?>"><a href="<?= $this->url('advert/dashboard') ?>">Przedstawiciele</a></li>
+    <li class="<?php if($this->action == 'add'): ?>active<?php endif; ?>"><a href="<?= $this->url('advert/add') ?>">Dodaj Przedstawiciela</a></li>
+    <li><a href="<?= $this->url('advert/manager') ?>" class="">Prawa Dostępu</a></li>
+    <li><a href="<?= $this->url('advert/manager') ?>" class="">Proponowane</a></li>
+</ul>

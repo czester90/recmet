@@ -16,17 +16,29 @@ module.exports = function(grunt) {
     uglify: {
         my_target: {
             files: {
-                'public/js/scripts.min.js': [
-                    'public/js/jquery.min.js',
+                'public/js/jquery.min.js': [
+                    'public/js/jquery-1.8.3.min.js'
+                ],
+                'public/js/plugins.min.js': [
                     'public/js/bootstrap.min.js',
-                    'public/js/jquery.prettyPhoto.js',
-                    'public/js/respond.min.js',
-                    'public/js/main.js',
-                    'public/js/vendor/*.js'
+                    'public/js/jquery.prettyPhoto.js'
+                ],
+                'public/js/script.min.js': [
+                    'public/js/vendor/*.js',
+                    'public/js/jquery.validate.min.js',
+                    'public/js/additional-methods.min.js',
+                    'public/js/main.js'
                 ]
             }
         }
     },
+      less: {
+          development: {
+              files: {
+                  "public/css/validate.css": "public/css/validate.less"
+              }
+          }
+      },
     cssmin: {
         combine: {
             files: {
@@ -38,15 +50,10 @@ module.exports = function(grunt) {
                   'public/css/views/company/price-table.less',
                   'public/css/views/advert/table-advert.less',
                   'public/css/font-awesome.min.css',
-                  'public/css/style.css'
+                  'public/css/style.css',
+                  'public/css/common.css',
+                  'public/css/validate.css'
                 ]
-            }
-        }
-    },
-    less: {
-        development: {
-            files: {
-                //"css/result.css": "less/less.less"
             }
         }
     },
@@ -58,12 +65,23 @@ module.exports = function(grunt) {
               'public/css/*.less'
             ],
             tasks: [
-              //'uglify', 
+              //'uglify',
               'less', 
               'cssmin'
             ],
             options: {
-              livereload: true,
+              livereload: true
+            }
+        },
+        js: {
+            files: [
+                'public/js/*.js'
+            ],
+            tasks: [
+                'uglify'
+            ],
+            options: {
+                livereload: true
             }
         }
     }
@@ -75,5 +93,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['less','uglify', 'cssmin']);
+  grunt.registerTask('wt-js', ['watch:']);
 
 };

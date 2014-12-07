@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Company extends BaseEntity {
 
+
+    /**
+     * Initialies the roles variable.
+     */
+    public function __construct() {
+        $this->updated_at = new \DateTime();
+        $this->created_at  = new \DateTime();
+    }
+
   /**
    * @var int
    * @ORM\Id
@@ -62,6 +71,28 @@ class Company extends BaseEntity {
    * @ORM\Column(type="string")
    */
   protected $post_code;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="BundleDetails")
+     */
+    protected $bundle_details_id;
+
+    /**
+     * @var integer
+     * @ORM\Column(type="integer")
+     */
+    protected $rank;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $updated_at;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $created_at;
 
   public function getId() {
     return $this->id;
@@ -126,5 +157,82 @@ class Company extends BaseEntity {
   public function setPostCode($value){
     $this->post_code = $value;
   }
+
+    /**
+     * @param int $pakiet
+     */
+    public function setPakiet($bundle_details_id)
+    {
+        $this->bundle_details_id = $bundle_details_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPakiet()
+    {
+        return $this->bundle_details_id;
+    }
+
+    /**
+     * @param int $rank
+     */
+    public function setRank($rank)
+    {
+        $this->rank = $rank;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRank()
+    {
+        return $this->rank;
+    }
+
+    /**
+     * @param mixed $created_at
+     */
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * @param mixed $updated_at
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    public static function rank($rank)
+    {
+        $arr = array();
+        $index = 0;
+
+        for($i = 0; $i < 5; $i++){
+            $arr[$i] = $rank > 0 ? 'blue' : '';
+            $index = $index + 2;
+        }
+
+        return $arr;
+    }
 
 }

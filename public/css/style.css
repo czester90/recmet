@@ -24,8 +24,8 @@ figure {
   padding: 0;
 }
 
-.mar-left5 {
-    margin-left: 5px;
+.normal-link {
+    color: #000;
 }
 
 .lineheight li {
@@ -36,6 +36,14 @@ figure {
     width: 120px;
     height: 120px;
     margin-bottom: 20px;
+}
+
+.view-menu li {
+    margin-bottom: 5px;
+}
+
+.view-menu li button {
+    width: 90%;
 }
 
 .pakiet {
@@ -232,6 +240,26 @@ figure {
     color: #0a6f8e;
 }
 
+.table-pricing th {
+    background: none repeat scroll 0 0 #085871;
+    border-color: #085871;
+    color: #fff;
+    font-size: 14px;
+    padding: 12px 0;
+}
+
+.table-pricing .pricing td {
+    background: none repeat scroll 0 0 #f6f6f6;
+    border-color: #cecece;
+    padding: 12px 10px 10px;
+}
+
+.table-pricing .price {
+    display: block;
+    font-size: 24px;
+    font-weight: 600;
+}
+
 .menu-grey li {
     height: 30px;
     background: #f4f4f4;
@@ -250,6 +278,14 @@ figure {
 
 .menu-grey li a:hover {
     text-decoration: none;
+    color: #000;
+}
+
+.menu-grey li.active {
+    background: #003647;
+}
+.menu-grey li.active a {
+    color: #fff;
 }
 
 .labelbox {
@@ -356,10 +392,16 @@ p {
     background: #e8e8e8;
     padding: 5px;
     color: #a0a0a0;
+    line-height: 21px;
 }
 .blue-tcol {
   color: #2a6496 !important;
-} 
+}
+
+.help-block{
+    font-size: 9px;
+    margin: 0px;
+}
  
 nav ul {
   display: inline-block;
@@ -370,7 +412,7 @@ input[type='password'],
 input[type='email'],
 input[type='tel'],
 textarea {
-  padding: 10px 20px;
+  padding: 5px 20px;
   box-shadow: inset 0px 4px 7px #ebeced;
   background-color: #f9f9f9;
   border-color: #c3c5c9;
@@ -392,7 +434,13 @@ textarea:invalid {
   background-color: #fff4f1;
   color: #f66442;
   border-color: #f66442;
-} 
+}
+
+.right input[type='text']{
+    padding: 5px 15px;
+    box-shadow: inset 0px 2px 5px #ebeced;
+    width: 95%;
+}
 
 .tooltip.bottom .tooltip-arrow {
   right: 20px;
@@ -1460,7 +1508,6 @@ footer .footer-bubble {
   margin-left: -1px;
   margin-bottom: 10px;
   width: 100%;
-  min-height: 280px;
   border: solid 1px #c3c5c9;
   overflow: hidden;
   -webkit-box-shadow: inset 0px 0px 10px #d0d2d5;
@@ -1575,11 +1622,9 @@ footer .footer-bubble {
   width: 100%;
 }
 .property-box .gallery .line figure {
-  width: 46%;
+  width: 20%;
   float: left;
-  margin-left: 8%;
   background-color: #edeeef;
-  margin-bottom: 8%;
 }
 .property-box .gallery .line figure a {
   display: inline-block;

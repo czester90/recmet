@@ -2,7 +2,7 @@
 
 namespace Advert\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Library\HttpServiceCaller;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +42,12 @@ class Category {
    */
   protected $position;
 
+    public function buildForm($name, $parent, $position) {
+        $this->setName($name);
+        $this->setParent_id($parent);
+        $this->setPosition($position);
+        $this->setUrl(HttpServiceCaller::toAscii($name));
+    }
 
   public function getId() {
     return $this->id;
@@ -51,7 +57,7 @@ class Category {
     $this->id = (int) $id;
   }
   
-  public function getParent_id() {
+  public function getParentId() {
     return $this->parent_id;
   }
 
@@ -67,7 +73,7 @@ class Category {
     return $this->position;
   }
 
-  public function setParent_id($parent_id) {
+  public function setParentId($parent_id) {
     $this->parent_id = $parent_id;
   }
 
