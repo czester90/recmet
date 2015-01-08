@@ -25,6 +25,12 @@
 .width50 {
   width: 49%;
 }
+.space-line {
+  margin: 0 7px;
+}
+.non-bottom-mar {
+  margin-bottom: 0px;
+}
 .info-message-content {
   width: 100%;
 }

@@ -63,6 +63,15 @@ return array(
                             ),
                         ),
                     ),
+                    'offer-delete' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/offer/delete/[:id]',
+                            'defaults' => array(
+                                'action' => 'offer-delete'
+                            ),
+                        ),
+                    ),
                     'dashboard' => array(
                         'type'    => 'Segment',
                         'options' => array(

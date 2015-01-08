@@ -159,6 +159,21 @@ class AdvertController extends BaseController
         ));
     }
 
+    public function offerDeleteAction()
+    {
+        $result = new ViewModel();
+        $result->setTerminal(true);
+
+        $offerId = $this->getParam('id');
+
+        $offer = $this->em('Advert\Entity\Offer')->find($offerId);
+        $advert = $this->em('Advert\Entity\Advert')->find($offer->getAdvertId());
+        $this->em()->remove($offer);
+        $this->em()->flush();
+
+        $this->redirect()->toRoute('advert/view', array('id' => $advert->getId(), 'url' => $advert->getUrl()));
+    }
+
     public function viewAction()
     {
         if($this->isUser()) return $this->isUser();
@@ -169,9 +184,11 @@ class AdvertController extends BaseController
         $offer->setDBCompany($this->em('Company\Entity\Company'));
 
         $advert = $this->em('Advert\Entity\Advert')->find($advertId);
+        $user = $this->em('User\Entity\User')->find($advert->getUser_id());
+        $companyFromAdvert = $this->em('Company\Entity\Company')->find($user->getCompany_id());
 
         if($this->request->isPost()){
-            if((boolean)$this->request->getPost('offer')){
+            if((boolean)$this->request->getPost('offer') && $this->request->getPost('amount') != null){
                 $addOffer = new Offer();
                 $addOffer->setAmount($this->request->getPost('amount'));
                 $addOffer->setAdvertId($advert->getId());
@@ -207,6 +224,7 @@ class AdvertController extends BaseController
             'offer' => $offer,
             'offerYour' => $yourOffer,
             'offerCount' => $count[1],
+            'companyFromAdvert' => $companyFromAdvert,
             'categories' => $this->em('Advert\Entity\Category')->findBy(array('parent_id' => null), array('position' => 'ASC')),
             'advert' => $this->em('Advert\Entity\Advert')->find($advertId),
             'observe' => $this->em('Advert\Entity\Observe')->findOneBy(array('advert_id' => $advertId, 'company_id' => $companyId))

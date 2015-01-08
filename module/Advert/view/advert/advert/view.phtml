@@ -16,7 +16,7 @@
                     <h2><?= $advert->getName() ?></h2> <br />
                     <p>
                       <span class="s12 border-ad-right">Polska</span>
-                      <span class="s12">Data wystawienia: 09-09-2014</span>
+                      <span class="s12">Data wystawienia: <?= $advert->getCreated_at()->format('d-m-Y H:i:s'); ?></span>
                     </p>
                   </div>
                   <div class='pull-right price-wrapper'>
@@ -93,23 +93,17 @@
             <div class='inner'>
               <div class='row'>
                   <div class="pull-left bottom-advert">
-                      <span>Data zaktualizowane: <?= $advert->getUpdated_at()->format('d-m-Y'); ?></span>
-                      <span> | </span>
+                      <span>Data zaktualizowane: <?= $advert->getUpdated_at()->format('d-m-Y H:i:s'); ?></span>
+                      <span class="space-line"> | </span>
                       <span>Przeglądnięte: <?= $advert->getVisits(); ?></span>
-                      <span> | </span>
+                      <span class="space-line"> | </span>
                       <span>Oferty: <?= $this->offerCount; ?></span>
                   </div>
                 <div class='pull-right'>
                   <?php if(!$this->UserIdentity()): ?>
                     <p>Musisz być <a href="#">zalogowany</a> aby złożyć oferte</p>
                   <?php endif;?>
-                  <div class='star-rating'>
-                    <button class='star blue'>1 Star</button>
-                    <button class='star active'>2 Star</button>
-                    <button class='star active'>3 Star</button>
-                    <button class='star'>4 Star</button>
-                    <button class='star'>5 Star</button>
-                  </div>
+                  <?= \Company\Entity\Company::rank($this->companyFromAdvert->getRank()); ?>
                 </div>
               </div>
             </div>
@@ -163,25 +157,25 @@
                                       <span class="s12 border-ad-right">Polska</span>
                                       <span class="s12">Data złożenia Oferty: <?= $this->offerYour->getUpdatedAt()->format('d-m-Y H:i:s'); ?></span>
                                   </p>
-                                  <div class="form-group">
+                                  <div class="form-group non-bottom-mar">
                                       <label class="col-sm-1 control-label">Cena:</label>
                                       <div class="col-sm-11">
                                           <p class="form-control-static">PLN <?= \Company\Entity\Transaction::Amount($this->offerYour->getAmount()); ?></p>
                                       </div>
                                   </div>
-                                  <div class="form-group">
+                                  <div class="form-group non-bottom-mar">
                                       <label class="col-sm-1 control-label">Status:</label>
                                       <div class="col-sm-11">
                                           <p class="form-control-static"><?= \Advert\Entity\Offer::getNameOfType($this->offerYour->getType()); ?></p>
                                       </div>
                                   </div>
-                                  <div class="form-group">
+                                  <div class="form-group non-bottom-mar">
                                       <label class="col-sm-1 control-label">Opis:</label>
                                       <div class="col-sm-11">
                                           <p class="form-control-static"><?= $this->offerYour->getDescription(); ?></p>
                                       </div>
                                   </div>
-                                  <a href="<?= $this->serverUrl(true); ?>" class="btn btn-danger btn-primary absolute-top-right">Anuluj Ofertę</a>
+                                  <a href="<?= $this->url('advert/offer-delete', array('id' => $this->offerYour->getId())); ?>" class="btn btn-danger btn-xs btn-primary absolute-top-right">Anuluj Ofertę</a>
                               </div>
                           </div>
                       </div>
