@@ -13,12 +13,16 @@ return array(
     'router' => array(
         'routes' => array(
             'advert' => array(
-                'type' => 'Literal',
+                'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/advert',
+                    'route'    => '/advert[/:page]',
+                    'constraints' => array(
+                        'page' => '[0-9]'
+                    ),
                     'defaults' => array(
                         'controller' => 'advert/advert',
                         'action'     => 'advertList',
+                        'page'       => 1,
                     ),
                 ),
                 'may_terminate' => true,

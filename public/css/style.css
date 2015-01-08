@@ -1735,13 +1735,8 @@ footer .footer-bubble {
 }
 .pagination ul li.active a {
   color: white;
-  border-color: #4176c6;
-  background-color: #4378c7;
-  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMSAxIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQtdWNnZy1nZW5lcmF0ZWQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCUiIHkxPSIxMDAlIiB4Mj0iMCUiIHkyPSIwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzRjODZlMCIgc3RvcC1vcGFjaXR5PSIxIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNDQ3OWNhIiBzdG9wLW9wYWNpdHk9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+PC9zdmc+);
-  background-image: -moz-linear-gradient(90deg, #4c86e0 0%, #4479ca 100%);
-  background-image: -webkit-linear-gradient(90deg, #4c86e0 0%, #4479ca 100%);
-  background-image: -o-linear-gradient(90deg, #4c86e0 0%, #4479ca 100%);
-  background-image: linear-gradient(0deg, #4c86e0 0%, #4479ca 100%);
+  border-color: #003647;
+  background-color: #003647;
 }
 .pagination ul li.first-element a {
   color: #5a5a5a;
@@ -1767,11 +1762,24 @@ footer .footer-bubble {
   transition: all 0.4s ease-in-out;
 }
 .pagination ul li.first-element a:hover {
-  color: #4a83db;
+  color: #003647;
 }
 .pagination ul li.first-element a:hover:before {
-  border-right-color: #4a83db;
+  border-right-color: #003647;
 }
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #085871;
+    border-color: #085871;
+    color: #fff;
+    cursor: default;
+    z-index: 2;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: #085871;
+}
+
 .pagination ul li.last-element a {
   border: none;
   color: #5a5a5a;
@@ -2181,28 +2189,7 @@ footer .footer-bubble {
   background-clip: padding-box;
 }
 .widget .widget-buttons .btn {
-  -webkit-border-radius: 4px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 4px;
-  -moz-background-clip: padding;
-  border-radius: 4px;
-  background-clip: padding-box;
-  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMSAxIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQtdWNnZy1nZW5lcmF0ZWQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCUiIHkxPSIxMDAlIiB4Mj0iMCUiIHkyPSIwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzRjODZlMCIgc3RvcC1vcGFjaXR5PSIxIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNDQ3OWNhIiBzdG9wLW9wYWNpdHk9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+PC9zdmc+);
-  background-image: -moz-linear-gradient(90deg, #4c86e0 0%, #4479ca 100%);
-  background-image: -webkit-linear-gradient(90deg, #4c86e0 0%, #4479ca 100%);
-  background-image: -o-linear-gradient(90deg, #4c86e0 0%, #4479ca 100%);
-  background-image: linear-gradient(0deg, #4c86e0 0%, #4479ca 100%);
   margin-top: 30px;
-  border-color: #4176c6;
-  margin-bottom: 10px;
-}
-.widget .widget-buttons .btn:hover {
-  background-image: none;
-  background-color: #4479ca;
-}
-.widget .widget-buttons .btn:focus {
-  background-image: none;
-  background-color: #4479ca;
 }
 .widget input[type='text'] {
   padding: 4px 10px;
@@ -2386,6 +2373,13 @@ footer .footer-bubble {
 .top-bar .view-type ul li.last-element a {
   border-right: none;
 }
+
+.bottom-advert {
+    font-size: 11px;
+    color: #b4b4b4;
+    line-height: 25px;
+}
+
 .top-bar .results-per-page ul {
   list-style: none;
   display: inline-block;
@@ -2398,14 +2392,14 @@ footer .footer-bubble {
 .top-bar .results-per-page ul li a {
   padding: 5px 10px;
   font-weight: bold;
-  color: #414141;
+  color: #003647;
   text-decoration: none;
 }
 .top-bar .results-per-page ul li a:hover {
-  color: #4a83db;
+  color: #085871;
 }
 .top-bar .results-per-page ul li.active a {
-  color: #4a83db;
+  color: #085871;
 }
 .top-bar .bar-bottom {
   width: 100%;

@@ -170,6 +170,31 @@ var RecMetals = {
             },
             "Please check your input."
         );
+    },
+    offerSend: function() {
+        $('.acceptOffer').click(function(){
+            $("#offerSend").submit();
+        });
+    },
+    offerAmount: function() {
+        $("#offerAmount").submit(function( event ) {
+            var current = $(this.currentAmount).val();
+            var amount = $(this.amount).val();
+
+            var reg = /^\d+(\.\d{1,2})?$/g;
+
+            $('.flash-messages-offer').html(' ');
+            if(!reg.test(amount)){
+                $('.flash-messages-offer').html('<div class="alert alert-danger text-center">Wpisałeś niepoprawną wartość.</div>');
+                event.preventDefault();
+                return false;
+            }
+            if(current > amount){
+                $('.flash-messages-offer').html('<div class="alert alert-danger text-center">Cena jest zbyt niska.</div>');
+                event.preventDefault();
+                return false;
+            }
+        });
     }
 }
 
@@ -177,4 +202,7 @@ $(document).ready(function () {
     RecMetals.init();
     RecMetals.ajaxSender();
     RecMetals.registerValidator();
+
+    RecMetals.offerSend();
+    RecMetals.offerAmount();
 });

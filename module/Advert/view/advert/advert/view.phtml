@@ -1,5 +1,10 @@
 <section id='content' class='alternate-bg'>
   <section class='container'>
+  <div class="flash-messages-offer" style="color: #fff; padding: 0 12px;">
+      <?php if($this->offer->getIsSent()): ?>
+          <?= $this->offer->getText(); ?>
+      <?php endif; ?>
+  </div>
     <section class='row featured-items'>
       <section class='col-md-9'>
         <div class='property-box wrapper-view'>
@@ -47,10 +52,11 @@
               </div>
                 </div>
               <div class='right'>
-                  <form role="form">
+                  <form role="form" id="offerAmount" method="POST">
                       <div class="form-group">
                           <label>Proponowana Cena</label>
-                          <input type="text" class="form-control" <?php if($advert->getUser_id() == $this->UserIdentity()->getId()): ?>disabled<?php endif; ?>>
+                          <input type="text" name="amount" class="form-control" <?php if($advert->getUser_id() == $this->UserIdentity()->getId() || $this->offer->getIsSent()): ?>disabled<?php endif; ?>>
+                          <input type="hidden" name="currentAmount" value="<?= $advert->getAmount() ?>" />
                           <p class="help-block">
                               <?php if($advert->getUser_id() == $this->UserIdentity()->getId()): ?>
                               Właściciel ogłoszenia nie może składać oferty.
@@ -59,7 +65,9 @@
                               <?php endif; ?>
                           </p>
                       </div>
-                      <button type="submit" class="btn btn-default btn-primary <?php if($advert->getUser_id() == $this->UserIdentity()->getId()): ?>disabled<?php endif; ?>">Złóż Ofertę</button>
+                      <?php if(!$this->offer->getIsSent()): ?>
+                        <button type="submit" class="btn btn-default btn-primary <?php if($advert->getUser_id() == $this->UserIdentity()->getId()): ?>disabled<?php endif; ?>">Złóż Ofertę</button>
+                      <?php endif; ?>
                   </form>
                   <div class="form-group mar-top15">
                       <label>Zarządzanie</label>
@@ -84,9 +92,13 @@
           <div class='bottom'>
             <div class='inner'>
               <div class='row'>
-                <div class='pull-left update-box'>
-                  <p>Ogłoszenie zaktualizowane <?= $advert->getUpdated_at()->format('d-m-Y'); ?> | Ilość złożonych ofert: 1</p>
-                </div>
+                  <div class="pull-left bottom-advert">
+                      <span>Data zaktualizowane: <?= $advert->getUpdated_at()->format('d-m-Y'); ?></span>
+                      <span> | </span>
+                      <span>Przeglądnięte: <?= $advert->getVisits(); ?></span>
+                      <span> | </span>
+                      <span>Oferty: <?= $this->offerCount; ?></span>
+                  </div>
                 <div class='pull-right'>
                   <?php if(!$this->UserIdentity()): ?>
                     <p>Musisz być <a href="#">zalogowany</a> aby złożyć oferte</p>
@@ -103,103 +115,168 @@
             </div>
           </div>
         </div>
-        <div class='author-section big-margins wrapper-view'>
-          <div class='left'>
-            <div class='inner'>
-                <div class='text'>
-                  <h2 style="float: left; margin-right: 10px;">Testowy Kontrahent</h2>
-                  <div class='star-rating' style="float: none;">
-                    <button class='star blue'>1 Star</button>
-                    <button class='star'>2 Star</button>
-                    <button class='star'>3 Star</button>
-                    <button class='star'>4 Star</button>
-                    <button class='star'>5 Star</button>
+          <?php if($this->offer->getIsOffer()): ?>
+            <form class="form-horizontal" id="offerSend" role="form2" method="POST">
+                <input type="hidden" name="offer" value="true" />
+                <div class='author-section big-margins wrapper-view'>
+                  <div class='left'>
+                    <div class='inner'>
+                        <div class='text'>
+                          <h2 style="float: left; margin-right: 10px;"><?= $this->offer->getCompanyName(); ?></h2>
+                          <?= $this->offer->getCompanyRank(); ?>
+                            <p>
+                                <span class="s12 border-ad-right">Polska</span>
+                                <span class="s12">Data złożenia Oferty: <?= date('d-m-Y H:i:s'); ?></span>
+                                <input type="hidden" name="date" value="<?= date('d-m-Y H:i:s'); ?>" />
+                            </p>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">Cena:</label>
+                                <div class="col-sm-11">
+                                    <p class="form-control-static">PLN <?= \Company\Entity\Transaction::Amount($this->offer->getAmount()); ?></p>
+                                    <input type="hidden" name="amount" value="<?= \Company\Entity\Transaction::Amount($this->offer->getAmount()); ?>" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">Opis:</label>
+                                <div class="col-sm-11">
+                                    <textarea name="description" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                          <a href="<?= $this->serverUrl(true); ?>" class="btn btn-danger btn-primary absolute-top-right" style="right: 115px;">Anuluj Ofertę</a>
+                          <button type="button" data-toggle="modal" data-target="#sendOffer" class="btn btn-default btn-primary absolute-top-right">Wyślij Ofertę</button>
+                        </div>
+                    </div>
                   </div>
-                  <span class='job-title'>Polska, Oferta złożona: <?= $advert->getUpdated_at()->format('d-m-Y'); ?></span>
-                  <p>Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</p>
-                  <a href="#" class='follow btn btn-primary' style="right: 268px;"><i class='icon-white icon-plus'></i> Zobacz Ofertę</a>
-                  <a href="#" class='follow btn btn-primary' style="right: 167px;"><i class='icon-white icon-plus'></i> Negocjuj</a>
-                  <a href="#" class='follow btn btn-success'><i class='icon-white icon-plus'></i> Zaakceptuj Ofertę</a>
                 </div>
-            </div>
-          </div>
-        </div>
+              </form>
+          <?php endif; ?>
+          <?php if($this->offer->getIsSent()): ?>
+              <form class="form-horizontal" id="offerSend" role="form2" method="POST">
+                  <input type="hidden" name="offer" value="true" />
+                  <div class='author-section big-margins wrapper-view'>
+                      <div class='left'>
+                          <div class='inner'>
+                              <div class='text'>
+                                  <h2 style="float: left; margin-right: 10px;"><?= $this->offer->getCompanyName(); ?></h2>
+                                  <?= $this->offer->getCompanyRank(); ?>
+                                  <p>
+                                      <span class="s12 border-ad-right">Polska</span>
+                                      <span class="s12">Data złożenia Oferty: <?= $this->offerYour->getUpdatedAt()->format('d-m-Y H:i:s'); ?></span>
+                                  </p>
+                                  <div class="form-group">
+                                      <label class="col-sm-1 control-label">Cena:</label>
+                                      <div class="col-sm-11">
+                                          <p class="form-control-static">PLN <?= \Company\Entity\Transaction::Amount($this->offerYour->getAmount()); ?></p>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-sm-1 control-label">Status:</label>
+                                      <div class="col-sm-11">
+                                          <p class="form-control-static"><?= \Advert\Entity\Offer::getNameOfType($this->offerYour->getType()); ?></p>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-sm-1 control-label">Opis:</label>
+                                      <div class="col-sm-11">
+                                          <p class="form-control-static"><?= $this->offerYour->getDescription(); ?></p>
+                                      </div>
+                                  </div>
+                                  <a href="<?= $this->serverUrl(true); ?>" class="btn btn-danger btn-primary absolute-top-right">Anuluj Ofertę</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+          <?php endif; ?>
       </section>
       <aside class='col-md-3'>
-        <section class='widget wrapper-view'>
-          <section class='widget-title uppercase'>
-            <div class='inner'>
-              <h2>Szukaj Ogłoszenia</h2>
-            </div>
-          </section>
-          <section class='widget-content'>
-            <form action="#">
-              <div class='widget-section'>
-                <div class='inner'>
-                  <label for="location">Słowo Kluczowe</label>
-                  <input type="text" name='location' id='location' class='input-block-level' value=''/>
-                </div>
-              </div>
-              <div class='widget-section'>
-                <div class='inner'>
-                  <label for="propertyType">Typ Ogłoszenia</label>
-                  <select name="propertyType" id="propertyType" class='btn-block selectpicker'>
-                    <option value="all">Wszystkie</option>
-                    <option value="all">Sprzedam</option>
-                    <option value="all">Poszukuje</option>
-                  </select>
-                </div>
-              </div>
-              <div class='widget-section'>
-                <div class='inner'>
-                  <label for="category">Kategorie</label>
-                  <select name="propertyType" id="category" class='btn-block selectpicker'>
-                    <option value="all">Metale</option>
-                    <option value="all">Plastik</option>
-                  </select>
-                </div>
-              </div>
-              <div class='widget-section first-half'>
-                <div class='inner'>
-                  <label for="minPrice">Min. Kwota</label>
-                  <select name="propertyType" id="minPrice" class='btn-block selectpicker'>
-                    <option value="all">PLN 1 tys.</option>
-                    <option value="all">PLN 2 tys.</option>
-                    <option value="all">PLN 3 tys.</option>
-                  </select>
-                </div>
-              </div>
-              <div class='widget-section second-half'>
-                <div class='inner'>
-                  <label for="maxPrice">Max. Kwota</label>
-                  <select name="propertyType" id="maxPrice" class='btn-block selectpicker'>
-                    <option value="all">PLN 5 tys.</option>
-                    <option value="all">PLN 6 tys.</option>
-                    <option value="all">PLN 7 tys.</option>
-                  </select>
-                </div>
-              </div>
-              <div class='widget-section'>
-                <div class='inner'>
-                  <label for="bedrooms">Ilość Tranzakcji</label>
-                  <select name="propertyType" id="bedrooms" class='btn-block selectpicker'>
-                    <option value="all">1-5</option>
-                    <option value="all">5-10</option>
-                    <option value="all">10-15</option>
-                    <option value="all">15+</option>
-                  </select>
-                </div>
-              </div>
-              <section class='widget-buttons'>
-                <div class='inner'>
-                  <a href="#" class='more-options'>Więcej Opcji</a> <br />
-                  <a href='#' class='btn btn-primary btn-large btn-block'>Wyszukaj</a>
-                </div>
+          <section class='widget wrapper-view'>
+              <section class='widget-title uppercase'>
+                  <div class='inner'>
+                      <div class="pull-left mar-10-auto">
+                          <strong>Ogłoszenia</strong>
+                      </div>
+                  </div>
               </section>
-            </form>
+              <section class='widget-content'>
+                  <form action="#">
+                      <div class='widget-section'>
+                          <div class='inner'>
+                              <label for="location">Szukaj</label>
+                              <input type="text" name='search' id='search' placeholder="Szukaj..." class='input-block-level'/>
+                          </div>
+                      </div>
+                      <div class='widget-section'>
+                          <div class='inner'>
+                              <label for="propertyType">Kategorie</label>
+                              <ul class="menulist">
+                                  <?php foreach($this->categories as $category): ?>
+                                      <li><a href="<?= $this->url('advert/sublist', array('id' => $category->getId(), 'url' => $category->getUrl())) ?>"><?= $category->getName(); ?></a></li>
+                                  <?php endforeach; ?>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class='widget-section'>
+                          <div class='inner'>
+                              <label for="location">Rodzaje oferty</label><br />
+                              <input type="radio" name='offer_type' id='offer_type' value='buy'/> <span>Kupię</span><br />
+                              <input type="radio" name='offer_type' id='offer_type' value='sell'/> <span>Sprzedam</span>
+                          </div>
+                      </div>
+                      <div class='widget-section'>
+                          <div class='inner'>
+                              <label for="location">Ilość</label>
+                              <input type="text" name='kg' id='kg' placeholder="Kilogramy" class='input-block-level'/>
+                          </div>
+                      </div>
+                      <div class='widget-section'>
+                          <div class='inner'>
+                              <label for="location">Lokalizacja</label>
+                              <input type="text" name='district' id='district' placeholder="Województwo" class='input-block-level'/>
+                              <input type="text" name='city' id='city' placeholder="Miejscowość" class='input-block-level mar-top5'/>
+                          </div>
+                      </div>
+                      <div class='widget-section'>
+                          <div class='inner'>
+                              <label for="location">Cena</label><br />
+                              <input type="text" name='district' id='district' placeholder="0" value="0" class='width50'/>
+                              <input type="text" name='city' id='city' placeholder="20000" value="20000" class='width50'/>
+                          </div>
+                      </div>
+                      <div class='widget-section'>
+                          <div class='inner'>
+                              <label for="location">Transport</label><br />
+                              <input type="checkbox" name='transport' value='1'/> <span>Własny</span><br />
+                              <input type="checkbox" name='transport' value='2'/> <span>W ofercie</span>
+                          </div>
+                      </div>
+                      <section class='widget-buttons'>
+                          <div class='inner'>
+                              <button class="btn btn-default btn-primary" type="submit">Szukaj Ofert</button>
+                          </div>
+                      </section>
+                  </form>
+              </section>
           </section>
-        </section>
       </aside>
     </section>
   </section>
 </section>
+
+<div id="sendOffer" class="modal fade bs-example-modal-sm" tabindex="1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Wyślij Propozycję Oferty</h4>
+            </div>
+            <div class="modal-body">
+                Jesteś pewny że chcesz wysłać Propozycję Oferty do tego Ogłoszenia?
+                <div class="mar-top15">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                    <button type="button" class="btn btn-primary pull-right acceptOffer">Wyślij</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

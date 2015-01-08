@@ -3,13 +3,15 @@
 namespace Advert\Controller;
 
 use Advert\Entity\Observe;
+use Advert\Entity\Offer;
 use Application\Controller\BaseController;
 use Zend\View\Model\ViewModel;
-use Zend\View\Model\JsonModel;
 use Advert\Entity\Advert;
 use Advert\Entity\Image;
 use Zend\Filter\File\RenameUpload;
 use Library\HttpServiceCaller;
+
+use Advert\Components\AddOffer;
 
 class AdvertController extends BaseController
 {
@@ -18,6 +20,10 @@ class AdvertController extends BaseController
 
     public function advertListAction()
     {
+        $resultPage = 3;
+        $page = $this->getParam('page');
+        $offset = max(0, ($page - 1) * $resultPage);
+
         $subcategory = null;
         if ($this->getParam('id')) {
             $this->getParentIdFromCategory($this->getParam('id'));
@@ -26,8 +32,15 @@ class AdvertController extends BaseController
         }
         $category = $this->em('Advert\Entity\Category')->findBy(array('parent_id' => null), array('position' => 'ASC'));
 
+        $query = $this->em()->createQuery("SELECT count(m) FROM Advert\Entity\Advert m");
+        $count = $query->getSingleResult();
+
         return new ViewModel(array(
-            'adverts' => $this->em('Advert\Entity\Advert')->findBy(array(), array('id' => 'ASC')),
+            'adverts' => $this->em('Advert\Entity\Advert')->findBy(array(), array('id' => 'ASC'), $resultPage, $offset),
+            'currentPage' => $page,
+            'resultPage' => $resultPage,
+            'resultCount' => $count[1],
+            'pages' => ceil($count[1]/$resultPage),
             'categories' => $category,
             'subcategories' => $subcategory,
             'category_ids' => $this->category_ids
@@ -152,7 +165,49 @@ class AdvertController extends BaseController
         $advertId = $this->getParam('id');
         $companyId = $this->user()->getIdentity()->getCompanyId();
 
+        $offer = new AddOffer($this->user()->getIdentity());
+        $offer->setDBCompany($this->em('Company\Entity\Company'));
+
+        $advert = $this->em('Advert\Entity\Advert')->find($advertId);
+
+        if($this->request->isPost()){
+            if((boolean)$this->request->getPost('offer')){
+                $addOffer = new Offer();
+                $addOffer->setAmount($this->request->getPost('amount'));
+                $addOffer->setAdvertId($advert->getId());
+                $addOffer->setCompanyId($companyId);
+                $addOffer->setDescription($this->request->getPost('description'));
+                $addOffer->setType(Offer::TYPE_SENT);
+                $this->em()->persist($addOffer);
+                $this->em()->flush();
+
+                $offer->setIsSent(true);
+                $offer->setText('<div class="alert alert-success text-center">Oferta została wysłana. Wyślemy wiadomość kiedy Firma oferta zostanie rozpatrzona.</div>');
+            }else{
+                $offer->setOffer($this->request->getPost('amount'));
+            }
+        }
+
+        if($advert->getUser_id() != $this->user()->getIdentity()->getId()){
+            $advert->setVisits($advert->getVisits()+1);
+            $this->em()->persist($advert);
+            $this->em()->flush();
+        }
+
+        $query = $this->em()->createQuery("SELECT count(m) FROM Advert\Entity\Offer m WHERE m.advert_id =". $advert->getId());
+        $count = $query->getSingleResult();
+
+        $yourOffer = $this->em('Advert\Entity\Offer')->findOneBy(array('advert_id' => $advert->getId(), 'company_id' => $companyId));
+        if($yourOffer){
+            $offer->setIsSent(true);
+            $offer->setText('<div class="alert alert-info text-center">Złożyłeś już ofertę do tego ogłoszenia.</div>');
+        }
+
         return new ViewModel(array(
+            'offer' => $offer,
+            'offerYour' => $yourOffer,
+            'offerCount' => $count[1],
+            'categories' => $this->em('Advert\Entity\Category')->findBy(array('parent_id' => null), array('position' => 'ASC')),
             'advert' => $this->em('Advert\Entity\Advert')->find($advertId),
             'observe' => $this->em('Advert\Entity\Observe')->findOneBy(array('advert_id' => $advertId, 'company_id' => $companyId))
         ));

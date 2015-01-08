@@ -21,13 +21,10 @@
                                 <h3>Informacje</h3>
                                 <ul class="list-unstyled">
                                     <li><strong>Pakiet:</strong> <span class="text-right"><span class="pakiet pakiet-premium"><?= $pakiet->getName(); ?></span></span></li>
-                                    <li><strong>Ranking:</strong> <span class="text-right">
-                                            <?php $stars = \Company\Entity\Company::rank($this->company->getRank());  ?>
-                                            <div class='star-rating'>
-                                                <?php foreach($stars as $key => $star): ?>
-                                                    <button class='star <?= $star; ?>'><?= ++$key; ?> Star</button>
-                                                <?php endforeach; ?>
-                                            </div></span></li>
+                                    <li><strong>Ranking:</strong>
+                                        <span class="text-right">
+                                            <?= \Company\Entity\Company::rank($this->company->getRank());  ?>
+                                        </span></li>
                                     <li><strong>Propozycje:</strong> <span class="text-right">10</span></li>
                                     <li><strong>Oferty:</strong> <span class="text-right">10</span></li>
                                     <li><strong>Wiadomości:</strong> <span class="text-right">4</span></li>

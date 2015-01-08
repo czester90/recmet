@@ -13,8 +13,20 @@ use Doctrine\ORM\Mapping as ORM;
 class Offer
 {
 
-    const TYPE_NEGOTIATION = 1;
+    const TYPE_ACCEPT = 1;
+    const TYPE_REJECTED = 2;
+    const TYPE_SENT = 3;
 
+    private static $typeNames = array(
+        1 => 'Zaakceptowana',
+        2 => 'Odrzucona',
+        3 => 'Wysłana'
+    );
+
+    public static function getNameOfType($type)
+    {
+        return self::$typeNames[$type];
+    }
     /**
      * @var int
      * @ORM\Id
@@ -25,15 +37,15 @@ class Offer
 
     /**
      * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="Users\Entity\Users")
-     */
-    protected $user_id;
-
-    /**
-     * @ORM\Column(type="integer")
      * @ORM\ManyToOne(targetEntity="Company\Entity\Company")
      */
     protected $company_id;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Advert\Entity\Advert")
+     */
+    protected $advert_id;
 
     /**
      * @ORM\Column(type="integer")
@@ -148,19 +160,19 @@ class Offer
     }
 
     /**
-     * @param mixed $user_id
+     * @param mixed $advert_id
      */
-    public function setUserId($user_id)
+    public function setAdvertId($advert_id)
     {
-        $this->user_id = $user_id;
+        $this->advert_id = $advert_id;
     }
 
     /**
      * @return mixed
      */
-    public function getUserId()
+    public function getAdvertId()
     {
-        return $this->user_id;
+        return $this->advert_id;
     }
 
     /**

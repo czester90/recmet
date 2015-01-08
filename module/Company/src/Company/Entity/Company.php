@@ -226,13 +226,20 @@ class Company extends BaseEntity {
     {
         $arr = array();
         $index = 0;
+        $html = "";
 
         for($i = 0; $i < 5; $i++){
             $arr[$i] = $rank > 0 ? 'blue' : '';
             $index = $index + 2;
         }
 
-        return $arr;
+        $html .= "<div class='star-rating' style='float: none;'>";
+        foreach($arr as $key => $star){
+            $html .= "<button class='star ".$star."'>".$key." Star</button>";
+        }
+        $html .= "</div>";
+
+        return $html;
     }
 
 }

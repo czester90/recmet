@@ -5,102 +5,77 @@
         <section class='widget'>
             <section class='widget-title uppercase'>
                 <div class='inner'>
-                    <h2>Kategorie Ogłoszeń</h2>
+                    <div class="pull-left mar-10-auto">
+                        <strong>Ogłoszenia</strong>
+                    </div>
                 </div>
             </section>
             <section class='widget-content'>
-                <ul>
-                    <?php foreach($this->categories as $category): ?>
-                           <li><a href="<?= $this->url('advert/sublist', array('id' => $category->getId(), 'url' => $category->getUrl())) ?>"><?= $category->getName(); ?></a></li>
-                           <?php if(in_array($category->getId(), $this->category_ids)): ?>
-                                <ul>
-                                    <?php foreach($this->subcategories as $sub): ?>
-                                        <li><a href="<?= $this->url('advert/sublist', array('id' => $sub->getId(), 'url' => $sub->getUrl())) ?>"><?= $sub->getName(); ?></a></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            <?php endif; ?>
-                    <?php endforeach; ?>
-                </ul>
                 <form action="#">
                     <div class='widget-section'>
                         <div class='inner'>
-                            <label for="location">Location</label>
-                            <input type="text" name='location' id='location' class='input-block-level' value='Oxford'/>
+                            <label for="location">Szukaj</label>
+                            <input type="text" name='search' id='search' placeholder="Szukaj..." class='input-block-level'/>
                         </div>
                     </div>
                     <div class='widget-section'>
                         <div class='inner'>
-                            <label for="propertyType">Property Type</label>
-                            <select name="propertyType" id="propertyType" class='btn-block selectpicker'>
-                                <option value="all">All</option>
-                                <option value="all">Mansion</option>
-                                <option value="all">Apartment</option>
-                            </select>
+                            <label for="propertyType">Kategorie</label>
+                            <ul class="menulist">
+                                <?php foreach($this->categories as $category): ?>
+                                    <li><a href="<?= $this->url('advert/sublist', array('id' => $category->getId(), 'url' => $category->getUrl())) ?>"><?= $category->getName(); ?> (100)</a></li>
+                                    <?php if(in_array($category->getId(), $this->category_ids)): ?>
+                                        <ul class="submenulist">
+                                            <?php foreach($this->subcategories as $sub): ?>
+                                                <li><a href="<?= $this->url('advert/sublist', array('id' => $sub->getId(), 'url' => $sub->getUrl())) ?>"><?= $sub->getName(); ?></a></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </ul>
                         </div>
                     </div>
                     <div class='widget-section'>
                         <div class='inner'>
-                            <label for="category">Category</label>
-                            <select name="propertyType" id="category" class='btn-block selectpicker'>
-                                <option value="all">For Sale</option>
-                                <option value="all">For Rent</option>
-                                <option value="all">Forclosures</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='widget-section first-half'>
-                        <div class='inner'>
-                            <label for="minPrice">Min. Price</label>
-                            <select name="propertyType" id="minPrice" class='btn-block selectpicker'>
-                                <option value="all">$17K</option>
-                                <option value="all">$27K</option>
-                                <option value="all">$37K</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='widget-section second-half'>
-                        <div class='inner'>
-                            <label for="maxPrice">Max. Price</label>
-                            <select name="propertyType" id="maxPrice" class='btn-block selectpicker'>
-                                <option value="all">$999K</option>
-                                <option value="all">$899K</option>
-                                <option value="all">$799K</option>
-                            </select>
+                            <label for="location">Rodzaje oferty</label><br />
+                            <input type="radio" name='offer_type' id='offer_type' value='buy'/> <span>Kupię</span><br />
+                            <input type="radio" name='offer_type' id='offer_type' value='sell'/> <span>Sprzedam</span>
                         </div>
                     </div>
                     <div class='widget-section'>
                         <div class='inner'>
-                            <label for="bedrooms">Bedrooms</label>
-                            <select name="propertyType" id="bedrooms" class='btn-block selectpicker'>
-                                <option value="all">3</option>
-                                <option value="all">2</option>
-                                <option value="all">4</option>
-                                <option value="all">5</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='widget-section'>
-                        <div class='inner' style='position: relative;'>
-                            <label for="size">Size</label>
-                            <input type="text" name='size' id='size' class='input-block-level' value='500'/>
-                            <span class='measure-type'>sqft</span>
+                            <label for="location">Ilość</label>
+                            <input type="text" name='kg' id='kg' placeholder="Kilogramy" class='input-block-level'/>
                         </div>
                     </div>
                     <div class='widget-section'>
                         <div class='inner'>
-                            <label for='range'>Slide Example</label>
-                            <input type="text" name='size' id='range' class='input-block-level range-example'/>
+                            <label for="location">Lokalizacja</label>
+                            <input type="text" name='district' id='district' placeholder="Województwo" class='input-block-level'/>
+                            <input type="text" name='city' id='city' placeholder="Miejscowość" class='input-block-level mar-top5'/>
+                        </div>
+                    </div>
+                    <div class='widget-section'>
+                        <div class='inner'>
+                            <label for="location">Cena</label><br />
+                            <input type="text" name='district' id='district' placeholder="0" value="0" class='width50'/>
+                            <input type="text" name='city' id='city' placeholder="20000" value="20000" class='width50'/>
+                        </div>
+                    </div>
+                    <div class='widget-section'>
+                        <div class='inner'>
+                            <label for="location">Transport</label><br />
+                            <input type="checkbox" name='transport' value='1'/> <span>Własny</span><br />
+                            <input type="checkbox" name='transport' value='2'/> <span>W ofercie</span>
                         </div>
                     </div>
                     <section class='widget-buttons'>
                         <div class='inner'>
-                            <a href="#" class='more-options'>More Options</a> <br />
-                            <a href='#' class='btn btn-primary btn-large btn-block'>Update</a>
+                            <button class="btn btn-default btn-primary" type="submit">Szukaj Ofert</button>
                         </div>
                     </section>
                 </form>
             </section>
-            <a href="#" id='clearFilters'>Clear all filters</a>
         </section>
     </aside>
       <section class='col-md-9'>
@@ -110,16 +85,16 @@
               <div class='bar-title'>
                 <div class='inner'>
                   <div class='pull-left custom-margin'>
-                    <strong>1</strong> - <strong>9</strong> of <strong>1,075</strong> results for <strong>Oxford</strong> property <strong>For Sale</strong>
+                    <strong><?= ($this->resultPage * $this->currentPage) - $this->resultPage + 1; ?></strong> - <strong><?= ($this->resultPage * $this->currentPage + $this->resultPage) - $this->resultPage; ?></strong> z <strong><?= $this->resultCount ?></strong> wyników
                   </div>
                   <div class='pull-right results-per-page custom-margin'>
-                    <span class='text-line'>Results per page:</span>
+                    <span class='text-line'>Wyników na stronie:</span>
                     <ul>
-                      <li class='active'><a href="#">9</a></li>
+                      <li class='active'><a href="#">20</a></li>
                       <li>|</li>
-                      <li><a href="#">18</a></li>
+                      <li><a href="#">40</a></li>
                       <li>|</li>
-                      <li><a href="#">27</a></li>
+                      <li><a href="#">60</a></li>
                     </ul>
                   </div>
                 </div>
@@ -127,141 +102,18 @@
               <div class='bar-bottom'>
                 <div class='inner'>
                   <div class='pull-left custom-margin'>
-                    <span class='text-line'>Sort by:</span>
+                    <span class='text-line'>Sortowanie:</span>
                     <select class='selectpicker'>
-                      <option value="relevance">Relevance</option>
-                      <option value="date">Date</option>
+                      <option value="date">Data</option>
+                      <option value="visits">Ilość wyświetleń</option>
                     </select>
-                  </div>
-                  <div class='pull-right view-type custom-margin'>
-                    <span class='text-line'>View:</span>
-                    <ul>
-                      <li><a href="search-grid.html" class='grid'>Grid</a></li>
-                      <li class='active'><a href="search-list.html" class='list'>List</a></li>
-                      <li class='last-element'><a href="search-location.html" class='location'>Location</a></li>
-                    </ul>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="row">
-            <div class='col-md-12'>
-                <h2>Ogłoszenia Specjalne</h2>
-                <div class='featured-items-slider'>
-                    <ul class='slides'>
-                        <li>
-                            <div class='row'>
-                                <div class='col-md-4 featured-item-wrapper'>
-                                    <div class='featured-item'>
-                                        <div class='top'>
-                                            <div class='inner-border'>
-                                                <div class='inner-padding'>
-                                                    <figure>
-                                                        <img src="img/photos/4834197589_84d75a42bd_b.jpg" alt="" />
-                                                        <div class='banner'>For Sale</div>
-                                                        <a href="property.html" class='figure-hover'>Zoom</a>
-                                                    </figure>
-                                                    <h3><a href="property.html">555 Malcolm X Blvd</a></h3>
-                                                    <p>Los Angeles, CA</p>
-                                                </div>
-                                            </div>
-                                            <i class='bubble'></i>
-                                        </div>
-                                        <div class='bottom'>
-                                            <div class='inner-border'>
-                                                <div class='inner-padding'>
-                                                    <p>3 beds  +  1 bath  +  100 sqft</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class='star-rating'>
-                                        <button class='star blue'>1 Star</button>
-                                        <button class='star active'>2 Star</button>
-                                        <button class='star active'>3 Star</button>
-                                        <button class='star'>4 Star</button>
-                                        <button class='star'>5 Star</button>
-                                    </div>
-                                </div>
-                                <div class='col-md-4 featured-item-wrapper'>
-                                    <div class='featured-item'>
-                                        <div class='top'>
-                                            <div class='inner-border'>
-                                                <div class='inner-padding'>
-                                                    <figure>
-                                                        <img src="img/photos/4834201025_e7f66118eb_b.jpg" alt="" />
-                                                        <div class='banner'>For Rent</div>
-                                                        <a href="property.html" class='figure-hover'>Zoom</a>
-                                                    </figure>
-                                                    <h3><a href="property.html">520 W 110th St</a></h3>
-                                                    <p>Las Vegas, NV</p>
-                                                </div>
-                                            </div>
-                                            <i class='bubble'></i>
-                                        </div>
-                                        <div class='bottom'>
-                                            <div class='inner-border'>
-                                                <div class='inner-padding'>
-                                                    <p>4 beds  +  2 baths  +  245 sqft</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class='star-rating'>
-                                        <button class='star active'>1 Star</button>
-                                        <button class='star active'>2 Star</button>
-                                        <button class='star active'>3 Star</button>
-                                        <button class='star active'>4 Star</button>
-                                        <button class='star active'>5 Star</button>
-                                    </div>
-                                    <div class='price-wrapper'>
-                                        <div class='price'>$17,000</div>
-                                        <div class='rate'>/year</div>
-                                    </div>
-                                </div>
-                                <div class='col-md-4 featured-item-wrapper'>
-                                    <div class='featured-item'>
-                                        <div class='top'>
-                                            <div class='inner-border'>
-                                                <div class='inner-padding'>
-                                                    <figure>
-                                                        <img src="img/photos/4834203945_3e56a09048_b.jpg" alt="" />
-                                                        <a href="property.html" class='figure-hover'>Zoom</a>
-                                                    </figure>
-                                                    <h3><a href="property.html">100 W 57th St</a></h3>
-                                                    <p>Los Angeles, CA</p>
-                                                </div>
-                                            </div>
-                                            <i class='bubble'></i>
-                                        </div>
-                                        <div class='bottom'>
-                                            <div class='inner-border'>
-                                                <div class='inner-padding'>
-                                                    <p>2 beds  +  2 baths + 168 sqft</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class='star-rating'>
-                                        <button class='star active'>1 Star</button>
-                                        <button class='star active'>2 Star</button>
-                                        <button class='star active'>3 Star</button>
-                                        <button class='star active'>4 Star</button>
-                                        <button class='star active'>5 Star</button>
-                                    </div>
-                                    <div class='price-wrapper'>
-                                        <div class='price'>$3,400</div>
-                                        <div class='rate'>/mo</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
         <div class='row'>
           <div class='col-md-12 featured-item-list'>
             <?php foreach($this->adverts as $advert): ?>
@@ -282,7 +134,7 @@
                       </div>
                       <div class='price-wrapper'>
                         <div class='price'>PLN <?= $advert->getAmount() ?></div>
-                        <div class='rate'>/month</div>
+                        <div class='rate'>/całość</div>
                       </div>
                     </div>
                   </div>
@@ -292,7 +144,11 @@
               <div class='bottom'>
                 <div class='inner-border'>
                   <div class='inner-padding'>
-                    <p>4 beds  +  2 baths  +  245 sqft</p>
+                      <div class="pull-left bottom-advert">
+                          <span>Data dodania: <?= $advert->getCreated_at()->format('d-m-Y H:i:s') ?></span>
+                          <span> | </span>
+                          <span>Przeglądnięte: <?= $advert->getVisits(); ?></span>
+                      </div>
                     <div class='star-rating'>
                       <button class='star active'>1 Star</button>
                       <button class='star active'>2 Star</button>
@@ -309,16 +165,19 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-          <ul class="pagination pagination-sm">
-            <li class='first-element'><a href="#">Prev</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">...</a></li>
-            <li><a href="#">48</a></li>
-            <li><a href="#">49</a></li>
-            <li class='last-element'><a href="#">Next</a></li>
-          </ul>
+              <?php if($this->pages > 1): ?>
+                  <ul class="pagination pagination-sm pull-right">
+                      <?php if($this->currentPage != 1): ?>
+                          <li class='first-element'><a href="<?= $this->url('advert', array('page' => $this->currentPage-1)); ?>">Prev</a></li>
+                      <?php endif; ?>
+                    <?php for($x = 1; $x <= $this->pages; $x++): ?>
+                        <li <?php if($x == $this->currentPage): ?>class="active"<?php endif; ?>><a href="<?= $this->url('advert', array('page' => $x)); ?>"><?= $x; ?></a></li>
+                    <?php endfor; ?>
+                      <?php if($this->currentPage != $this->pages): ?>
+                          <li class='last-element'><a href="<?= $this->url('advert', array('page' => $this->currentPage+1)); ?>">Next</a></li>
+                      <?php endif; ?>
+                  </ul>
+              <?php endif; ?>
           </div>
         </div>
       </section>

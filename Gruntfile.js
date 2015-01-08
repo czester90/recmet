@@ -52,7 +52,8 @@ module.exports = function(grunt) {
                   'public/css/font-awesome.min.css',
                   'public/css/style.css',
                   'public/css/common.css',
-                  'public/css/validate.css'
+                  'public/css/validate.css',
+                  'public/css/button.css'
                 ]
             }
         }

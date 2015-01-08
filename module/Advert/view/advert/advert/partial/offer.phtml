@@ -1,7 +1,6 @@
 <h2 class="module-heading">Menu</h2>
 <ul class="list-unstyled menu-grey">
     <li class="<?php if($this->action == 'dashboard'): ?>active<?php endif; ?>"><a href="<?= $this->url('advert/dashboard') ?>">Dashboard</a></li>
-    <li class="<?php if($this->action == 'add'): ?>active<?php endif; ?>"><a href="<?= $this->url('advert/add') ?>">Dodaj Ogłoszenie</a></li>
-    <li class="<?php if($this->action == 'observe-list'): ?>active<?php endif; ?>"><a href="<?= $this->url('advert/observe-list') ?>" class="">Obserwowane</a></li>
-    <li><a href="<?= $this->url('advert/manager') ?>" class="">Proponowane</a></li>
+    <li class="<?php if($this->action == 'add'): ?>active<?php endif; ?>"><a href="<?= $this->url('advert/add') ?>">Otrzymane Oferty</a></li>
+    <li class="<?php if($this->action == 'observe-list'): ?>active<?php endif; ?>"><a href="<?= $this->url('advert/observe-list') ?>" class="">Złożone Oferty</a></li>
 </ul>

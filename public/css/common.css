@@ -4,6 +4,9 @@
 .mar-top15 {
   margin-top: 15px;
 }
+.mar-top5 {
+  margin-top: 5px;
+}
 .mar-bottom15 {
   margin-bottom: 15px;
 }
@@ -13,8 +16,14 @@
 .mar-left25-proc {
   margin-left: 25%;
 }
+.mar-10-auto {
+  margin: 10px auto;
+}
 .padding-20-30-0 {
   padding: 20px 30px 0;
+}
+.width50 {
+  width: 49%;
 }
 .info-message-content {
   width: 100%;
@@ -24,4 +33,15 @@
 }
 .alert-success p {
   color: #006400;
+}
+ul.menulist li {
+  text-decoration: none;
+  list-style: none;
+  line-height: 27px;
+}
+ul.menulist li a {
+  color: #000;
+}
+.submenulist a {
+  padding-left: 30px;
 }
