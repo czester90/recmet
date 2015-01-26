@@ -4,8 +4,9 @@ namespace Advert\Controller;
 
 use Advert\Entity\Observe;
 use Advert\Entity\Offer;
+use Application\Components\Image\ImageThumb;
 use Application\Controller\BaseController;
-use Zend\View\Model\ViewModel;
+use Application\Components\ViewModel;
 use Advert\Entity\Advert;
 use Advert\Entity\Image;
 use Zend\Filter\File\RenameUpload;
@@ -36,7 +37,7 @@ class AdvertController extends BaseController
         $count = $query->getSingleResult();
 
         return new ViewModel(array(
-            'adverts' => $this->em('Advert\Entity\Advert')->findBy(array(), array('id' => 'ASC'), $resultPage, $offset),
+            'adverts' => $this->em('Advert\Entity\Advert')->findBy(array(), array('id' => 'DESC'), $resultPage, $offset),
             'currentPage' => $page,
             'resultPage' => $resultPage,
             'resultCount' => $count[1],
@@ -66,39 +67,29 @@ class AdvertController extends BaseController
 
         if ($this->request->isPost()) {
 
-            $files = $this->request->getFiles();
+            var_dump($this->request->getFiles());
+            exit();
+            $advert = $this->addAdvert();
 
-            $advert = new Advert();
-            $advert->setActive(1);
-            $advert->setAmount($this->request->getPost('amount'));
-            $advert->setDays(20); //TODO
-            $advert->setDescription($this->request->getPost('description'));
-            $advert->setName($this->request->getPost('name'));
-            $advert->setAdvertType($this->request->getPost('advert_type'));
-            $advert->setAmountType($this->request->getPost('amount_type'));
-            $advert->setPieces($this->request->getPost('pieces'));
-            $advert->setUrl(HttpServiceCaller::toAscii($this->request->getPost('name')));
-            $advert->setUser_id($this->user()->getIdentity()->getId());
-            $category = $this->em('Advert\Entity\Category')->find($this->request->getPost('category'));
-            $advert->setCategory_id($category->getId());
-            $this->em()->persist($advert);
-            $this->em()->flush();
 
-            $path = getcwd() . Image::IMAGE_PATH . DIRECTORY_SEPARATOR . $this->user()->getIdentity()->getId();
+            $path = getcwd() . Image::IMAGE_PATH . DIRECTORY_SEPARATOR . $this->getUserId();
             if (!is_dir($path)) {
-                mkdir($path);
+                mkdir($path, 0777, true);
             }
 
-            foreach ($files['images'] as $file) {
+            foreach ($this->files['images'] as $file) {
                 $filter = new RenameUpload(array(
                     "target" => $path . DIRECTORY_SEPARATOR . date('YmdHis') . "." . pathinfo($file['name'], PATHINFO_EXTENSION),
                     "randomize" => true,
                 ));
+
+                $img = new ImageThumb();
+
                 $FileSaved = $filter->filter($file);
                 $filePart = explode("/", $FileSaved['tmp_name']);
 
                 $images = new Image();
-                $images->setUser_id($this->user()->getIdentity()->getId());
+                $images->setUser_id($this->getUserId());
                 $images->setName($filePart[count($filePart) - 1]);
                 $images->setType($file['type']);
                 $images->getAdvert_id()->add($advert);
@@ -116,6 +107,34 @@ class AdvertController extends BaseController
             'categories' => $category,
             'action' => $this->params('action'),
         ));
+    }
+
+    private function addAdvert()
+    {
+        $advert = new Advert();
+        $advert->setActive(Advert::ADVERT_ACTIVE);
+        $advert->setAmount($this->post('amount'));
+        $advert->setDays($this->post('days'));
+        $advert->setDescription($this->post('description'));
+        $advert->setName($this->post('name'));
+        $advert->setAdvertType($this->post('advert_type'));
+        $advert->setAmountType($this->post('amount_type'));
+        $advert->setPieces($this->post('pieces'));
+        $advert->setUrl(HttpServiceCaller::toAscii($this->post('name')));
+        $advert->setUser_id($this->getUserId());
+
+        $category = $this->em('Advert\Entity\Category')->find($this->request->getPost('category'));
+        $advert->setCategory_id($category->getId());
+
+        $this->em()->persist($advert);
+        $this->em()->flush();
+
+        return $advert;
+    }
+
+    private function addImage()
+    {
+
     }
 
     public function deleteAction()

@@ -49,6 +49,26 @@ class BaseController extends AbstractActionController
         return $sm->get('user_auth_service');
     }
 
+    public function getUserId()
+    {
+        return $this->user()->getIdentity()->getId();
+    }
+
+    public function getCompanyId()
+    {
+        return $this->user()->getIdentity()->getCompanyId();
+    }
+
+    public function post($name)
+    {
+        return $this->request->getPost($name);
+    }
+
+    public function files($name)
+    {
+        return $this->request->getFiles($name);
+    }
+
     public function isUser()
     {
         if (!$this->UserAuthentication()->hasIdentity()) {

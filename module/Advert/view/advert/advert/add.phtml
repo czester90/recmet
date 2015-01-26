@@ -4,7 +4,9 @@
 
             <div class="flash-messages">
                 <div class="alert alert-warning text-center">
-                    <p>Nie możesz korzystać z wybrane pakietu. Pakiet jest <strong><abbr title="Przejdź do zakładki Płatności aby w szybki sposób móc aktywować usługę.">Nieaktywny</abbr></strong>. Opłać pakiet by móc w pełni korzystać z funkcjonalności serwisu.</p>
+                    <p>Nie możesz korzystać z wybrane pakietu. Pakiet jest <strong><abbr
+                                title="Przejdź do zakładki Płatności aby w szybki sposób móc aktywować usługę.">Nieaktywny</abbr></strong>.
+                        Opłać pakiet by móc w pełni korzystać z funkcjonalności serwisu.</p>
                 </div>
             </div>
             <div class="toolbar">
@@ -18,85 +20,188 @@
                 <div class="primary">
                     <section class="module">
                         <div class="module-content dis-table col-lg-12">
-                            <div class="alert alert-info text-center info-message-content mar-bottom15">
-                                <p>Tutaj możesz <strong>Dodać Ogłoszenie</strong>. Uzupełnij <strong>wymagane pola</strong> by móc wystawić Ogłoszenie.</p>
+                            <div class="alert alert-info text-center info-message-content mar-bottom15 alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <p>Tutaj możesz <strong>Dodać Ogłoszenie</strong>. Uzupełnij <strong>wymagane
+                                        pola</strong> by móc wystawić Ogłoszenie.</p>
                             </div>
 
-                            <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
-                                <div class="col-lg-8">
+                            <form id="addAdvertForm" class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                                <div class="col-lg-12">
+
                                     <div class="form-group">
-                                        <label for="name" class="col-sm-4 control-label">Tytuł Ogłoszenia</label>
+                                        <label for="category" class="col-sm-3 control-label">Kategoria</label>
+
+                                        <div class="col-sm-8">
+                                            <input type="hidden" id="category_id" name="category_id" />
+                                            <ul id="category-tree-view" data-url="<?= $this->url('generate-category'); ?>">
+                                                <?php foreach ($this->categories as $category): ?>
+                                                    <li><span class="tree" data-id="<?= $category->getId(); ?>"><?= $category->getName(); ?></span></li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                            <label id="category_id-error" class="error" for="category_id"></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 control-label">Rodzaj Oferty</label>
+
                                         <div class="col-sm-7">
+                                            <div class="col-sm-12 padding-0">
+                                                <input class="advert_type" name="advert_type" value="1" type="radio"> Sprzedaż
+                                            </div>
+                                            <div class="col-sm-12 padding-0">
+                                                <input class="advert_type" name="advert_type" value="2" type="radio"> Kupno
+                                            </div>
+                                            <label id="advert_type-error" class="error" for="advert_type"></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group sell-option-box dis-none">
+                                        <label for="name" class="col-sm-3 control-label">Rodzaj Sprzedaży</label>
+                                        <div class="col-sm-8">
+                                            <div class="col-sm-12 padding-0">
+                                                <input class="sell_option" name="sell_option" value="1" type="radio"> Licytacja
+                                            </div>
+                                            <div class="col-sm-12 padding-0">
+                                                <input class="sell_option" name="sell_option" value="2" type="radio"> Przetarg
+                                            </div>
+                                            <div class="col-sm-12 padding-0">
+                                                <input class="sell_option" name="sell_option" value="3" type="radio"> Kup Teraz
+                                            </div>
+                                            <label id="sell_option-error" class="error" for="sell_option"></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 control-label">Tytuł Ogłoszenia</label>
+
+                                        <div class="col-sm-8">
                                             <input id="name" name="name" class="form-control input-md" type="text">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="category" class="col-sm-4 control-label">Kategoria</label>
-                                        <div class="col-sm-7">
-                                            <select id="category" name="category" class="form-control">
-                                                <?php foreach($this->categories as $category): ?>
-                                                    <option value="<?= $category->getId(); ?>"><?= $category->getName(); ?></option>
-                                                <?php endforeach; ?>
+                                        <label for="amount" class="col-sm-3 control-label">Cena</label>
+
+                                        <div class="col-sm-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">PLN</span>
+                                                <input type="text" class="form-control" name="amount" id="amount">
+                                            </div>
+                                            <label id="amount-error" class="error" for="amount"></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="pieces" class="col-sm-3 control-label">Ilość Towaru</label>
+
+                                        <div class="col-sm-3">
+                                            <input id="pieces" name="pieces" class="form-control input-md" type="text">
+                                        </div>
+                                        <div class="col-sm-2 amount-type-box">
+                                            <select id="amount_typ" name="amount_typ" class="form-control">
+                                                <option value="sztuka">Sztuka</option>
+                                                <option value="kg">Kilogram</option>
+                                                <option value="tona">Tona</option>
+                                                <option value="tona">Metr &#178;</option>
+                                                <option value="tona">Metr &#179;</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="description" class="col-sm-4 control-label">Treść</label>
-                                        <div class="col-sm-7">
-                                            <textarea class="form-control" rows="10" id="description" name="description"></textarea>
+                                        <label for="name" class="col-sm-3 control-label">Czas trwania <span aria-hidden="true" data-toggle="tooltip" data-original-title="Another one here too" data-placement="top" class="glyphicon glyphicon-info-sign"></span></label>
+
+                                        <div class="col-sm-2">
+                                            <select id="days" name="days" class="form-control">
+                                                <option value="7">7 dni</option>
+                                                <option value="14">14 dni</option>
+                                                <?php if($this->Bundle()->getOptionAdvertDay() >= 21): ?><option value="21">21 dni</option><?php endif; ?>
+                                                <?php if($this->Bundle()->getOptionAdvertDay() >= 30): ?><option value="30">30 dni</option><?php endif; ?>
+                                            </select>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 control-label">Zdjęcia</label>
 
-                                <div class="form-group">
-                                    <label for="amount" class="col-sm-2 control-label">Cena</label>
-                                    <div class="col-sm-10">
-                                        <input id="amount" name="amount" class="form-control input-md" type="text">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="pieces" class="col-sm-2 control-label">Ilość</label>
-                                    <div class="col-sm-10">
-                                        <input id="weight" name="pieces" class="form-control input-md" type="text">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="checkbox-inline" for="advert_type">
-                                        <input name="advert_type" id="checkboxes-0" value="1" type="checkbox">
-                                        Wystawiam
-                                    </label>
-                                    <label class="checkbox-inline" for="advert_type">
-                                        <input name="advert_type" id="checkboxes-1" value="2" type="checkbox">
-                                        Poszukuje
-                                    </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="checkbox-inline" for="amount_type">
-                                        <input name="amount_type" id="checkboxes-0" value="1" type="checkbox">
-                                        Jednorazowo
-                                    </label>
-                                    <label class="checkbox-inline" for="amount_type">
-                                        <input name="amount_type" id="checkboxes-1" value="2" type="checkbox">
-                                        Miesiecznie
-                                    </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="images">Zdjęcia</label>
-                                    <input id="images" name="images[]" multiple="multiple" class="input-file" type="file">
-                                </div>
-
+                                        <div class="col-sm-8">
+                                            <p class="help-block">Wybierz zdjęcia do ogłoszenia. Pierwsze zdjęcie, zostanie automatycznie ustawione jako zdjęcie główne.</p>
+                                            <div class="col-sm-12 addimage padding-0">
+                                                <div id="filediv add-file1"><input name="photo[]" type="file" id="photo"/></div>
+                                            </div>
+                                            <div class="row place-image"></div>
+                                            <label id="photo-error" class="error" for="photo"></label>
+                                        </div>
                                     </div>
 
-                                <div class="form-group">
-                                    <button id="add-advert" name="add-advert" class="btn btn-success">Dodaj Ogłoszenie</button>
+                                    <div class="form-group">
+                                        <label for="description" class="col-sm-3 control-label">Treść</label>
+
+                                        <div class="col-sm-8">
+                                            <textarea class="form-control editor" rows="10" id="description" name="description"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="attach" class="col-sm-3 control-label">Załączniki</label>
+
+                                        <div class="col-sm-8">
+                                            <div class="col-sm-12 padding-0">
+                                                <input name="attach[]" id="attach" onchange="attach()" type="file" multiple="" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group dis-none attach-list">
+                                        <label for="attachList" class="col-sm-3 control-label">Dodane załączniki</label>
+
+                                        <div class="col-sm-8">
+                                            <ul id="fileList"><li>No Files Selected</li></ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="location" class="col-sm-3 control-label">Lokalizacja Towaru</label>
+
+                                        <div class="col-sm-8">
+                                            <input id="location" name="location" class="form-control input-md" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="transport" class="col-sm-3 control-label">Transport</label>
+
+                                        <div class="col-sm-3">
+                                            <div class="col-sm-12 padding-0">
+                                                <input class="transport" name="transport" value="1" type="radio"> Kupujący
+                                            </div>
+                                            <div class="col-sm-12 padding-0">
+                                                <input class="transport" name="transport" value="2" type="radio"> Sprzedający
+                                            </div>
+                                            <label id="transport-error" class="error" for="transport"></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group transport-amount-box dis-none">
+                                        <label for="transport_amount" class="col-sm-3 control-label">Koszt Transportu</label>
+                                        <div class="col-sm-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">PLN</span>
+                                                <input type="text" class="form-control input-md" id="transport_amount" name="transport_amount">
+                                            </div>
+                                            <label id="transport_amount-error" class="error" for="transport_amount"></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="description" class="col-sm-3 control-label"></label>
+
+                                        <div class="col-sm-8">
+                                            <button id="add-advert" name="add-advert" class="btn btn-primary">Dodaj Ogłoszenie</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>

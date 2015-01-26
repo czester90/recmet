@@ -85,9 +85,10 @@ return array(
     ),
     'view_helpers' => array(
         'invokables' => array(
-            'MetaTags' => 'Application\View\Helper\MetaTags',
-            'getRepos' => 'Application\View\Helper\getRepos',
+            'MetaTags'  => 'Application\View\Helper\MetaTags',
+            'getRepos'  => 'Application\View\Helper\getRepos',
             'LayoutIni' => 'Application\View\Helper\LayoutIni',
+            'Bundle'    => 'Application\View\Helper\Bundle',
         )
     ),
     'console' => array(

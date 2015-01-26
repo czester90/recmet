@@ -7,11 +7,22 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'advert\advert' => 'Advert\Controller\AdvertController'
+            'advert\advert' => 'Advert\Controller\AdvertController',
+            'advert\category' => 'Advert\Controller\CategoryController'
         ),
     ),
     'router' => array(
         'routes' => array(
+            'generate-category' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/category/view/',
+                    'defaults' => array(
+                        'controller' => 'advert/category',
+                        'action'     => 'generateCategory',
+                    ),
+                ),
+            ),
             'advert' => array(
                 'type' => 'Segment',
                 'options' => array(

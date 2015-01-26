@@ -13,50 +13,58 @@ namespace Application;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
-class Module {
+class Module
+{
 
-  public function onBootstrap(MvcEvent $e) {
-    $eventManager = $e->getApplication()->getEventManager();
-    $moduleRouteListener = new ModuleRouteListener();
-    $moduleRouteListener->attach($eventManager);
+    public function onBootstrap(MvcEvent $e)
+    {
+        $eventManager = $e->getApplication()->getEventManager();
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($eventManager);
 
-    $application = $e->getApplication();
-    $em = $application->getEventManager();
+        $application = $e->getApplication();
+        $em = $application->getEventManager();
 
-    $em->attach('dispatch', function($e) {
-      $routeMatch = $e->getRouteMatch();
-      $viewModel = $e->getViewModel();
-      $viewModel->setVariable('controller', $routeMatch->getParam('controller'));
-      $viewModel->setVariable('action', $routeMatch->getParam('action'));
+        $em->attach('dispatch', function ($e) {
+            $routeMatch = $e->getRouteMatch();
+            $viewModel = $e->getViewModel();
+            $viewModel->setVariable('controller', $routeMatch->getParam('controller'));
+            $viewModel->setVariable('action', $routeMatch->getParam('action'));
 
-    }, -100);
+        }, -100);
 
-    $serviceManager = $e->getApplication()->getServiceManager();
+        $serviceManager = $e->getApplication()->getServiceManager();
 
-    $serviceManager->get('viewhelpermanager')->setFactory('MetaTags', function ($sm) use ($e) {
-      return new View\Helper\MetaTags($e, $sm);
-    });
-    $serviceManager->get('viewhelpermanager')->setFactory('getRepos', function ($sm) use ($e) {
-      return new View\Helper\getRepos($e, $sm);
-    });
-  }
+        $serviceManager->get('viewhelpermanager')->setFactory('MetaTags', function ($sm) use ($e) {
+            return new View\Helper\MetaTags($e, $sm);
+        });
+        $serviceManager->get('viewhelpermanager')->setFactory('getRepos', function ($sm) use ($e) {
+            return new View\Helper\getRepos($e, $sm);
+        });
+        $serviceManager->get('viewhelpermanager')->setFactory('Bundle', function ($sm) use ($e) {
+            return new View\Helper\Bundle($e, $sm);
+        });
+    }
 
-  public function loadConfiguration(MvcEvent $e) {
-    $controller = $e->getTarget();
-  }
-  
-  public function getConfig() {
-    return include __DIR__ . '/config/module.config.php';
-  }
+    public function loadConfiguration(MvcEvent $e)
+    {
+        $controller = $e->getTarget();
+    }
 
-  public function getAutoloaderConfig() {
-    return array(
-      'Zend\Loader\StandardAutoloader' => array(
-        'namespaces' => array(
-          __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-        ),
-      ),
-    );
-  }
+    public function getConfig()
+    {
+        return include __DIR__ . '/config/module.config.php';
+    }
+
+    public function getAutoloaderConfig()
+    {
+        return array(
+            'Zend\Loader\StandardAutoloader' => array(
+                'namespaces' => array(
+                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                ),
+            ),
+        );
+    }
 
 }

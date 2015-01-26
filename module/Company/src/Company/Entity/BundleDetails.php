@@ -40,6 +40,12 @@ class BundleDetails extends BaseEntity {
     protected $option_advert;
 
     /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    protected $option_advert_day;
+
+    /**
      * @var bool
      * @ORM\Column(type="boolean")
      */
@@ -167,6 +173,22 @@ class BundleDetails extends BaseEntity {
     public function getOptionStore()
     {
         return $this->option_store;
+    }
+
+    /**
+     * @param int $option_advert_day
+     */
+    public function setOptionAdvertDay($option_advert_day)
+    {
+        $this->option_advert_day = $option_advert_day;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOptionAdvertDay()
+    {
+        return $this->option_advert_day;
     }
 
 

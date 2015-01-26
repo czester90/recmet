@@ -13,7 +13,8 @@ return array(
         'Company',
         'DoctrineModule',
         'DoctrineORMModule',
-        'User'
+        'User',
+        'WebinoImageThumb'
     ),
     'module_listener_options' => array(
         'module_paths' => array(

@@ -1,9 +1,11 @@
-#registerCompany input.error {
+#registerCompany input.error,
+#addAdvertForm input.error {
   background-color: #fff4f1;
   border-color: #f66442;
   color: #f66442;
 }
-#registerCompany label.error {
+#registerCompany label.error,
+#addAdvertForm label.error {
   color: #f66442;
   display: inline-block;
   font-size: 12px;
