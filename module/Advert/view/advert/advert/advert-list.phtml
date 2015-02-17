@@ -1,3 +1,7 @@
+<?php
+    $layout = new \Application\Components\Helper\LayoutHelper();
+    $layout->setFormArray($this->query);
+?>
 <section id='content'>
   <section class='container'>
     <section class='row featured-items'>
@@ -11,25 +15,38 @@
                 </div>
             </section>
             <section class='widget-content'>
-                <form action="#">
+                <form id="search_advert" method="GET">
                     <div class='widget-section'>
                         <div class='inner'>
-                            <label for="location">Szukaj</label>
-                            <input type="text" name='search' id='search' placeholder="Szukaj..." class='input-block-level'/>
+                            <div class="form-group">
+                                <label for="search">Wyszukiwarka</label>
+                                <input type="text" class="form-control" name="search" id="search" placeholder="Szukaj">
+                            </div>
                         </div>
                     </div>
+                    </form>
+                    <form id="form_advert" method="GET">
                     <div class='widget-section'>
                         <div class='inner'>
                             <label for="propertyType">Kategorie</label>
                             <ul class="menulist">
                                 <?php foreach($this->categories as $category): ?>
-                                    <li><a href="<?= $this->url('advert/sublist', array('id' => $category->getId(), 'url' => $category->getUrl())) ?>"><?= $category->getName(); ?> (100)</a></li>
-                                    <?php if(in_array($category->getId(), $this->category_ids)): ?>
-                                        <ul class="submenulist">
-                                            <?php foreach($this->subcategories as $sub): ?>
-                                                <li><a href="<?= $this->url('advert/sublist', array('id' => $sub->getId(), 'url' => $sub->getUrl())) ?>"><?= $sub->getName(); ?></a></li>
-                                            <?php endforeach; ?>
-                                        </ul>
+                                    <li><a href="<?= $this->url('advert/sublist', array('id' => $category->getId(), 'url' => $category->getUrl())) ?>"><?= $category->getName(); ?> <span>(100)</span></a></li>
+                                    <?php if($this->currentCategory): ?>
+                                        <?php if($category->getId() == $this->currentCategory->getId() || $category->getId() == $this->currentCategory->getOriginalId()): ?>
+                                            <ul class="submenulist">
+                                                <?php foreach($this->getRepos('Advert\Entity\Category')->findBy(array('parent_id' => $category->getId())) as $sub): ?>
+                                                    <li><a href="<?= $this->url('advert/sublist', array('id' => $sub->getId(), 'url' => $sub->getUrl())) ?>"><?= $sub->getName(); ?></a></li>
+                                                    <?php if($sub->getId() == $this->currentCategory->getId() || $sub->getId() == $this->currentCategory->getParentId()): ?>
+                                                        <ul class="submenulist">
+                                                            <?php foreach($this->getRepos('Advert\Entity\Category')->findBy(array('parent_id' => $sub->getId())) as $subq): ?>
+                                                                <li><a href="<?= $this->url('advert/sublist', array('id' => $subq->getId(), 'url' => $subq->getUrl())) ?>"><?= $subq->getName(); ?></a></li>
+                                                            <?php endforeach; ?>
+                                                        </ul>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        <?php endif; ?>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </ul>
@@ -37,40 +54,72 @@
                     </div>
                     <div class='widget-section'>
                         <div class='inner'>
-                            <label for="location">Rodzaje oferty</label><br />
-                            <input type="radio" name='offer_type' id='offer_type' value='buy'/> <span>Kupię</span><br />
-                            <input type="radio" name='offer_type' id='offer_type' value='sell'/> <span>Sprzedam</span>
+                            <div class="form-group">
+                                <label for="advert_type">Rodzaj Ogłoszenia</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="advert_type" value="1"  checked>
+                                        Kupię
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="advert_type" value="2">
+                                        Sprzedam
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class='widget-section'>
                         <div class='inner'>
-                            <label for="location">Ilość</label>
-                            <input type="text" name='kg' id='kg' placeholder="Kilogramy" class='input-block-level'/>
+                            <div class="form-group">
+                                <label for="pieces">Ilość</label>
+                                <div class="col-sm-12 padding-0 mar-bottom15">
+                                    <div class="col-sm-6 padding-0" style="padding-right: 2px;">
+                                        <input type="text" name='pieces_min' class="form-control" value="<?= $layout->getFormParam('pieces_min'); ?>" />
+                                    </div>
+                                    <div class="col-sm-6 padding-0" style="padding-left: 2px;">
+                                        <input type="text" name='pieces_max' class="form-control" value="<?= $layout->getFormParam('pieces_max'); ?>" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class='widget-section'>
                         <div class='inner'>
-                            <label for="location">Lokalizacja</label>
-                            <input type="text" name='district' id='district' placeholder="Województwo" class='input-block-level'/>
-                            <input type="text" name='city' id='city' placeholder="Miejscowość" class='input-block-level mar-top5'/>
+                            <div class="form-group">
+                                <label for="advert_type">Lokalizacja</label>
+                                <div class="col-sm-12 padding-0 mar-bottom15">
+                                    <div class="col-sm-12 padding-0">
+                                        <input type="text" name='district' id='district' placeholder="Województwo" value="<?= $layout->getFormParam('district'); ?>" class="form-control" />
+                                    </div>
+                                    <div class="col-sm-12 padding-0 mar-top5">
+                                        <input type="text" name='city' id='city' placeholder="Miejscowość" value="<?= $layout->getFormParam('city'); ?>" class="form-control col-lg-5"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class='widget-section'>
                         <div class='inner'>
-                            <label for="location">Cena</label><br />
-                            <input type="text" name='district' id='district' placeholder="0" value="0" class='width50'/>
-                            <input type="text" name='city' id='city' placeholder="20000" value="20000" class='width50'/>
-                        </div>
-                    </div>
-                    <div class='widget-section'>
-                        <div class='inner'>
-                            <label for="location">Transport</label><br />
-                            <input type="checkbox" name='transport' value='1'/> <span>Własny</span><br />
-                            <input type="checkbox" name='transport' value='2'/> <span>W ofercie</span>
+                            <div class="form-group">
+                                <label for="advert_type">Cena</label>
+                                <div class="col-sm-12 padding-0 mar-bottom15">
+                                <div class="col-sm-6 padding-0" style="padding-right: 2px;">
+                                    <input type="text" name='amount_min' id='amount_min' class="form-control" value="<?= $layout->getFormParam('amount_min'); ?>" />
+                                    </div>
+                                <div class="col-sm-6 padding-0" style="padding-left: 2px;">
+                                    <input type="text" name='amount_max' id='amount_max' class="form-control" value="<?= $layout->getFormParam('amount_max'); ?>"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <section class='widget-buttons'>
                         <div class='inner'>
+                            <input id="sortInput" type="hidden" name="sort" />
+                            <input id="resultsInput" type="hidden" name="results" value="20" />
                             <button class="btn btn-default btn-primary" type="submit">Szukaj Ofert</button>
                         </div>
                     </section>
@@ -85,16 +134,16 @@
               <div class='bar-title'>
                 <div class='inner'>
                   <div class='pull-left custom-margin'>
-                    <strong><?= ($this->resultPage * $this->currentPage) - $this->resultPage + 1; ?></strong> - <strong><?= ($this->resultPage * $this->currentPage + $this->resultPage) - $this->resultPage; ?></strong> z <strong><?= $this->resultCount ?></strong> wyników
+                    <strong><?= ($this->resultPage * $this->currentPage) - $this->resultPage + 1; ?></strong> - <strong><?= ($this->currentPage * $this->resultPage) < $this->resultCount ? ($this->currentPage * $this->resultPage) : $this->resultCount; ?></strong> z <strong><?= $this->resultCount ?></strong> wyników
                   </div>
                   <div class='pull-right results-per-page custom-margin'>
                     <span class='text-line'>Wyników na stronie:</span>
-                    <ul>
-                      <li class='active'><a href="#">20</a></li>
+                    <ul id="resultPage">
+                      <li <?= $layout->getFormParamEquals('results', '40', "class='active'", "class='active'"); ?>><a href="#">20</a></li>
                       <li>|</li>
-                      <li><a href="#">40</a></li>
+                      <li <?= $layout->getFormParamEquals('results', '40', "class='active'"); ?>><a href="#">40</a></li>
                       <li>|</li>
-                      <li><a href="#">60</a></li>
+                      <li <?= $layout->getFormParamEquals('results', '60', "class='active'"); ?>><a href="#">60</a></li>
                     </ul>
                   </div>
                 </div>
@@ -103,9 +152,15 @@
                 <div class='inner'>
                   <div class='pull-left custom-margin'>
                     <span class='text-line'>Sortowanie:</span>
-                    <select class='selectpicker'>
-                      <option value="date">Data</option>
-                      <option value="visits">Ilość wyświetleń</option>
+                    <select class="selectpicker sortpicker" name="sort">
+                        <option data-subtext="od najniższej" value="sort_amount_asc" <?= $layout->getFormParamEquals('sort', 'sort_amount_asc'); ?>>Cena</option>
+                        <option data-subtext="od najwyższej" value="sort_amount_desc" <?= $layout->getFormParamEquals('sort', 'sort_amount_desc'); ?>>Cena</option>
+                        <option data-divider="true"></option>
+                        <option data-subtext="najmniej" value="sort_created_at_desc" <?= $layout->getFormParamEquals('sort', 'sort_created_at_desc'); ?>>Data zakończenia</option>
+                        <option data-subtext="najwięcej" value="sort_created_at_asc" <?= $layout->getFormParamEquals('sort', 'sort_created_at_asc'); ?>>Data zakończenia</option>
+                        <option data-divider="true"></option>
+                        <option data-subtext="od najczęstrzych" value="sort_visits_desc" <?= $layout->getFormParamEquals('sort', 'sort_visits_desc'); ?>>Oglądnięte</option>
+                        <option data-subtext="od najrzadszych" value="sort_visits_asc" <?= $layout->getFormParamEquals('sort', 'sort_visits_asc'); ?>>Oglądnięte</option>
                     </select>
                   </div>
                 </div>
@@ -122,15 +177,16 @@
                 <div class='inner-border'>
                   <div class='inner-padding'>
                     <figure>
-                      <img src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$advert->getImages()->get(0)->getName(); ?>" alt="" />
+                      <img src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getCompanyId().DIRECTORY_SEPARATOR.$advert->getImages()->get(0)->getName(); ?>" alt="" />
                       <div class='banner'><?= Advert\Entity\Advert::advertTypeArray($advert->getAdvertType()); ?></div>
                       <a href="<?= $this->url('advert/view', array('id' => $advert->getId(), 'url' => $advert->getUrl())); ?>" class='figure-hover'>Zoom</a>
                     </figure>
                     <div class='right'>
-                      <h3><a href="<?= $this->url('advert/view', array('id' => $advert->getId(), 'url' => $advert->getUrl())); ?>"><?= $advert->getName() ?></a></h3>
-                      <p>Las Vegas, NV</p>
+                      <h3><a href="<?= $this->url('advert/view', array('id' => $advert->getId(), 'url' => $advert->getUrl())); ?>"><strong><?= $advert->getName() ?></strong></a></h3>
+                        <?php $company = $this->getRepos('Company\Entity\Company')->find($advert->getCompanyId()); ?>
+                      <p><?= $company->getCity(); ?>, <?= $company->getCountry(); ?></p>
                       <div class='description'>
-                        <p><?= $advert->getDescription() ?></p>
+                        <p><?= strlen(strip_tags($advert->getDescription())) > 200 ? substr(strip_tags($advert->getDescription()), 0, 200).'...' : strip_tags($advert->getDescription()); ?></p>
                       </div>
                       <div class='price-wrapper'>
                         <div class='price'>PLN <?= $advert->getAmount() ?></div>
@@ -145,17 +201,11 @@
                 <div class='inner-border'>
                   <div class='inner-padding'>
                       <div class="pull-left bottom-advert">
-                          <span>Data zakończenia: <?= $advert->getCreated_at()->format('d-m-Y H:i:s') ?></span>
+                          <span>Data zakończenia: <span class="<?php if($advert->isLessOneDay()): ?>red-color<?php endif; ?>"><?= $advert->getHoursToFinishAdvert(); ?></span></span>
                           <span class="space-line"> | </span>
-                          <span>Przeglądnięte: <?= $advert->getVisits(); ?></span>
+                          <span>Oglądnięte: <?= $advert->getVisits(); ?></span>
                       </div>
-                    <div class='star-rating'>
-                      <button class='star active'>1 Star</button>
-                      <button class='star active'>2 Star</button>
-                      <button class='star active'>3 Star</button>
-                      <button class='star active'>4 Star</button>
-                      <button class='star active'>5 Star</button>
-                    </div>
+                      <?= \Company\Entity\Company::rank($company->getRank(), ''); ?>
                   </div>
                 </div>
               </div>
@@ -165,16 +215,18 @@
         </div>
         <div class="row">
           <div class="col-md-12">
+              <?php $PagId = $this->currentCategory ? $this->currentCategory->getId() : null;  ?>
+              <?php $PagUrl = $this->currentCategory ? $this->currentCategory->getUrl() : null;  ?>
               <?php if($this->pages > 1): ?>
                   <ul class="pagination pagination-sm pull-right">
                       <?php if($this->currentPage != 1): ?>
-                          <li class='first-element'><a href="<?= $this->url('advert', array('page' => $this->currentPage-1)); ?>">Prev</a></li>
+                          <li class='first-element'><a href="<?= $this->url('advert/sublist', array('id' => $PagId,'url' => $PagUrl, 'page' => $this->currentPage-1), array('query' => $this->query)); ?>">Prev</a></li>
                       <?php endif; ?>
                     <?php for($x = 1; $x <= $this->pages; $x++): ?>
-                        <li <?php if($x == $this->currentPage): ?>class="active"<?php endif; ?>><a href="<?= $this->url('advert', array('page' => $x)); ?>"><?= $x; ?></a></li>
+                        <li <?php if($x == $this->currentPage): ?>class="active"<?php endif; ?>><a href="<?= $this->url('advert/sublist', array('id' => $PagId,'url' => $PagUrl, 'page' => $x), array('query' => $this->query)); ?>"><?= $x; ?></a></li>
                     <?php endfor; ?>
                       <?php if($this->currentPage != $this->pages): ?>
-                          <li class='last-element'><a href="<?= $this->url('advert', array('page' => $this->currentPage+1)); ?>">Next</a></li>
+                          <li class='last-element'><a href="<?= $this->url('advert/sublist', array('id' => $PagId,'url' => $PagUrl, 'page' => $this->currentPage+1), array('query' => $this->query)); ?>">Next</a></li>
                       <?php endif; ?>
                   </ul>
               <?php endif; ?>

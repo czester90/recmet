@@ -1,0 +1,119 @@
+<section role="main" id="main">
+    <section class="container">
+        <section class="row featured-items">
+
+            <div class="toolbar">
+                <ol class="breadcrumb">
+                    <li class="home"><a href="<?= $this->url('home'); ?>"><i class="fa fa-home"></i><span> Home</span> Home</a></li>
+                    <li class="active"><a href="<?= $this->url('support'); ?>" class=" active">Support</a></li>
+                </ol>
+            </div>
+            <div class="wrapper">
+                <div class="primary">
+                    <section class="module">
+                        <div class="module-content">
+                            <form class="form-horizontal" role="form" method="POST" action="<?= $this->url('user/login') ?>">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"></label>
+                                    <div class="col-sm-8">
+                                        <p><strong>Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym.</strong></p>
+                                        <p>Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Adres Korespondencji</label>
+                                    <div class="col-sm-8">
+                                        <address class="margin-0">
+                                            <strong>Recol Investement Group</strong><br>
+                                            ul. Złotoryjska 7/1, Wrocław<br>
+                                            Wrocław 53-614<br>
+                                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                                        </address>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Kontakt</label>
+                                    <div class="col-sm-8">
+                                        <label class="control-label" style="font-weight: normal;"><a href="mailto:support@recmetals.com">support@recmetals.com</a></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" class="col-sm-3 control-label">Tytuł</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="title" placeholder="Tytuł wiadomości" />
+                                    </div>
+                                </div>
+
+                                <?php if(!$this->UserIdentity()): ?>
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 control-label">Imię i Nazwisko</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="name" placeholder="Imię i Nazwisko" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-3 control-label">Email</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="email" placeholder="example@email.com" />
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+
+                                <div class="form-group">
+                                    <label for="description" class="col-sm-3 control-label">Wiadomość</label>
+                                    <div class="col-sm-8">
+                                        <textarea class="form-control" name="description" rows="8"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-10">
+                                        <button type="submit" class="btn btn-primary">Wyślij Wiadomość</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                <aside class="secondary">
+                    <section class="module module-narrow module-shallow">
+                        <h2 class="module-heading">Znajdziesz Nas</h2>
+                        <div class="module-content">
+                            <p class="font-size-10">Jesteśmy dostępnie, na największych portalach społecznościowych oraz biznesowych, obserwuj nas i bądź na bierząco z naszymi zmianami.</p>
+                            <p>
+                                <a class="btn back-image-none btn-social-icon btn-twitter">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                                <a class="btn back-image-none btn-social-icon btn-facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                                <a class="btn back-image-none btn-social-icon btn-google-plus">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                                <a class="btn back-image-none btn-social-icon btn-linkedin">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                                <a class="btn back-image-none btn-social-icon btn-vimeo">
+                                    <i class="fa fa-vimeo-square"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </section>
+
+                    <section class="module module-narrow module-shallow">
+                        <h2 class="module-heading">Najczęstrze pytania</h2>
+                        <div class="module-content">
+                            <p class="font-size-10"><strong>Mam problem z zalogowaniem się</strong></p>
+                            <p class="font-size-10">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym.</p>
+                            <p class="font-size-10"><strong>Mam problem z zalogowaniem się</strong></p>
+                            <p class="font-size-10">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym.</p>
+                            <p class="font-size-10"><strong>Mam problem z zalogowaniem się</strong></p>
+                            <p class="font-size-10">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym.</p>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </section>
+    </section>
+</section>

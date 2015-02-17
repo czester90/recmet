@@ -17,38 +17,6 @@
                 <div class="primary">
                     <section class="module">
                         <div class="module-content dashboard-profile dis-table col-lg-12">
-                            <div class="col-lg-4">
-                                <h3>Informacje</h3>
-                                <ul class="list-unstyled">
-                                    <li><strong>Pakiet:</strong> <span class="text-right"><span class="pakiet pakiet-premium"><?= $pakiet->getName(); ?></span></span></li>
-                                    <li><strong>Ranking:</strong>
-                                        <span class="text-right">
-                                            <?= \Company\Entity\Company::rank($this->company->getRank());  ?>
-                                        </span></li>
-                                    <li><strong>Propozycje:</strong> <span class="text-right">10</span></li>
-                                    <li><strong>Oferty:</strong> <span class="text-right">10</span></li>
-                                    <li><strong>Wiadomości:</strong> <span class="text-right">4</span></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-4">
-                                <h3>Magazyn</h3>
-                            </div>
-                            <div class="col-lg-4">
-                                <h3>Płatności
-                                    <?php if(!$this->bundlePayments->getPaid()): ?>
-                                        <span class="labelbox red pull-right"><?= -$this->bundlePayments->getAmount() ?> zł</span>
-                                    <?php else: ?>
-                                        <span class="labelbox green pull-right">Brak Należności</span>
-                                    <?php endif; ?>
-                                </h3>
-                                <ul class="list-unstyled">
-                                    <li><strong>Pakiet:</strong> <span class="text-right color-red"><b><?= $this->bundlePayments->getAmount() ?> zł</b></span></li>
-                                    <li><strong>Tranzakcje:</strong> <span class="text-right">0 zł</span></li>
-                                    <li><strong>Transport:</strong> <span class="text-right">0 zł</span></li>
-                                    <li><strong>Dodatki:</strong> <span class="text-right">0 zł</span></li>
-                                    <li><strong>Poleceni:</strong> <span class="text-right color-green"><b>+20 zł</b></span></li>
-                                </ul>
-                            </div>
                             <div class="col-lg-12 mar-top15">
                                 <h3>Ogłoszenia <button type="button" link="<?= $this->url('advert/dashboard') ?>" class="buttonPoint btn btn-primary btn-xs pull-right">Zarządzanie Ogłoszeniami</button></h3>
                                 <table class="table table-hover">
@@ -121,29 +89,42 @@
                         </div>
                     </section>
                 </div>
-                <aside class="secondary">
+                <aside class="secondary dashboard-profile">
                     <section class="module module-narrow module-shallow">
-                        <h2 class="module-heading">Dane Firmy <button type="button" class="btn btn-primary btn-xs pull-right">Edytuj</button></h2>
+                        <h2 class="module-heading">Informacje</h2>
                         <div class="module-content">
-                            <ul class="list-unstyled lineheight">
-                                <li><span><strong>Nazwa:</strong> <?= $this->company->getName(); ?></span></li>
-                                <li><span><strong>Nip:</strong> <?= $this->company->getNip(); ?></span></li>
-                                <li><span><strong>Regon:</strong> <?= $this->company->getRegon(); ?></span></li>
-                                <li><span><strong>Miasto:</strong> <?= $this->company->getCity(); ?></span></li>
-                                <li><span><strong>Adres:</strong> <?= $this->company->getAddress(); ?></span></li>
-                                <li><span><strong>Kod Pocztowy:</strong> <?= $this->company->getPostCode(); ?></span></li>
+                            <ul class="list-unstyled">
+                                <li><strong>Pakiet:</strong> <span class="text-right"><span class="pakiet pakiet-premium"><?= $pakiet->getName(); ?></span></span></li>
+                                <li><strong>Ranking:</strong>
+                                        <span>
+                                            <?= \Company\Entity\Company::rank($this->company->getRank());  ?>
+                                        </span></li>
+                                <li><strong>Propozycje:</strong> <span class="text-right">10</span></li>
+                                <li><strong>Oferty:</strong> <span class="text-right">10</span></li>
+                                <li><strong>Wiadomości:</strong> <span class="text-right">4</span></li>
                             </ul>
                         </div>
                     </section>
                     <section class="module module-narrow module-shallow">
-                        <h2 class="module-heading">Główny Przedstawiciel</h2>
+                        <h2 class="module-heading">Magazyn</h2>
                         <div class="module-content">
-                            <img src="<?= $this->basePath(); ?>/img/avatar.jpg" class="img-profile" />
-                            <ul class="list-unstyled lineheight">
-                                <li><span><strong>Imię:</strong> <?= $this->UserIdentity()->getFirstName(); ?></span></li>
-                                <li><span><strong>Nazwisko:</strong> <?= $this->UserIdentity()->getLastName(); ?></span></li>
-                                <li><span><strong>Email:</strong> <?= $this->UserIdentity()->getEmail(); ?></span></li>
-                                <li><span><strong>Logowanie:</strong> <?php if($this->UserIdentity()->getLastLogin()):?><?= $this->UserIdentity()->getLastLogin()->format('d/m/Y'); ?><?php else: ?><?= date('d/m/Y'); ?><?php endif; ?></span></li>
+
+                        </div>
+                    </section>
+                    <section class="module module-narrow module-shallow">
+                        <h2 class="module-heading">Płatności
+                            <?php if(!$this->bundlePayments->getPaid()): ?>
+                                <span class="labelbox red pull-right"><?= -$this->bundlePayments->getAmount() ?> zł</span>
+                            <?php else: ?>
+                                <span class="labelbox green pull-right">Brak Należności</span>
+                            <?php endif; ?></h2>
+                        <div class="module-content">
+                            <ul class="list-unstyled">
+                                <li><strong>Pakiet:</strong> <span class="text-right color-red"><b><?= $this->bundlePayments->getAmount() ?> zł</b></span></li>
+                                <li><strong>Tranzakcje:</strong> <span class="text-right">0 zł</span></li>
+                                <li><strong>Transport:</strong> <span class="text-right">0 zł</span></li>
+                                <li><strong>Dodatki:</strong> <span class="text-right">0 zł</span></li>
+                                <li><strong>Poleceni:</strong> <span class="text-right color-green"><b>+20 zł</b></span></li>
                             </ul>
                         </div>
                     </section>

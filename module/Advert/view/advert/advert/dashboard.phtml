@@ -38,8 +38,8 @@
                                             <div class="inner-border noborder">
                                                 <div class="inner-padding">
                                                     <figure>
-                                                        <img alt="" src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getUser_id().DIRECTORY_SEPARATOR.$advert->getImages()->get(0)->getName(); ?>">
-                                                        <div class="banner"><?= Advert\Entity\Advert::advertTypeArray($advert->getAdvertType()); ?></div>
+                                                        <img alt="" src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getCompanyId().DIRECTORY_SEPARATOR.$advert->getImages()->get(0)->getName(); ?>">
+                                                        <div class="banner"><?= \Advert\Entity\Advert::advertTypeArray($advert->getAdvertType()); ?></div>
                                                         <a class="figure-hover" href="<?= $this->url('advert/view', array('id' => $advert->getId(), 'url' => $advert->getUrl())); ?>">Zoom</a>
                                                     </figure>
                                                     <div class="right">
@@ -51,7 +51,7 @@
                                                         </div>
                                                         <div class="price-wrapper">
                                                             <div class="price">PLN <?= $advert->getAmount(); ?></div>
-                                                            <div class="rate">/<?= Advert\Entity\Advert::amountTypeArray($advert->getAmountType()); ?></div>
+                                                            <div class="rate">/</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 footer">
@@ -60,7 +60,6 @@
                                                             <span class="s12 border-ad-right">Kategoria: <?= $category->getName(); ?></span>
                                                             <span class="s12 border-ad-right">Wizyt: <?= $advert->getVisits(); ?></span>
                                                             <span class="s12 border-ad-right">Ofert: 0</span>
-                                                            <span class="s12 border-ad-right">Najwyższa Oferta: Brak</span>
                                                             <span class="s12">Status: Wystawione</span>
                                                         </div>
                                                         <div class="col-md-2">

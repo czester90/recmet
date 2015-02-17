@@ -166,10 +166,6 @@ var Validator = {
                     required: true,
                     number: true
                 },
-                description: {
-                    required: true,
-                    tinymce: true
-                },
                 location: {
                     required: true,
                     minlength: 3

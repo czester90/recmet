@@ -8,11 +8,34 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'company\company' => 'Company\Controller\CompanyController'
+            'company\company' => 'Company\Controller\CompanyController',
+            'company\transport' => 'Company\Controller\TransportController',
+            'company\site' => 'Company\Controller\SiteController',
+            'company\message' => 'Company\Controller\MessageController',
         ),
     ),
     'router' => array(
         'routes' => array(
+            'transport' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/transport',
+                    'defaults' => array(
+                        'controller' => 'company\transport',
+                        'action' => 'transport',
+                    ),
+                ),
+            ),
+            'site' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/site',
+                    'defaults' => array(
+                        'controller' => 'company\site',
+                        'action' => 'site',
+                    ),
+                ),
+            ),
             'companies' => array(
                 'type' => 'Literal',
                 'options' => array(
@@ -30,6 +53,16 @@ return array(
                     'defaults' => array(
                         'controller' => 'company\company',
                         'action' => 'rules',
+                    ),
+                ),
+            ),
+            'message' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/message',
+                    'defaults' => array(
+                        'controller' => 'company\message',
+                        'action' => 'index',
                     ),
                 ),
             ),
@@ -65,9 +98,9 @@ return array(
                         ),
                     ),
                     'settings' => array(
-                        'type' => 'Literal',
+                        'type' => 'Segment',
                         'options' => array(
-                            'route' => '/settings',
+                            'route' => '/settings[/:method]',
                             'defaults' => array(
                                 'controller' => 'company\company',
                                 'action' => 'settings',

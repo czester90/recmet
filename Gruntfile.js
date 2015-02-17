@@ -17,15 +17,14 @@ module.exports = function (grunt) {
             development: {
                 files: {
                     'public/js/jquery.min.js': [
-                        'public/js/jquery-1.8.3.min.js',
+                        'public/js/jquery-1.11.1.min.js',
                         'public/js/jquery-ui.js'
                     ],
                     'public/js/plugins.min.js': [
                         'public/js/bootstrap.min.js',
-                        'public/js/jquery.prettyPhoto.js'
+                        'public/js/vendor/bootstrap-*.js'
                     ],
                     'public/js/script.min.js': [
-                        'public/js/vendor/*.js',
                         'public/js/jquery.validate.min.js',
                         'public/js/additional-methods.min.js',
                         'public/js/main.js',
@@ -60,6 +59,7 @@ module.exports = function (grunt) {
                         'public/css/font-awesome.min.css',
                         'public/css/style.css',
                         'public/css/common.css',
+                        'public/css/bootstrap-social.css',
                         'public/css/validate.css',
                         'public/css/button.css'
                     ],

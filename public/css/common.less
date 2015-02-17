@@ -1,16 +1,22 @@
 .mar-left5 {margin-left: 5px;}
 .mar-top15 {margin-top: 15px;}
 .mar-top5 {margin-top: 5px;}
+.mar-top0 {margin-top: 0px;}
 .mar-bottom15 {margin-bottom: 15px;}
 .mar-bottom10 {margin-bottom: 10px;}
 .mar-left25-proc {margin-left: 25%;}
 .mar-10-auto {margin: 10px auto;}
 .padding-20-30-0 {padding: 20px 30px 0;}
-.padding-0 {padding: 0px;}
+.padding-0 {padding: 0px !important;}
+.margin-0 {margin: 0px !important;}
+.border-0 {border: 0px !important;}
 
 .width50 {width: 49%;}
 .space-line {margin: 0 7px;}
 .non-bottom-mar {margin-bottom: 0px;}
+.back-image-none {background-image: none;}
+
+.font-size-10 {font-size: 11px; line-height: 18px;}
 
 .position-absolute {position: relative;}
 
@@ -23,11 +29,20 @@
   }
 }
 
+// Colors
+.red-color {color: #ff0000;}
+
 // Alert
 .alert-success {
   p {
     color: #006400;
   }
+}
+
+// Settings
+.seperator .form-group {
+  border-bottom: 1px dashed #c4c4c4;
+  padding-bottom: 10px;
 }
 
 // Add Advert
@@ -50,8 +65,13 @@
   cursor: pointer;
 }
 
-li ul {
-  padding-left: 30px;
+li ul li {
+  padding-left: 25px;
+  background: url("../img/divider.png") no-repeat scroll 10px 4px rgba(0, 0, 0, 0);
+}
+
+span.tree {
+  color: #a3a3a3;
 }
 
 span.active_category {
@@ -64,11 +84,25 @@ ul.menulist li {
   text-decoration: none;
   list-style: none;
   line-height: 27px;
+  fon-size: 12px;
+  border-bottom: 1px solid #f4f4f4;
   a {
     color: #000;
+    span {
+      color: #a3a3a3;
+    }
   }
 }
 
-.submenulist a {
-  padding-left: 30px;
+ul.submenulist {
+  li {
+    padding-left: 15px;
+    background: url("../img/divider.png") no-repeat scroll 0px 7px rgba(0, 0, 0, 0);
+    a {
+      color: #a3a3a3;
+    }
+  }
+  ul.submenulist {
+    padding-left: 15px;
+  }
 }

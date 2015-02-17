@@ -3,10 +3,8 @@
 namespace Company\Controller;
 
 use Application\Controller\BaseController;
-use Company\Entity\BundleDetails;
 use Company\Entity\BundlePayments;
 use Company\Entity\City;
-use Company\Entity\Province;
 use Library\Przelewy24;
 use Zend\Json\Server\Exception\HttpException;
 use Zend\View\Model\ViewModel;
@@ -120,8 +118,24 @@ class CompanyController extends BaseController {
       ));
   }
 
-  public function settingsAction() {
+  public function settingsAction()
+  {
+      $method = $this->getParam('method');
+      $action = $this->params('action');
 
+      $view = new ViewModel(array(
+          'company' => $this->em('Company\Entity\Company')->find($this->getCompanyId()),
+          'action' => $action,
+          'method' => $method
+      ));
+
+      if($method){
+          $view->setTemplate('company/company/settings/' . $method);
+      }else{
+          $view->setTemplate('company/company/settings/' . $action);
+      }
+
+      return $view;
   }
 
   public function representativesAction() {

@@ -26,7 +26,7 @@ return array(
             'advert' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/advert[/:page]',
+                    'route'    => '/advert',
                     'constraints' => array(
                         'page' => '[0-9]'
                     ),
@@ -46,6 +46,7 @@ return array(
                                 'action' => 'add'
                             ),
                         ),
+                        'priority' => 1000,
                     ),
                     'edit' => array(
                         'type'    => 'Segment',
@@ -55,11 +56,12 @@ return array(
                                 'action' => 'edit'
                             ),
                         ),
+                        'priority' => 1000,
                     ),
                     'sublist' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/r/[:id]/[:url]',
+                            'route'    => '[/:id][/:url]/[:page]',
                             'defaults' => array(
                                 'action' => 'advertList'
                             ),
@@ -73,6 +75,7 @@ return array(
                                 'action' => 'delete'
                             ),
                         ),
+                        'priority' => 1000,
                     ),
                     'offer-delete' => array(
                         'type'    => 'Segment',
@@ -82,6 +85,7 @@ return array(
                                 'action' => 'offer-delete'
                             ),
                         ),
+                        'priority' => 1000,
                     ),
                     'dashboard' => array(
                         'type'    => 'Segment',
@@ -109,6 +113,7 @@ return array(
                                 'action' => 'view'
                             ),
                         ),
+                        'priority' => 1000,
                     ),
                     'offer' => array(
                         'type'    => 'Segment',

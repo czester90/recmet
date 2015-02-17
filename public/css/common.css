@@ -7,6 +7,9 @@
 .mar-top5 {
   margin-top: 5px;
 }
+.mar-top0 {
+  margin-top: 0px;
+}
 .mar-bottom15 {
   margin-bottom: 15px;
 }
@@ -23,7 +26,13 @@
   padding: 20px 30px 0;
 }
 .padding-0 {
-  padding: 0px;
+  padding: 0px !important;
+}
+.margin-0 {
+  margin: 0px !important;
+}
+.border-0 {
+  border: 0px !important;
 }
 .width50 {
   width: 49%;
@@ -33,6 +42,13 @@
 }
 .non-bottom-mar {
   margin-bottom: 0px;
+}
+.back-image-none {
+  background-image: none;
+}
+.font-size-10 {
+  font-size: 11px;
+  line-height: 18px;
 }
 .position-absolute {
   position: relative;
@@ -46,8 +62,15 @@
 .info-message-content p {
   margin: 0px;
 }
+.red-color {
+  color: #ff0000;
+}
 .alert-success p {
   color: #006400;
+}
+.seperator .form-group {
+  border-bottom: 1px dashed #c4c4c4;
+  padding-bottom: 10px;
 }
 .img-remove {
   border: medium none;
@@ -68,8 +91,12 @@ ul#fileList {
 #category-tree-view li {
   cursor: pointer;
 }
-li ul {
-  padding-left: 30px;
+li ul li {
+  padding-left: 25px;
+  background: url("../img/divider.png") no-repeat scroll 10px 4px rgba(0, 0, 0, 0);
+}
+span.tree {
+  color: #a3a3a3;
 }
 span.active_category {
   color: #003647;
@@ -79,10 +106,22 @@ ul.menulist li {
   text-decoration: none;
   list-style: none;
   line-height: 27px;
+  fon-size: 12px;
+  border-bottom: 1px solid #f4f4f4;
 }
 ul.menulist li a {
   color: #000;
 }
-.submenulist a {
-  padding-left: 30px;
+ul.menulist li a span {
+  color: #a3a3a3;
+}
+ul.submenulist li {
+  padding-left: 15px;
+  background: url("../img/divider.png") no-repeat scroll 0px 7px rgba(0, 0, 0, 0);
+}
+ul.submenulist li a {
+  color: #a3a3a3;
+}
+ul.submenulist ul.submenulist {
+  padding-left: 15px;
 }

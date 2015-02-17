@@ -222,7 +222,7 @@ class Company extends BaseEntity {
         return $this->updated_at;
     }
 
-    public static function rank($rank)
+    public static function rank($rank, $style = 'float: none;')
     {
         $arr = array();
         $index = 0;
@@ -233,7 +233,7 @@ class Company extends BaseEntity {
             $index = $index + 2;
         }
 
-        $html .= "<div class='star-rating' style='float: none;'>";
+        $html .= "<div class='star-rating' style='".$style."'>";
         foreach($arr as $key => $star){
             $html .= "<button class='star ".$star."'>".$key." Star</button>";
         }

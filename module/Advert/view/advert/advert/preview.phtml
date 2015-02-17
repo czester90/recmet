@@ -1,0 +1,320 @@
+<section id='content' class='alternate-bg'>
+<section class='container'>
+<div class="flash-messages-offer" style="color: #fff; padding: 0 12px;">
+    <?php if ($this->offer->getIsSent()): ?>
+        <?= $this->offer->getText(); ?>
+    <?php endif; ?>
+</div>
+<section class='row featured-items'>
+<section class='col-md-9'>
+<div class='property-box wrapper-view'>
+    <div class='top'>
+        <div class='row'>
+            <div class='left'>
+                <div class='title-line'>
+                    <div class='pull-left'>
+                        <h2><?= $advert->getName() ?></h2> <br/>
+
+                        <p>
+                            <span class="s12 border-ad-right">Polska</span>
+                            <span class="s12">Data wystawienia: <?= $advert->getCreated_at()->format('d-m-Y H:i:s'); ?></span>
+                        </p>
+                    </div>
+                    <div class='pull-right price-wrapper'>
+                        <span class='price'>PLN <?= $advert->getAmount() ?></span>
+                        <div class="rate">/jhgjdhsgfjhsdgfjh</div>
+                    </div>
+                </div>
+                <div class='description'>
+                    <p><?= $advert->getDescription() ?></p>
+                </div>
+                <table class='table table-hover table-bordered'>
+                    <tr>
+                        <td>Ilość materiału</td>
+                        <td><?= $advert->getPieces() ?> <?= $advert->getAmountType() ?></td>
+                    </tr>
+                    <tr>
+                        <td>Lokalizacja Towaru</td>
+                        <td><?= $advert->getLocation() ?></td>
+                    </tr>
+                </table>
+                <div class='gallery'>
+                    <?php $group = 1; ?>
+                    <?php foreach ($advert->getImages()->getValues() as $images): ?>
+                    <?php if ($group) { echo "<div class='line'>";} ?>
+                    <figure>
+                        <a rel="prettyPhoto[gallery]" href="<?= $this->basePath() . Advert\Entity\Image::IMAGE_PATH_VIEW . $advert->getUser_id() . DIRECTORY_SEPARATOR . $images->getName(); ?>">
+                            <img src="<?= $this->basePath() . Advert\Entity\Image::IMAGE_PATH_VIEW . $advert->getUser_id() . DIRECTORY_SEPARATOR . $images->getName(); ?>" alt=""/>
+                        </a>
+                    </figure>
+                    <?php if (!$group || $advert->getImages()->count() == 1): ?>
+                </div>
+                <?php $group++; ?>
+                <?php else: ?>
+                    <?php $group--; ?>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <div class='right'>
+            <form role="form" id="offerAmount" method="POST">
+                <div class="form-group">
+                    <label>Proponowana Cena</label>
+                    <input type="text" name="amount" class="form-control" <?php if ($advert->getUser_id() == $this->UserIdentity()->getId() || $this->offer->getIsSent()): ?>disabled<?php endif; ?>>
+                    <input type="hidden" name="currentAmount" value="<?= $advert->getAmount() ?>"/>
+
+                    <p class="help-block">
+                        <?php if ($advert->getUser_id() == $this->UserIdentity()->getId()): ?>
+                            Właściciel ogłoszenia nie może składać oferty.
+                        <?php else: ?>
+                            Cena nie może być niższa niż sugerowana.
+                        <?php endif; ?>
+                    </p>
+                </div>
+                <?php if (!$this->offer->getIsSent()): ?>
+                    <button type="submit" class="btn btn-default btn-primary <?php if ($advert->getUser_id() == $this->UserIdentity()->getId()): ?>disabled<?php endif; ?>">Złóż Ofertę</button>
+                <?php endif; ?>
+            </form>
+            <div class="form-group mar-top15">
+                <label>Zarządzanie</label>
+            </div>
+            <ul class="list-unstyled view-menu">
+                <?php if ($advert->getUser_id() !== $this->UserIdentity()->getId()): ?>
+                    <li>
+                        <button type="button" class="btn btn-xs ajaxSender" data-id="<?= $advert->getId(); ?>" data-href="<?= $this->url('advert/observe'); ?>"><?php if ($this->observe): ?>Zakończ Obserwowanie<?php else: ?>Obserwuj Ogłoszenie<?php endif; ?></button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-xs">Zobacz Inne Ogłoszenia</button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-xs disabled">Przejdź do Magazynu</button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-xs disabled">Strona Firmy</button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-xs">Wyślij wiadomość</button>
+                    </li>
+                <?php else: ?>
+                    <li>
+                        <button type="button" class="btn btn-xs disabled">Zobacz Oferty</button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-xs">Dodatkowa Promocja</button>
+                    </li>
+                    <li>
+                        <button type="button" link="<?= $this->url('advert/edit', array('id' => $advert->getId())); ?>" class="buttonPoint btn btn-xs btn-primary">Edytuj Ogłoszenie</button>
+                    </li>
+                    <li>
+                        <button type="button" link="<?= $this->url('advert/delete', array('id' => $advert->getId())); ?>" class="buttonPoint btn btn-xs btn-danger">Usuń Ogłoszenie</button>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class='bottom'>
+    <div class='inner'>
+        <div class='row'>
+            <div class="pull-left bottom-advert">
+                <span>Data zaktualizowane: <?= $advert->getUpdated_at()->format('d-m-Y H:i:s'); ?></span>
+                <span class="space-line"> | </span>
+                <span>Przeglądnięte: <?= $advert->getVisits(); ?></span>
+                <span class="space-line"> | </span>
+                <span>Oferty: <?= $this->offerCount; ?></span>
+            </div>
+            <div class='pull-right'>
+                <?php if (!$this->UserIdentity()): ?>
+                    <p>Musisz być <a href="#">zalogowany</a> aby złożyć oferte</p>
+                <?php endif; ?>
+                <?= \Company\Entity\Company::rank($this->companyFromAdvert->getRank()); ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php if ($this->offer->getIsOffer()): ?>
+    <form class="form-horizontal" id="offerSend" role="form2" method="POST">
+        <input type="hidden" name="offer" value="true"/>
+
+        <div class='author-section big-margins wrapper-view'>
+            <div class='left'>
+                <div class='inner'>
+                    <div class='text'>
+                        <h2 style="float: left; margin-right: 10px;"><?= $this->offer->getCompanyName(); ?></h2>
+                        <?= $this->offer->getCompanyRank(); ?>
+                        <p>
+                            <span class="s12 border-ad-right">Polska</span>
+                            <span class="s12">Data złożenia Oferty: <?= date('d-m-Y H:i:s'); ?></span>
+                            <input type="hidden" name="date" value="<?= date('d-m-Y H:i:s'); ?>"/>
+                        </p>
+
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">Cena:</label>
+
+                            <div class="col-sm-11">
+                                <p class="form-control-static">
+                                    PLN <?= \Company\Entity\Transaction::Amount($this->offer->getAmount()); ?></p>
+                                <input type="hidden" name="amount" value="<?= \Company\Entity\Transaction::Amount($this->offer->getAmount()); ?>"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">Opis:</label>
+
+                            <div class="col-sm-11">
+                                <textarea name="description" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <a href="<?= $this->serverUrl(true); ?>" class="btn btn-danger btn-primary absolute-top-right" style="right: 115px;">Anuluj
+                            Ofertę</a>
+                        <button type="button" data-toggle="modal" data-target="#sendOffer" class="btn btn-default btn-primary absolute-top-right">Wyślij Ofertę
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+<?php endif; ?>
+<?php if ($this->offer->getIsSent()): ?>
+    <form class="form-horizontal" id="offerSend" role="form2" method="POST">
+        <input type="hidden" name="offer" value="true"/>
+
+        <div class='author-section big-margins wrapper-view'>
+            <div class='left'>
+                <div class='inner'>
+                    <div class='text'>
+                        <h2 style="float: left; margin-right: 10px;"><?= $this->offer->getCompanyName(); ?></h2>
+                        <?= $this->offer->getCompanyRank(); ?>
+                        <p>
+                            <span class="s12 border-ad-right">Polska</span>
+                                <span
+                                    class="s12">Data złożenia Oferty: <?= $this->offerYour->getUpdatedAt()->format('d-m-Y H:i:s'); ?></span>
+                        </p>
+
+                        <div class="form-group non-bottom-mar">
+                            <label class="col-sm-1 control-label">Cena:</label>
+
+                            <div class="col-sm-11">
+                                <p class="form-control-static">
+                                    PLN <?= \Company\Entity\Transaction::Amount($this->offerYour->getAmount()); ?></p>
+                            </div>
+                        </div>
+                        <div class="form-group non-bottom-mar">
+                            <label class="col-sm-1 control-label">Status:</label>
+
+                            <div class="col-sm-11">
+                                <p class="form-control-static"><?= \Advert\Entity\Offer::getNameOfType($this->offerYour->getType()); ?></p>
+                            </div>
+                        </div>
+                        <div class="form-group non-bottom-mar">
+                            <label class="col-sm-1 control-label">Opis:</label>
+
+                            <div class="col-sm-11">
+                                <p class="form-control-static"><?= $this->offerYour->getDescription(); ?></p>
+                            </div>
+                        </div>
+                        <a href="<?= $this->url('advert/offer-delete', array('id' => $this->offerYour->getId())); ?>"
+                           class="btn btn-danger btn-xs btn-primary absolute-top-right">Anuluj Ofertę</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+<?php endif; ?>
+</section>
+<aside class='col-md-3'>
+    <section class='widget wrapper-view'>
+        <section class='widget-title uppercase'>
+            <div class='inner'>
+                <div class="pull-left mar-10-auto">
+                    <strong>Ogłoszenia</strong>
+                </div>
+            </div>
+        </section>
+        <section class='widget-content'>
+            <form action="#">
+                <div class='widget-section'>
+                    <div class='inner'>
+                        <label for="location">Szukaj</label>
+                        <input type="text" name='search' id='search' placeholder="Szukaj..." class='input-block-level'/>
+                    </div>
+                </div>
+                <div class='widget-section'>
+                    <div class='inner'>
+                        <label for="propertyType">Kategorie</label>
+                        <ul class="menulist">
+                            <?php foreach ($this->categories as $category): ?>
+                                <li>
+                                    <a href="<?= $this->url('advert/sublist', array('id' => $category->getId(), 'url' => $category->getUrl())) ?>"><?= $category->getName(); ?></a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+                <div class='widget-section'>
+                    <div class='inner'>
+                        <label for="location">Rodzaje oferty</label><br/>
+                        <input type="radio" name='offer_type' id='offer_type' value='buy'/> <span>Kupię</span><br/>
+                        <input type="radio" name='offer_type' id='offer_type' value='sell'/> <span>Sprzedam</span>
+                    </div>
+                </div>
+                <div class='widget-section'>
+                    <div class='inner'>
+                        <label for="location">Ilość</label>
+                        <input type="text" name='kg' id='kg' placeholder="Kilogramy" class='input-block-level'/>
+                    </div>
+                </div>
+                <div class='widget-section'>
+                    <div class='inner'>
+                        <label for="location">Lokalizacja</label>
+                        <input type="text" name='district' id='district' placeholder="Województwo"
+                               class='input-block-level'/>
+                        <input type="text" name='city' id='city' placeholder="Miejscowość"
+                               class='input-block-level mar-top5'/>
+                    </div>
+                </div>
+                <div class='widget-section'>
+                    <div class='inner'>
+                        <label for="location">Cena</label><br/>
+                        <input type="text" name='district' id='district' placeholder="0" value="0" class='width50'/>
+                        <input type="text" name='city' id='city' placeholder="20000" value="20000" class='width50'/>
+                    </div>
+                </div>
+                <div class='widget-section'>
+                    <div class='inner'>
+                        <label for="location">Transport</label><br/>
+                        <input type="checkbox" name='transport' value='1'/> <span>Własny</span><br/>
+                        <input type="checkbox" name='transport' value='2'/> <span>W ofercie</span>
+                    </div>
+                </div>
+                <section class='widget-buttons'>
+                    <div class='inner'>
+                        <button class="btn btn-default btn-primary" type="submit">Szukaj Ofert</button>
+                    </div>
+                </section>
+            </form>
+        </section>
+    </section>
+</aside>
+</section>
+</section>
+</section>
+
+<div id="sendOffer" class="modal fade bs-example-modal-sm" tabindex="1" role="dialog"
+     aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Wyślij Propozycję Oferty</h4>
+            </div>
+            <div class="modal-body">
+                Jesteś pewny że chcesz wysłać Propozycję Oferty do tego Ogłoszenia?
+                <div class="mar-top15">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                    <button type="button" class="btn btn-primary pull-right acceptOffer">Wyślij</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

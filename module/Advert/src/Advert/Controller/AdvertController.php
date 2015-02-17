@@ -11,6 +11,7 @@ use Advert\Entity\Advert;
 use Advert\Entity\Image;
 use Zend\Filter\File\RenameUpload;
 use Library\HttpServiceCaller;
+use Advert\Repository\AdvertRepository;
 
 use Advert\Components\AddOffer;
 
@@ -18,33 +19,60 @@ class AdvertController extends BaseController
 {
 
     private $category_ids = array();
+    private $advertRepository;
+
+    /**
+     * @param mixed $advertRepository
+     */
+    public function setAdvertRepository($advertRepository)
+    {
+        $this->advertRepository = $advertRepository;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdvertRepository()
+    {
+        return $this->advertRepository;
+    }
+
+    public function __construct()
+    {
+        $this->setAdvertRepository(new AdvertRepository());
+        $this->getAdvertRepository()->setController($this);
+    }
 
     public function advertListAction()
     {
-        $resultPage = 3;
-        $page = $this->getParam('page');
+        $resultPage = 7;
+        $page = $this->getParam('page', 1);
+        $currentCategoryId = $this->getParam('id', null);
         $offset = max(0, ($page - 1) * $resultPage);
 
+        $currentCategory = 0;
+        $categoryIds = null;
         $subcategory = null;
-        if ($this->getParam('id')) {
-            $this->getParentIdFromCategory($this->getParam('id'));
-            $this->category_ids[] = $this->getParam('id');
-            $subcategory = $this->em('Advert\Entity\Category')->findBy(array('parent_id' => $this->category_ids));
+
+        if ($currentCategoryId) {
+            $currentCategory = $this->em('Advert\Entity\Category')->find($currentCategoryId);
+            $categoryIds = $this->em('Advert\Entity\Category')->getCategoryArray($currentCategory);
+            $advertList = $this->em('Advert\Entity\Advert')->getAdvertByCategory($categoryIds, $offset, $resultPage, $this->request->getQuery());
+        }else{
+            $advertList = $this->em('Advert\Entity\Advert')->findBy(array('advert_type' => 1), array('id' => 'DESC'), $resultPage, $offset);
         }
         $category = $this->em('Advert\Entity\Category')->findBy(array('parent_id' => null), array('position' => 'ASC'));
-
-        $query = $this->em()->createQuery("SELECT count(m) FROM Advert\Entity\Advert m");
-        $count = $query->getSingleResult();
+        $count = $this->em('Advert\Entity\Advert')->getCountAdvertsByCategory($categoryIds, $this->request->getQuery());
 
         return new ViewModel(array(
-            'adverts' => $this->em('Advert\Entity\Advert')->findBy(array(), array('id' => 'DESC'), $resultPage, $offset),
+            'adverts' => $advertList,
             'currentPage' => $page,
+            'currentCategory' => $currentCategory,
             'resultPage' => $resultPage,
-            'resultCount' => $count[1],
-            'pages' => ceil($count[1]/$resultPage),
+            'resultCount' => $count,
+            'pages' => ceil($count/$resultPage),
             'categories' => $category,
-            'subcategories' => $subcategory,
-            'category_ids' => $this->category_ids
+            'query' => $this->request->getQuery() ? $this->request->getQuery()->toArray() : array()
         ));
     }
 
@@ -53,48 +81,21 @@ class AdvertController extends BaseController
 
     }
 
-    private function getParentIdFromCategory($id)
-    {
-        $category = $this->em('Advert\Entity\Category')->findOneBy(array('id' => $id), array('position' => 'ASC'));
-        if ($category->getParentId() !== null) {
-            $this->category_ids[] = $category->getParentId();
-            $this->getParentIdFromCategory($category->getParentId());
-        }
-    }
-
     public function addAction()
     {
-
+        $this->getAdvertRepository()->testImage();
         if ($this->request->isPost()) {
+            $preview = $this->request->getPost('preview');
 
-            var_dump($this->request->getFiles());
-            exit();
-            $advert = $this->addAdvert();
+            $this->getAdvertRepository()->setDirectoryPath();
+            $advert = $this->getAdvertRepository()->saveAdvert();
+            $this->getAdvertRepository()->saveImage($this->files('photo'), $advert, Image::ADVERT_TYPE_PHOTO);
+            $this->getAdvertRepository()->saveImage($this->files('attach'), $advert, Image::ADVERT_TYPE_ATTACH);
 
-
-            $path = getcwd() . Image::IMAGE_PATH . DIRECTORY_SEPARATOR . $this->getUserId();
-            if (!is_dir($path)) {
-                mkdir($path, 0777, true);
-            }
-
-            foreach ($this->files['images'] as $file) {
-                $filter = new RenameUpload(array(
-                    "target" => $path . DIRECTORY_SEPARATOR . date('YmdHis') . "." . pathinfo($file['name'], PATHINFO_EXTENSION),
-                    "randomize" => true,
-                ));
-
-                $img = new ImageThumb();
-
-                $FileSaved = $filter->filter($file);
-                $filePart = explode("/", $FileSaved['tmp_name']);
-
-                $images = new Image();
-                $images->setUser_id($this->getUserId());
-                $images->setName($filePart[count($filePart) - 1]);
-                $images->setType($file['type']);
-                $images->getAdvert_id()->add($advert);
-                $this->em()->persist($images);
-                $this->em()->flush();
+            if(isset($preview)){
+                $view = new ViewModel(array('variable' => $advert));
+                $view->setTemplate('advert/advert/preview.phtml');
+                return $view;
             }
 
             $this->session->alert = array('alert' => 'success', 'message' => 'Ogłoszenie zostało dodane.');
@@ -109,37 +110,9 @@ class AdvertController extends BaseController
         ));
     }
 
-    private function addAdvert()
-    {
-        $advert = new Advert();
-        $advert->setActive(Advert::ADVERT_ACTIVE);
-        $advert->setAmount($this->post('amount'));
-        $advert->setDays($this->post('days'));
-        $advert->setDescription($this->post('description'));
-        $advert->setName($this->post('name'));
-        $advert->setAdvertType($this->post('advert_type'));
-        $advert->setAmountType($this->post('amount_type'));
-        $advert->setPieces($this->post('pieces'));
-        $advert->setUrl(HttpServiceCaller::toAscii($this->post('name')));
-        $advert->setUser_id($this->getUserId());
-
-        $category = $this->em('Advert\Entity\Category')->find($this->request->getPost('category'));
-        $advert->setCategory_id($category->getId());
-
-        $this->em()->persist($advert);
-        $this->em()->flush();
-
-        return $advert;
-    }
-
-    private function addImage()
-    {
-
-    }
-
     public function deleteAction()
     {
-        $advert = $this->em('Advert\Entity\Advert')->findOneBy(array('id' => $this->getParam('id'), 'user_id' => $this->user()->getIdentity()->getId()));
+        $advert = $this->em('Advert\Entity\Advert')->findOneBy(array('id' => $this->getParam('id'), 'company_id' => $this->getCompanyId()));
         $advert->getImages()->clear();
         $this->em()->remove($advert);
         $this->em()->flush();
@@ -149,7 +122,7 @@ class AdvertController extends BaseController
 
     public function editAction()
     {
-        $advert = $this->em('Advert\Entity\Advert')->findOneBy(array('id' => $this->getParam('id'), 'user_id' => $this->user()->getIdentity()->getId()));
+        $advert = $this->em('Advert\Entity\Advert')->findOneBy(array('id' => $this->getParam('id'), 'company_id' => $this->getCompanyId()));
 
         return new ViewModel(array(
             'advert' => $advert
@@ -159,15 +132,14 @@ class AdvertController extends BaseController
     public function dashboardAction()
     {
         $alert = array();
-        $param_alert = $this->session->alert;
 
-        if (isset($param_alert)) {
-            $alert = $param_alert;
+        if (isset($this->session->alert)) {
+            $alert = $this->session->alert;
         }
 
         unset($this->session->alert);
 
-        $adverts = $this->em('Advert\Entity\Advert')->findBy(array('user_id' => $this->user()->getIdentity()->getId()));
+        $adverts = $this->em('Advert\Entity\Advert')->findBy(array('company_id' => $this->getCompanyId()));
         return new ViewModel(array(
             'adverts' => $adverts,
             'alert' => $alert,
@@ -203,8 +175,7 @@ class AdvertController extends BaseController
         $offer->setDBCompany($this->em('Company\Entity\Company'));
 
         $advert = $this->em('Advert\Entity\Advert')->find($advertId);
-        $user = $this->em('User\Entity\User')->find($advert->getUser_id());
-        $companyFromAdvert = $this->em('Company\Entity\Company')->find($user->getCompany_id());
+        $companyFromAdvert = $this->em('Company\Entity\Company')->find($advert->getCompanyId());
 
         if($this->request->isPost()){
             if((boolean)$this->request->getPost('offer') && $this->request->getPost('amount') != null){

@@ -12,6 +12,8 @@
         ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
         ->prependStylesheet($this->basePath() . '/css/tinymce.css')
     ?>
+      <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
 <?php $this->headScript()
     ->prependFile($this->basePath() . '/js/tinymce.js', 'text/javascript', array())
     ->prependFile($this->basePath() . '/js/script.min.js', 'text/javascript', array())
@@ -32,25 +34,32 @@
                 RecMetals
               </a>
           </div>
+            <?php
+            $mainNav = array(
+                array('url' => 'home', 'name' => $this->translate('Home'), 'action' => 'index'),
+                array('url' => 'advert', 'name' => 'Ogłoszenia', 'action' => 'advertList'),
+                array('url' => 'companies', 'name' => 'Firmy', 'action' => 'companiesList'),
+                array('url' => 'transport', 'name' => 'Transport', 'action' => 'transport'),
+                array('url' => 'site', 'name' => 'Site', 'action' => 'site'),
+                array('url' => 'stock', 'name' => 'Stock', 'action' => 'stock'),
+                array('url' => 'support', 'name' => 'Support', 'action' => 'support')
+            )
+            ?>
           <div class='col-md-8'>
             <nav class='main-nav'>
               <ul class="hidden-phone">
-                <li <?php if($this->action == ''): ?> class="active"<?php endif; ?>><a href="<?= $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                <li><a href="<?= $this->url('advert') ?>"><?php echo $this->translate('Ogłoszenia') ?></a></li>
-                <li><a href="<?= $this->url('companies') ?>"><?php echo $this->translate('Firmy') ?></a></li>
-                <li><a href="<?php //echo $this->url('jobs')   ?>"><?php echo $this->translate('Specjaliści') ?></a></li>
-                <li><a href="<?php //echo $this->url('website')   ?>"><?php echo $this->translate('Strona') ?></a></li>
-                <li><a href="<?php //echo $this->url('statistics')   ?>"><?php echo $this->translate('Giełda') ?></a></li>
-                <li><a href="<?php //echo $this->url('support')   ?>"><?php echo $this->translate('Support') ?></a></li>
+                  <?php foreach($mainNav as $nav): ?>
+                      <li <?php if($this->action == $nav['action']): ?> class="active"<?php endif; ?>><a href="<?= $this->url($nav['url']); ?>"><?= $nav['name']; ?></a></li>
+                  <?php endforeach; ?>
               </ul>
             </nav>
           </div>
           <?php if($this->UserIdentity()): ?>
             <div class='col-md-2'>
-              <div class='header-buttons'>
-                <a href="<?= $this->url('user/profile') ?>" class="add">Add</a>
+              <div class='header-buttons'><span>sss</span>
+                <a href="<?= $this->url('advert/add'); ?>" class="add">Add</a>
                 <a href="<?= $this->url('user/profile') ?>" class='profile'>Profile</a>
-                <a href="#" class='contact'>Contact</a>
+                <a href="<?= $this->url('message'); ?>" class='contact'>Contact</a>
               </div>
             </div>
           <?php else: ?>

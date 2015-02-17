@@ -339,6 +339,7 @@ figure {
 
 .dis-table, .dashboard-profile div {
     display: table;
+    width: 100%;
 }
 
 .dashboard-profile div {
@@ -351,8 +352,12 @@ figure {
     font-size: 16px;
 }
 
+.dashboard-profile div ul li {
+    line-height: 25px;
+}
+
 .dashboard-profile div ul li strong {
-    width: 150px;
+    width: 100px;
     float: left;
 }
 
@@ -1139,49 +1144,28 @@ footer .footer-bubble {
   width: 8px;
   margin-top: 2px;
 }
-.bootstrap-select .btn {
-  background-image: none;
-  background-color: white;
-  border: solid 1px #c3c5c9;
-  font-weight: 300 !important;
-  text-transform: capitalize !important;
-}
-.bootstrap-select .dropdown-menu {
-  overflow-y: visible !important;
-  text-align: right;
-  min-width: 90px !important;
-  right: 0;
-  left: auto;
-  top: 120%;
-}
-.bootstrap-select .dropdown-menu > li > a {
-  padding: 3px 10px;
-  color: #5a5a5a;
-  font-weight: 300;
-}
 .bootstrap-select .dropdown-menu > li > a:hover {
-  background: none;
-  background-color: #efefef;
+    background: none;
 }
-.bootstrap-select .dropdown-menu:before {
-  border-bottom: 7px solid rgba(0, 0, 0, 0.2);
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  content: "";
-  display: inline-block;
-  right: 9px;
-  position: absolute;
-  top: -7px;
+
+.bootstrap-select.btn-group .dropdown-menu li:not(.disabled) > a:focus small, .bootstrap-select.btn-group .dropdown-menu li:not(.disabled) > a:hover small {
+    color: #777;
 }
-.bootstrap-select .dropdown-menu:after {
-  border-bottom: 6px solid #FFFFFF;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  content: "";
-  display: inline-block;
-  right: 10px;
-  position: absolute;
-  top: -6px;
+
+.bootstrap-select div.open {
+    background: none;
+    box-shadow: none;
+    border: none;
+    background-color: none;
+}
+
+ul.selectpicker {
+    top: -4px;
+    padding: 10px 20px !important;
+}
+
+.sortpicker .check-mark {
+    display: none;
 }
 
 .featured-items {
@@ -1243,9 +1227,6 @@ footer .footer-bubble {
   -moz-box-shadow: 0px 0px 10px #d0d2d5;
   box-shadow: 0px 0px 10px #d0d2d5;
   color: 0px 0px 10px #d0d2d5;
-}
-.featured-items .featured-item:hover h3 a {
-  color: #4a83db;
 }
 .featured-items .featured-item:hover .top:before {
   -webkit-opacity: 1;
@@ -1376,7 +1357,7 @@ footer .footer-bubble {
   opacity: 0;
 }
 .featured-items .featured-item figure .banner {
-  background-color: #333333;
+  background-color:rgba(0,0,0,0.2);
   padding: 3px 10px;
   position: absolute;
   right: 0;
@@ -1449,7 +1430,7 @@ footer .footer-bubble {
   position: relative;
 }
 .featured-items .featured-item.featured-list .description p {
-  color: #414141;
+  color: #5d5d5d;
   font-size: 13px;
 }
 .featured-items .featured-item.featured-list .top:after {

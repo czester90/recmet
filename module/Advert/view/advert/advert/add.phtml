@@ -91,6 +91,9 @@
                                             </div>
                                             <label id="amount-error" class="error" for="amount"></label>
                                         </div>
+                                        <div class="col-sm-3 padding-0">
+                                            <label for="prices-text" class="control-label prices-text">Za całość</label>
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
@@ -100,18 +103,18 @@
                                             <input id="pieces" name="pieces" class="form-control input-md" type="text">
                                         </div>
                                         <div class="col-sm-2 amount-type-box">
-                                            <select id="amount_typ" name="amount_typ" class="form-control">
-                                                <option value="sztuka">Sztuka</option>
-                                                <option value="kg">Kilogram</option>
-                                                <option value="tona">Tona</option>
-                                                <option value="tona">Metr &#178;</option>
-                                                <option value="tona">Metr &#179;</option>
+                                            <select id="amount_type" name="amount_type" class="form-control">
+                                                <option value="Sztuka">Sztuka</option>
+                                                <option value="Kilogram">Kilogram</option>
+                                                <option value="Tona">Tona</option>
+                                                <option value="Metr2">Metr &#178;</option>
+                                                <option value="Metr3">Metr &#179;</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="name" class="col-sm-3 control-label">Czas trwania <span aria-hidden="true" data-toggle="tooltip" data-original-title="Another one here too" data-placement="top" class="glyphicon glyphicon-info-sign"></span></label>
+                                        <label for="name" class="col-sm-3 control-label">Czas trwania</label>
 
                                         <div class="col-sm-2">
                                             <select id="days" name="days" class="form-control">
@@ -199,6 +202,7 @@
                                         <label for="description" class="col-sm-3 control-label"></label>
 
                                         <div class="col-sm-8">
+                                            <button id="add-advert" name="preview" class="btn btn-primary">Podgląd Ogłoszenie</button>
                                             <button id="add-advert" name="add-advert" class="btn btn-primary">Dodaj Ogłoszenie</button>
                                         </div>
                                     </div>

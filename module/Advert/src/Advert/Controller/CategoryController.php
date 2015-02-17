@@ -23,7 +23,7 @@ class CategoryController extends BaseController
             $category = $this->em('Advert\Entity\Category')->findBy(array('parent_id' => null), array('position' => 'ASC'));
 
             foreach($category as $cat){
-                $this->categoryArr[] = array('id' => $cat->getId(),'name' => $cat->getName());
+                $this->categoryArr[] = array('id' => $cat->getId(),'name' => $cat->getName() , 'child' => $cat->getHaveChild() == 0 ? false : true);
 
                 if($cat->getId() == $id || $cat->getId() == $request->getParentId()){
                     $this->categoryArr[count($this->categoryArr)-1]['sub'] = $this->getSubCategory($id, $cat->getId(), $sub);
@@ -39,7 +39,7 @@ class CategoryController extends BaseController
         $subCategory = $this->em('Advert\Entity\Category')->findBy(array('parent_id' => $requestId), array('position' => 'ASC'));
 
         foreach($subCategory as $subCat){
-            $enter[] = array('id' => $subCat->getId(),'name' => $subCat->getName());
+            $enter[] = array('id' => $subCat->getId(),'name' => $subCat->getName(), 'child' => $subCat->getHaveChild() == 0 ? false : true);
 
             if($subCat->getId() == $id){
                 $enter[count($enter)-1]['sub'] = $this->getSubCategory($id, $subCat->getId(), array());

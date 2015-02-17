@@ -1,0 +1,6 @@
+<h2 class="module-heading">Menu <?= ucfirst($this->action); ?></h2>
+<ul class="list-unstyled menu-grey">
+    <li class="<?php if($this->action == 'settings' && $this->method == null): ?>active<?php endif; ?>"><a href="<?= $this->url('company/settings') ?>">Dane Firmowe</a></li>
+    <li class="<?php if($this->method == 'user'): ?>active<?php endif; ?>"><a href="<?= $this->url('company/settings', array('method' => 'user')) ?>">Dane Uzytkownika</a></li>
+    <li class="<?php if($this->method == 'account'): ?>active<?php endif; ?>"><a href="<?= $this->url('company/settings', array('method' => 'account')) ?>">Ustawienia Konta</a></li>
+</ul>

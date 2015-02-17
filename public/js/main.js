@@ -88,21 +88,69 @@ var RecMetals = {
         })
     },
     advertAdd: function() {
-        //$("[data-toggle='tooltip']").tooltip();
+        $('form#form_advert').submit(function(e){
+            var emptyinputs = $(this).find('input').filter(function(){
+                return !$.trim(this.value).length;  // get all empty fields
+            }).prop('disabled',true);
+        });
+
+        $('.selectpicker').selectpicker({
+            showSubtext: true,
+            showIcon: false,
+            size: false
+        });
 
         $('.advert_type').click(function(){
             visibilityBox($(this).val(), 1, '.sell-option-box');
             if($(this).val() == 2){
-                $('.amount-type-box').css('display', 'none');
+                $('.prices-text').html('Za całość');
                 $('.sell_option').attr('checked',false);
+            }
+        });
+
+        $('.sell_option').click(function(){
+            if($(this).val() == 3){
+                var amountType = document.getElementById("amount_type").value;
+                amountType = checkAmountType(amountType);
+                $('.prices-text').html(amountType);
             }else{
-                $('.amount-type-box').css('display', 'block');
+                $('.prices-text').html('Za całość');
+            }
+        });
+
+        $('.sortpicker').on('change', function() {
+            $('#sortInput').val($(this).val());
+            $('form#form_advert').submit();
+        });
+
+        $('ul#resultPage li a').click(function(event) {
+            event.preventDefault();
+            $('#resultsInput').val($(this).html());
+            $('form#form_advert').submit();
+            return false;
+        });
+
+        $('#amount_type').on('change', function() {
+            var isChecked = $("input[name='sell_option']:checked").val()
+            if(isChecked == 3){
+                $('.prices-text').html(checkAmountType($(this).val()));
             }
         });
 
         $('.transport').click(function(){
-            visibilityBox($(this).val(), 2, '.transport-amount-box');
+            visibilityBox($(this).val(), 1, '.transport-amount-box');
         });
+
+        function checkAmountType(amountType){
+            if(amountType == 'Metr2'){
+                amountType = 'Metr <sup>2</sup>';
+            }
+
+            if(amountType == 'Metr3'){
+                amountType = 'Metr <sup>3</sup>';
+            }
+            return amountType;
+        }
 
         $('#attach').on('change', function() {
             var input = document.getElementById("attach");
@@ -169,7 +217,7 @@ var RecMetals = {
                             $.each( value.sub, function( index, value2 ){
                                 var result = generateTree(value2, true);
                                 var entSub = result == '' ? '' : '<ul>'+result+'</ul>';
-                                var class_sb = view ? 'class="view"' : 'class="tree"';
+                                var class_sb = value2.child == false || value2.child == 'false'  ? 'class="view"' : 'class="tree"';
                                 html += '<li><span '+class_sb+' data-id="'+value2.id+'">'+value2.name+'</span>'+entSub+'</li>';
                             });
                         }
