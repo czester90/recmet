@@ -1,0 +1,222 @@
+<section role="main" id="main">
+<section class="container">
+<section class="row featured-items">
+
+<div class="flash-messages">
+    <div class="alert alert-warning text-center">
+        <p>Nie możesz korzystać z wybrane pakietu. Pakiet jest <strong><abbr
+                    title="Przejdź do zakładki Płatności aby w szybki sposób móc aktywować usługę.">Nieaktywny</abbr></strong>.
+            Opłać pakiet by móc w pełni korzystać z funkcjonalności serwisu.</p>
+    </div>
+</div>
+<div class="toolbar">
+    <ol class="breadcrumb">
+        <li class="home"><a href="/"><i class="fa fa-home"></i><span> Home</span></a></li>
+        <li class="active"><a href="/user/login" class=" active">Firma</a></li>
+        <li class="active"><a href="/user/profile" class=" active">Zarządzanie Ogłoszeniami</a></li>
+    </ol>
+</div>
+<div class="wrapper">
+    <div class="primary">
+        <section class="module">
+            <div class="module-content dis-table col-lg-12">
+                <div class="alert alert-info text-center info-message-content mar-bottom15 alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <p>Tutaj możesz <strong>Edytować swoje Ogłoszenie</strong>. Pamiętaj o wypełnieniu wszystkich <strong>wymaganych
+                            pól</strong>. Kliknij <strong>Edytuj Ogłoszenie</strong> aby móc zapisać zmiany.</p>
+                </div>
+
+                <form id="addAdvertForm" class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                    <div class="col-lg-12">
+
+                        <div class="form-group">
+                            <label for="category" class="col-sm-3 control-label">Kategoria</label>
+
+                            <div class="col-sm-8">
+                                <input type="hidden" id="category_id" name="category_id" />
+                                <ul id="category-tree-view" data-url="<?= $this->url('generate-category'); ?>">
+                                    <?php foreach ($this->categories as $category): ?>
+                                        <li><span class="tree" data-id="<?= $category->getId(); ?>"><?= $category->getName(); ?></span></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                                <label id="category_id-error" class="error" for="category_id"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">Rodzaj Oferty</label>
+
+                            <div class="col-sm-7">
+                                <div class="col-sm-12 padding-0">
+                                    <input class="advert_type" name="advert_type" value="1" <?php if($this->advert->getAdvertType() == 1): ?>checked="checked"<?php endif; ?> type="radio"> Sprzedaż
+                                </div>
+                                <div class="col-sm-12 padding-0">
+                                    <input class="advert_type" name="advert_type" value="2" <?php if($this->advert->getAdvertType() == 2): ?>checked="checked"<?php endif; ?> type="radio"> Kupno
+                                </div>
+                                <label id="advert_type-error" class="error" for="advert_type"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group sell-option-box <?php if($this->advert->getAdvertType() == 2): ?>dis-none<?php endif; ?>">
+                            <label for="name" class="col-sm-3 control-label">Rodzaj Sprzedaży</label>
+                            <div class="col-sm-8">
+                                <div class="col-sm-12 padding-0">
+                                    <input class="sell_option" name="sell_option" value="1" <?php if($this->advert->getSellOption() == 1): ?>checked="checked"<?php endif; ?> type="radio"> Licytacja
+                                </div>
+                                <div class="col-sm-12 padding-0">
+                                    <input class="sell_option" name="sell_option" value="2" <?php if($this->advert->getSellOption() == 2): ?>checked="checked"<?php endif; ?> type="radio"> Przetarg
+                                </div>
+                                <div class="col-sm-12 padding-0">
+                                    <input class="sell_option" name="sell_option" value="3" <?php if($this->advert->getSellOption() == 3): ?>checked="checked"<?php endif; ?> type="radio"> Kup Teraz
+                                </div>
+                                <label id="sell_option-error" class="error" for="sell_option"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">Tytuł Ogłoszenia</label>
+
+                            <div class="col-sm-8">
+                                <input id="name" name="name" class="form-control input-md" value="<?= $this->advert->getName(); ?>" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="amount" class="col-sm-3 control-label">Cena</label>
+
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">PLN</span>
+                                    <input type="text" class="form-control" value="<?= $this->advert->getAmount(); ?>" name="amount" id="amount">
+                                </div>
+                                <label id="amount-error" class="error" for="amount"></label>
+                            </div>
+                            <div class="col-sm-3 padding-0">
+                                <label for="prices-text" class="control-label prices-text"><?php if($this->advert->getAdvertType() == 1 && $this->advert->getSellOption() == 3): ?><?= $this->advert->getAmountType(); ?><?php else: ?>Za całość<?php endif; ?></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pieces" class="col-sm-3 control-label">Ilość Towaru</label>
+
+                            <div class="col-sm-3">
+                                <input id="pieces" name="pieces" value="<?= $this->advert->getPieces(); ?>" class="form-control input-md" type="text">
+                            </div>
+                            <div class="col-sm-2 amount-type-box">
+                                <select id="amount_type" name="amount_type" class="form-control">
+                                    <option value="Sztuka" <?php if($this->advert->getAmountType() == 'Sztuka'): ?>selected="selected"<?php endif; ?>>Sztuka</option>
+                                    <option value="Kilogram" <?php if($this->advert->getAmountType() == 'Kilogram'): ?>selected="selected"<?php endif; ?>>Kilogram</option>
+                                    <option value="Tona" <?php if($this->advert->getAmountType() == 'Tona'): ?>selected="selected"<?php endif; ?>>Tona</option>
+                                    <option value="Metr2" <?php if($this->advert->getAmountType() == 'Metr2'): ?>selected="selected"<?php endif; ?>>Metr &#178;</option>
+                                    <option value="Metr3" <?php if($this->advert->getAmountType() == 'Metr3'): ?>selected="selected"<?php endif; ?>>Metr &#179;</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">Czas trwania</label>
+
+                            <div class="col-sm-2">
+                                <select id="days" name="days" class="form-control">
+                                    <option value="7" <?php if($this->advert->getDays() == 7): ?>selected="selected"<?php endif; ?>>7 dni</option>
+                                    <option value="14" <?php if($this->advert->getDays() == 14): ?>selected="selected"<?php endif; ?>>14 dni</option>
+                                    <?php if($this->Bundle()->getOptionAdvertDay() >= 21): ?><option value="21" <?php if($this->advert->getDays() == 21): ?>selected="selected"<?php endif; ?>>21 dni</option><?php endif; ?>
+                                    <?php if($this->Bundle()->getOptionAdvertDay() >= 30): ?><option value="30" <?php if($this->advert->getDays() == 30): ?>selected="selected"<?php endif; ?>>30 dni</option><?php endif; ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">Zdjęcia</label>
+
+                            <div class="col-sm-8">
+                                <p class="help-block">Wybierz zdjęcia do ogłoszenia. Pierwsze zdjęcie, zostanie automatycznie ustawione jako zdjęcie główne.</p>
+                                <div class="col-sm-12 addimage padding-0">
+                                    <div id="filediv add-file1"><input name="photo[]" type="file" id="photo"/></div>
+                                </div>
+                                <div class="row place-image"></div>
+                                <label id="photo-error" class="error" for="photo"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description" class="col-sm-3 control-label">Treść</label>
+
+                            <div class="col-sm-8">
+                                <textarea class="form-control editor" rows="10" id="description" name="description"><?= $this->advert->getDescription(); ?></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="attach" class="col-sm-3 control-label">Załączniki</label>
+
+                            <div class="col-sm-8">
+                                <div class="col-sm-12 padding-0">
+                                    <input name="attach[]" id="attach" onchange="attach()" type="file" multiple="" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group dis-none attach-list">
+                            <label for="attachList" class="col-sm-3 control-label">Dodane załączniki</label>
+
+                            <div class="col-sm-8">
+                                <ul id="fileList"><li>No Files Selected</li></ul>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location" class="col-sm-3 control-label">Lokalizacja Towaru</label>
+
+                            <div class="col-sm-8">
+                                <input id="location" name="location" class="form-control input-md" value="<?= $this->advert->getLocation(); ?>" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transport" class="col-sm-3 control-label">Transport</label>
+
+                            <div class="col-sm-3">
+                                <div class="col-sm-12 padding-0">
+                                    <input class="transport" name="transport" value="1" <?php if($this->advert->getTransport() == 1): ?>checked="checked"<?php endif; ?> type="radio"> Kupujący
+                                </div>
+                                <div class="col-sm-12 padding-0">
+                                    <input class="transport" name="transport" value="2" <?php if($this->advert->getTransport() == 2): ?>checked="checked"<?php endif; ?> type="radio"> Sprzedający
+                                </div>
+                                <label id="transport-error" class="error" for="transport"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group transport-amount-box <?php if($this->advert->getTransport() == 2): ?>dis-none<?php endif; ?>">
+                            <label for="transport_amount" class="col-sm-3 control-label">Koszt Transportu</label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">PLN</span>
+                                    <input type="text" class="form-control input-md" value="<?= $this->advert->getTransportAmount(); ?>" id="transport_amount" name="transport_amount">
+                                </div>
+                                <label id="transport_amount-error" class="error" for="transport_amount"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description" class="col-sm-3 control-label"></label>
+
+                            <div class="col-sm-8">
+                                <button id="add-advert" name="edit" class="btn btn-primary">Edytuj Ogłoszenie</button>
+                                <button id="add-advert" name="cancel" class="btn btn-primary">Anuluj</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    <aside class="secondary">
+        <section class="module module-narrow module-shallow">
+            <?= $this->partial('advert/advert/partial/advert.phtml'); ?>
+        </section>
+    </aside>
+</div>
+</section>
+</section>
+</section>
