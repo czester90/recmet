@@ -1,6 +1,9 @@
 .mar-left5 {
   margin-left: 5px;
 }
+.mar-left10 {
+  margin-left: 10px;
+}
 .mar-top15 {
   margin-top: 15px;
 }
@@ -37,6 +40,9 @@
 .width50 {
   width: 49%;
 }
+.width100 {
+  width: 100%;
+}
 .space-line {
   margin: 0 7px;
 }
@@ -62,6 +68,64 @@
 .info-message-content p {
   margin: 0px;
 }
+.active-link {
+  color: #003647;
+}
+.active-link:hover {
+  text-decoration: none;
+}
+p.small-date {
+  color: #656565;
+  font-size: 11px;
+  margin: 0px;
+}
+td.table-label h5,
+th.table-label h5 {
+  margin: 0px;
+}
+.nav {
+  right: 5px;
+  top: 15px;
+  position: absolute;
+}
+.navbar-nav > li > a {
+  padding: 0px;
+}
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus,
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background-color: transparent;
+}
+.dropdown-menu {
+  margin-left: -20px;
+}
+.dropdown ul.dropdown-menu {
+  border-radius: 4px;
+  box-shadow: none;
+  margin-top: 10px;
+}
+.dropdown ul.dropdown-menu:before {
+  content: "";
+  border-bottom: 10px solid #fff;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  z-index: 10;
+}
+.dropdown ul.dropdown-menu:after {
+  content: "";
+  border-bottom: 12px solid #ccc;
+  border-right: 12px solid transparent;
+  border-left: 12px solid transparent;
+  position: absolute;
+  top: -12px;
+  left: 14px;
+  z-index: 9;
+}
 .red-color {
   color: #ff0000;
 }
@@ -71,6 +135,9 @@
 .seperator .form-group {
   border-bottom: 1px dashed #c4c4c4;
   padding-bottom: 10px;
+}
+.featured-item-list .description p {
+  width: 75%;
 }
 .img-remove {
   border: medium none;
@@ -91,7 +158,7 @@ ul#fileList {
 #category-tree-view li {
   cursor: pointer;
 }
-li ul li {
+#category-tree-view li ul li {
   padding-left: 25px;
   background: url("../img/divider.png") no-repeat scroll 10px 4px rgba(0, 0, 0, 0);
 }
@@ -124,4 +191,126 @@ ul.submenulist li a {
 }
 ul.submenulist ul.submenulist {
   padding-left: 15px;
+}
+.sortbox .dropdown-menu {
+  margin-left: 0px;
+}
+.ibox-title {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #ffffff;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 4px 0 0;
+  color: inherit;
+  height: 48px;
+  margin-bottom: 0;
+  padding: 14px 15px 7px;
+}
+.ibox-title h5 {
+  display: inline-block;
+  float: left;
+  font-size: 14px;
+  margin: 0 0 7px;
+  padding: 0;
+  text-overflow: ellipsis;
+}
+.ibox-title .ibox-tools {
+  display: inline-block;
+  float: right;
+  margin-top: 0;
+  padding: 0;
+  position: relative;
+}
+.ibox-content {
+  clear: both;
+}
+.ibox-content {
+  background-color: #ffffff;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 1px 0;
+  color: inherit;
+  padding: 15px 20px 20px;
+}
+.ibox-content .bootstrap-select.btn-group,
+.ibox-content .bootstrap-select.btn-group[class*="span"] {
+  margin: 0px;
+}
+.ibox-content .sortpicker .btn {
+  padding: 4px 2px;
+}
+.project-list table tr td {
+  border-bottom: 1px solid #e7eaec;
+  border-top: medium none;
+  padding: 15px 10px;
+  vertical-align: middle;
+}
+.project-list table tr td .label {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  text-shadow: none;
+}
+.project-list table tr td .small-info {
+  color: #656565;
+}
+.project-list table tr td .small-info .space-line {
+  margin: 0 4px;
+  color: #c2c2c2;
+}
+.project-list table tr td .small-info small a {
+  font-size: 9px;
+  color: #0a6f8e;
+}
+.project-list table tr td .label-primary {
+  background-color: #085871;
+  color: #ffffff;
+}
+.project-list table tr td a {
+  color: #676a6c;
+  font-size: 12px;
+  font-weight: 600;
+}
+.project-list table tr td .btn {
+  border-radius: 3px;
+}
+.project-list table tr td .btn-sm,
+.project-list table tr td .btn-group-sm > .btn {
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 2px 8px;
+}
+.project-list table tr td img {
+  height: 32px;
+  width: 32px;
+}
+.project-list table tr td img .img-circle {
+  border-radius: 50%;
+}
+.project-list table tr td .first-amount {
+  font-size: 11px;
+}
+.project-list table tr td .second-amount {
+  color: #c2c2c2;
+  font-size: 9px;
+}
+.project-list table tr td.project-actions a {
+  font-weight: normal;
+}
+.project-list table tr td.project-actions a.btn-danger,
+.project-list table tr td.project-actions a.btn-primary {
+  color: #fff !important;
+}
+tr.header-table {
+  background: #f6f6f6;
+  border-bottom: 2px solid #ddd;
+}
+tr.header-table th {
+  border: none !important;
 }

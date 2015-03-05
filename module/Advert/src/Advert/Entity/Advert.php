@@ -21,11 +21,32 @@ class Advert extends BaseEntity
     const ADVERT_ACTIVE = 1;
     const ADVERT_PREVIEW = 2;
     const ADVERT_NOACTIVE = 0;
+    const ADVERT_FINISH = 3;
 
     private static $advert_type_arr = array(
         1 => Advert::ADVERT_TYPE_SELL,
         2 => Advert::ADVERT_TYPE_BUY
     );
+
+    private static $advert_active_type = array(
+        1 => array('name' => 'Aktywne', 'label' => 'primary'),
+        2 => array('name' => 'Podgląd', 'label' => 'primary'),
+        0 => array('name' => 'Nieaktywne', 'label' => 'danger'),
+        3 => array('name' => 'Zakończone', 'label' => 'success')
+    );
+
+    /**
+     * @param $type
+     * @return \stdClass
+     */
+    public static function getActiveType($type)
+    {
+        $result = self::$advert_active_type[$type];
+        $active = new \stdClass();
+        $active->name = $result['name'];
+        $active->label = $result['label'];
+        return $active;
+    }
 
 
     /**
@@ -49,10 +70,10 @@ class Advert extends BaseEntity
     protected $company_id;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="Advert\Entity\Category", cascade={"persist"})
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
-    protected $category_id;
+    protected $category;
 
     /**
      * @var string
@@ -78,7 +99,7 @@ class Advert extends BaseEntity
     protected $images;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="integer")
      */
     protected $active = 1;
 
@@ -152,8 +173,20 @@ class Advert extends BaseEntity
     public function isLessOneDay()
     {
         $now = new \DateTime();
-        $diff = $now->diff($this->getCreated_at());
+        $end = $this->getCreated_at()->add(new \DateInterval('P'.$this->getDays().'D'));
+        $diff = $now->diff($end);
         if($diff->d == 0){
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isLessThen($days)
+    {
+        $now = new \DateTime();
+        $diff = $now->diff($this->getCreated_at());
+        if($diff->d <= $days){
             return true;
         }
 
@@ -206,9 +239,9 @@ class Advert extends BaseEntity
         return $this->company_id;
     }
 
-    public function getCategory_id()
+    public function getCategory()
     {
-        return $this->category_id;
+        return $this->category;
     }
 
     public function getName()
@@ -271,9 +304,9 @@ class Advert extends BaseEntity
         $this->company_id = $company_id;
     }
 
-    public function setCategory_id($category_id)
+    public function setCategory($category)
     {
-        $this->category_id = $category_id;
+        $this->category = $category;
     }
 
     public function setName($name)
@@ -432,6 +465,14 @@ class Advert extends BaseEntity
     }
 
 
+    public function isKupTeraz()
+    {
+        return $this->sell_option == 3 ? true : false;
+    }
 
+    public function isPrzetarg()
+    {
+        return $this->sell_option == 2 ? true : false;
+    }
 
 }

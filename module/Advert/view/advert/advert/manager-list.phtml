@@ -36,8 +36,7 @@
                     </div>
                     <div class="row">
                       <div class="col-md-10">
-                        <?php $category = $this->category->find($advert->getCategory_id()); ?>
-                        <span class="s12 border-ad-right">Kategoria: <?= $category->getName(); ?></span>
+                        <span class="s12 border-ad-right">Kategoria: <?= $advert->getCategory()->getName(); ?></span>
                         <span class="s12 border-ad-right">Wizyt: <?= $advert->getVisits(); ?></span>
                         <span class="s12 border-ad-right">Ofert: 0</span>
                         <span class="s12 border-ad-right">Najwyższa Oferta: Brak</span>

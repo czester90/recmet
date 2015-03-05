@@ -3,9 +3,7 @@
 namespace Application\Controller;
 
 use User\Controller\UserController;
-use Zend\Json\Server\Exception\HttpException;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Session\Container;
 use Zend\View\Model\JsonModel;
 
 class BaseController extends AbstractActionController
@@ -16,7 +14,6 @@ class BaseController extends AbstractActionController
 
     public function __construct()
     {
-        $this->session = new Container('advert');
         $this->request = $this->getRequest();
     }
 

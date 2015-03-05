@@ -3,7 +3,7 @@ return array(
     'router' => array(
         'routes' => array(
             'home' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Literal',
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
@@ -17,8 +17,7 @@ return array(
                 'options' => array(
                     'route'    => '/support',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
+                        'controller'    => 'Application\Controller\Index',
                         'action'        => 'support',
                     ),
                 )
@@ -28,11 +27,33 @@ return array(
                 'options' => array(
                     'route'    => '/stock',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
+                        'controller'    => 'Application\Controller\Index',
                         'action'        => 'stock',
                     ),
                 )
+            ),
+            'system' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/set',
+                    'defaults' => array(
+                        'controller'    => 'Application\Controller\System',
+                        'action'        => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'lang' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/language',
+                            'defaults' => array(
+                                'action' => 'setLanguage'
+                            ),
+                        ),
+                        'priority' => 1000,
+                    ),
+                ),
             ),
         ),
     ),
@@ -58,6 +79,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\System' => 'Application\Controller\SystemController',
         ),
     ),
     'view_manager' => array(

@@ -250,6 +250,13 @@ var RecMetals = {
                 return false;
             }
         });
+    },
+    plugins: function() {
+        $(".ibuttonCheck").iButton({
+            labelOn: "Włączone",
+            labelOff: "Wyłączone",
+            enableDrag: false
+        });
     }
 }
 
@@ -261,4 +268,5 @@ $(document).ready(function () {
 
     RecMetals.offerSend();
     RecMetals.offerAmount();
+    RecMetals.plugins();
 });

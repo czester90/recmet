@@ -8,11 +8,9 @@ use Company\Entity\Company;
 class AddOffer {
 
     public $amount;
-    public $user;
     public $isOffer = false;
     public $isSent = false;
     public $text = "";
-    public $companyId;
     public $companyName;
     public $companyRank;
     public $date;
@@ -21,10 +19,8 @@ class AddOffer {
 
     private $db;
 
-    public function __construct($user)
+    public function __construct()
     {
-        $this->user = $user;
-        $this->companyId = $user->getCompanyId();
         $this->setDate();
     }
 
@@ -34,10 +30,8 @@ class AddOffer {
         $this->isOffer = $isOffer;
     }
 
-    public function setDBCompany($db)
+    public function setDBCompany($company)
     {
-        $this->db = $db;
-        $company = $this->getDBCompany()->find($this->user->getCompanyId());
         $this->companyName = $company->getName();
         $this->companyRank = Company::rank($company->getRank());
     }
@@ -76,10 +70,6 @@ class AddOffer {
         return $this->error;
     }
 
-    public function getDBCompany()
-    {
-        return $this->db;
-    }
 
     /**
      * @param mixed $companyRank
@@ -98,22 +88,6 @@ class AddOffer {
     }
 
     /**
-     * @param mixed $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
      * @param mixed $amount
      */
     public function setAmount($amount)
@@ -127,22 +101,6 @@ class AddOffer {
     public function getAmount()
     {
         return $this->amount;
-    }
-
-    /**
-     * @param mixed $companyId
-     */
-    public function setCompanyId($companyId)
-    {
-        $this->companyId = $companyId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCompanyId()
-    {
-        return $this->companyId;
     }
 
     /**

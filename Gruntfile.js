@@ -18,7 +18,8 @@ module.exports = function (grunt) {
                 files: {
                     'public/js/jquery.min.js': [
                         'public/js/jquery-1.11.1.min.js',
-                        'public/js/jquery-ui.js'
+                        'public/js/jquery-ui.js',
+                        'public/js/jquery.migrate.js'
                     ],
                     'public/js/plugins.min.js': [
                         'public/js/bootstrap.min.js',
@@ -28,6 +29,7 @@ module.exports = function (grunt) {
                         'public/js/jquery.validate.min.js',
                         'public/js/additional-methods.min.js',
                         'public/js/main.js',
+                        'public/plugins/*/jquery.*.js',
                         'public/js/validator.js'
                     ],
                     'public/js/tinymce.js': [
@@ -63,6 +65,9 @@ module.exports = function (grunt) {
                         'public/css/validate.css',
                         'public/css/button.css'
                     ],
+                    'public/css/plugins.css': [
+                        'public/plugins/*/*.css'
+                    ],
                     'public/css/tinymce.css': [
                         'vendor/tinymce/tinymce/skins/*/*.css'
                     ]
@@ -74,7 +79,8 @@ module.exports = function (grunt) {
                 files: [
                     //'public/js/*.js',
                     'public/css/*.css',
-                    'public/css/*.less'
+                    'public/css/*.less',
+                    'public/css/views/*/*.less'
                 ],
                 tasks: [
                     //'uglify',

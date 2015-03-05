@@ -188,6 +188,7 @@ class CompanyController extends BaseController {
             $user->setFirstName($request->getPost('first_name'));
             $user->setLastName($request->getPost('last_name'));
             $user->setCompany_id($company->id);
+            $user->setLocale('pl_PL');
             $roles = $this->em('User\Entity\Role')->find(1);
             $user->getRolesAdd()->add($roles);
             $this->em()->persist($user);

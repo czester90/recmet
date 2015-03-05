@@ -29,7 +29,7 @@
                     <div class='widget-section'>
                         <div class='inner'>
                             <label for="propertyType">Kategorie</label>
-                            <ul class="menulist">
+                            <ul class="menulist category-tree-view">
                                 <?php foreach($this->categories as $category): ?>
                                     <li><a href="<?= $this->url('advert/sublist', array('id' => $category->getId(), 'url' => $category->getUrl())) ?>"><?= $category->getName(); ?> <span>(100)</span></a></li>
                                     <?php if($this->currentCategory): ?>
@@ -150,7 +150,7 @@
               </div>
               <div class='bar-bottom'>
                 <div class='inner'>
-                  <div class='pull-left custom-margin'>
+                  <div class='pull-left custom-margin sortbox'>
                     <span class='text-line'>Sortowanie:</span>
                     <select class="selectpicker sortpicker" name="sort">
                         <option data-subtext="od najniższej" value="sort_amount_asc" <?= $layout->getFormParamEquals('sort', 'sort_amount_asc'); ?>>Cena</option>
@@ -177,16 +177,16 @@
                 <div class='inner-border'>
                   <div class='inner-padding'>
                     <figure>
-                      <img src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getCompanyId().DIRECTORY_SEPARATOR.$advert->getImages()->get(0)->getName(); ?>" alt="" />
+                      <img src="<?= $this->basePath().Advert\Entity\Image::IMAGE_PATH_VIEW.$advert->getCompanyId().DIRECTORY_SEPARATOR . '90x160' . DIRECTORY_SEPARATOR .$advert->getImages()->get(0)->getName(); ?>" alt="" />
                       <div class='banner'><?= Advert\Entity\Advert::advertTypeArray($advert->getAdvertType()); ?></div>
                       <a href="<?= $this->url('advert/view', array('id' => $advert->getId(), 'url' => $advert->getUrl())); ?>" class='figure-hover'>Zoom</a>
                     </figure>
                     <div class='right'>
-                      <h3><a href="<?= $this->url('advert/view', array('id' => $advert->getId(), 'url' => $advert->getUrl())); ?>"><strong><?= $advert->getName() ?></strong></a></h3>
+                      <h3><a href="<?= $this->url('advert/view', array('id' => $advert->getId(), 'url' => $advert->getUrl())); ?>"><strong><?= strlen($advert->getName()) > 51 ? substr($advert->getName(), 0, 50).'...' : $advert->getName();  ?></strong></a></h3>
                         <?php $company = $this->getRepos('Company\Entity\Company')->find($advert->getCompanyId()); ?>
                       <p><?= $company->getCity(); ?>, <?= $company->getCountry(); ?></p>
                       <div class='description'>
-                        <p><?= strlen(strip_tags($advert->getDescription())) > 200 ? substr(strip_tags($advert->getDescription()), 0, 200).'...' : strip_tags($advert->getDescription()); ?></p>
+                        <p><?= strlen(strip_tags($advert->getDescription())) > 150 ? substr(strip_tags($advert->getDescription()), 0, 150).'...' : strip_tags($advert->getDescription()); ?></p>
                       </div>
                       <div class='price-wrapper'>
                         <div class='price'>PLN <?= $advert->getAmount() ?></div>
@@ -204,6 +204,8 @@
                           <span>Data zakończenia: <span class="<?php if($advert->isLessOneDay()): ?>red-color<?php endif; ?>"><?= $advert->getHoursToFinishAdvert(); ?></span></span>
                           <span class="space-line"> | </span>
                           <span>Oglądnięte: <?= $advert->getVisits(); ?></span>
+                          <span class="space-line"> | </span>
+                          <span>Kategoria: <?= $advert->getCategory()->getName(); ?></span>
                       </div>
                       <?= \Company\Entity\Company::rank($company->getRank(), ''); ?>
                   </div>

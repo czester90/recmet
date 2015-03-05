@@ -1,6 +1,7 @@
 <?php
 namespace Advert\Entity\Repository;
 
+use Advert\Entity\Advert;
 use Doctrine\ORM\EntityRepository;
 
 class AdvertRepository extends EntityRepository {
@@ -13,7 +14,8 @@ class AdvertRepository extends EntityRepository {
 
         $qb->select('a')
             ->from('Advert\Entity\Advert', 'a')
-            ->where('a.category_id IN(:categoryIds)')
+            ->where('a.category IN(:categoryIds)')
+            ->andWhere('a.active = ' . Advert::ADVERT_ACTIVE)
             ->setParameter('categoryIds', $categoryIds);
 
         foreach($getQuery as $key => $value) {
@@ -70,7 +72,7 @@ class AdvertRepository extends EntityRepository {
             ->from('Advert\Entity\Advert', 'a');
 
         if($categoryIds != null){
-            $qb->where('a.category_id IN(:categoryIds)')
+            $qb->where('a.category IN(:categoryIds)')
                 ->setParameter('categoryIds', $categoryIds);
         }
 
@@ -99,5 +101,22 @@ class AdvertRepository extends EntityRepository {
         $query = $qb->getQuery()->getSingleScalarResult();
 
         return $query;
+    }
+
+    public function getCompanyAdverts($companyId, $limit = 5)
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $now = new \DateTime();
+
+        $qb->select('a')
+            ->from('Advert\Entity\Advert', 'a')
+            ->where('a.company_id = ' . $companyId)
+            ->andWhere('a.created_at + a.days > ' . $now->format('Y-m-d'))
+            ->setMaxResults($limit)
+            ->orderBy('a.created_at', 'DESC');
+
+        return $qb->getQuery()->getResult();
     }
 } 

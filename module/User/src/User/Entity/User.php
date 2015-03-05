@@ -77,6 +77,12 @@ class User implements UserInterface, ProviderInterface {
    */
   protected $last_name;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    protected $locale;
+
   /**
    * @var string
    * @ORM\Column(type="datetime", nullable=true)
@@ -246,5 +252,23 @@ class User implements UserInterface, ProviderInterface {
     {
         return $this->password_recovery_hash;
     }
+
+    /**
+     * @param string $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+
 
 }

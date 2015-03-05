@@ -4,13 +4,11 @@ namespace Advert\Controller;
 
 use Advert\Entity\Observe;
 use Advert\Entity\Offer;
-use Application\Components\Image\ImageThumb;
 use Application\Controller\BaseController;
 use Application\Components\ViewModel;
 use Advert\Entity\Advert;
 use Advert\Entity\Image;
-use Zend\Filter\File\RenameUpload;
-use Library\HttpServiceCaller;
+use Zend\Session\Container;
 use Advert\Repository\AdvertRepository;
 
 use Advert\Components\AddOffer;
@@ -59,7 +57,7 @@ class AdvertController extends BaseController
             $categoryIds = $this->em('Advert\Entity\Category')->getCategoryArray($currentCategory);
             $advertList = $this->em('Advert\Entity\Advert')->getAdvertByCategory($categoryIds, $offset, $resultPage, $this->request->getQuery());
         }else{
-            $advertList = $this->em('Advert\Entity\Advert')->findBy(array('advert_type' => 1), array('id' => 'DESC'), $resultPage, $offset);
+            $advertList = $this->em('Advert\Entity\Advert')->findBy(array('active' => Advert::ADVERT_ACTIVE), array('created_at' => 'DESC'), $resultPage, $offset);
         }
         $category = $this->em('Advert\Entity\Category')->findBy(array('parent_id' => null), array('position' => 'ASC'));
         $count = $this->em('Advert\Entity\Advert')->getCountAdvertsByCategory($categoryIds, $this->request->getQuery());
@@ -83,10 +81,8 @@ class AdvertController extends BaseController
 
     public function addAction()
     {
-        $this->getAdvertRepository()->testImage();
+        $bundle = $this->em('Company\Entity\BundlePayments')->findOneBy(array('company_id' => $this->getCompanyId()));
         if ($this->request->isPost()) {
-            $preview = $this->request->getPost('preview');
-
             $this->getAdvertRepository()->setDirectoryPath();
             $advert = $this->getAdvertRepository()->saveAdvert();
             $this->getAdvertRepository()->saveImage($this->files('photo'), $advert, Image::ADVERT_TYPE_PHOTO);
@@ -98,7 +94,14 @@ class AdvertController extends BaseController
                 return $view;
             }
 
-            $this->session->alert = array('alert' => 'success', 'message' => 'Ogłoszenie zostało dodane.');
+            if($bundle->getAdvertsToUse()){
+                $bundle->setAdvertsToUse($bundle->getAdvertsToUse()-1);
+                $this->em()->persist($bundle);
+                $this->em()->flush();
+            }
+
+            $sessionAdvert = new Container('advert');
+            $sessionAdvert->alert = array('alert' => 'success', 'message' => 'Ogłoszenie zostało dodane.');
             return $this->redirect()->toRoute('advert/dashboard');
         }
 
@@ -107,6 +110,7 @@ class AdvertController extends BaseController
         return new ViewModel(array(
             'categories' => $category,
             'action' => $this->params('action'),
+            'bundle' => $bundle
         ));
     }
 
@@ -133,11 +137,12 @@ class AdvertController extends BaseController
     {
         $alert = array();
 
-        if (isset($this->session->alert)) {
-            $alert = $this->session->alert;
+        $sessionAdvert = new Container('advert');
+        if (isset($sessionAdvert->alert)) {
+            $alert = $sessionAdvert->alert;
         }
 
-        unset($this->session->alert);
+        unset($sessionAdvert->alert);
 
         $adverts = $this->em('Advert\Entity\Advert')->findBy(array('company_id' => $this->getCompanyId()));
         return new ViewModel(array(
@@ -171,25 +176,36 @@ class AdvertController extends BaseController
         $advertId = $this->getParam('id');
         $companyId = $this->user()->getIdentity()->getCompanyId();
 
-        $offer = new AddOffer($this->user()->getIdentity());
-        $offer->setDBCompany($this->em('Company\Entity\Company'));
+        $offer = new AddOffer();
 
         $advert = $this->em('Advert\Entity\Advert')->find($advertId);
         $companyFromAdvert = $this->em('Company\Entity\Company')->find($advert->getCompanyId());
+        $offer->setDBCompany($companyFromAdvert);
 
         if($this->request->isPost()){
             if((boolean)$this->request->getPost('offer') && $this->request->getPost('amount') != null){
-                $addOffer = new Offer();
-                $addOffer->setAmount($this->request->getPost('amount'));
-                $addOffer->setAdvertId($advert->getId());
-                $addOffer->setCompanyId($companyId);
-                $addOffer->setDescription($this->request->getPost('description'));
-                $addOffer->setType(Offer::TYPE_SENT);
-                $this->em()->persist($addOffer);
-                $this->em()->flush();
+                if($advert->getActive() != Advert::ADVERT_FINISH){
+                    $addOffer = new Offer();
+                    $addOffer->setAmount($this->request->getPost('amount'));
+                    $addOffer->setAdvertId($advert->getId());
+                    $addOffer->setCompanyId($advert->getCompanyId());
+                    $addOffer->setSendCompanyId($companyId);
+                    $description = $this->request->getPost('description');
+                    $addOffer->setDescription(isset($description) ? $description : '');
+                    $addOffer->setType($advert->isKupTeraz() ? Offer::TYPE_BUY : Offer::TYPE_SENT);
+                    $this->em()->persist($addOffer);
+                    $this->em()->flush();
 
-                $offer->setIsSent(true);
-                $offer->setText('<div class="alert alert-success text-center">Oferta została wysłana. Wyślemy wiadomość kiedy Firma oferta zostanie rozpatrzona.</div>');
+                    $offer->setIsSent(true);
+                    if($advert->isKupTeraz()){
+                        $advert->setActive(Advert::ADVERT_FINISH);
+                        $this->em()->persist($advert);
+                        $this->em()->flush();
+                        $offer->setText('<div class="alert alert-success text-center">Ogłoszenie Zakończone. Złożyłeś najwyższą ofertę.</div>');
+                    }else{
+                        $offer->setText('<div class="alert alert-success text-center">Oferta została wysłana. Wyślemy wiadomość kiedy Firma oferta zostanie rozpatrzona.</div>');
+                    }
+                }
             }else{
                 $offer->setOffer($this->request->getPost('amount'));
             }
@@ -205,9 +221,18 @@ class AdvertController extends BaseController
         $count = $query->getSingleResult();
 
         $yourOffer = $this->em('Advert\Entity\Offer')->findOneBy(array('advert_id' => $advert->getId(), 'company_id' => $companyId));
+
         if($yourOffer){
             $offer->setIsSent(true);
-            $offer->setText('<div class="alert alert-info text-center">Złożyłeś już ofertę do tego ogłoszenia.</div>');
+            if($advert->isKupTeraz() && $count[1] > 0){
+                $offer->setText('<div class="alert alert-success text-center">Ogłoszenie Zakończone. Złożyłeś najwyższą ofertę.</div>');
+            }else{
+                $offer->setText('<div class="alert alert-info text-center">Złożyłeś już ofertę do tego ogłoszenia.</div>');
+            }
+        }else{
+            if($advert->isKupTeraz()) {
+                $offer->setText('<div class="alert alert-danger text-center">Ogłoszenie Zakończone.</div>');
+            }
         }
 
         return new ViewModel(array(
@@ -216,7 +241,7 @@ class AdvertController extends BaseController
             'offerCount' => $count[1],
             'companyFromAdvert' => $companyFromAdvert,
             'categories' => $this->em('Advert\Entity\Category')->findBy(array('parent_id' => null), array('position' => 'ASC')),
-            'advert' => $this->em('Advert\Entity\Advert')->find($advertId),
+            'advert' => $advert,
             'observe' => $this->em('Advert\Entity\Observe')->findOneBy(array('advert_id' => $advertId, 'company_id' => $companyId))
         ));
     }

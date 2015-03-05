@@ -25,6 +25,9 @@ msgstr "Szkielet Aplikacji"
 msgid "Home"
 msgstr "Strona startowa"
 
+msgid "Adverts"
+msgstr "Ogłoszenie"
+
 #: ../view/layout/layout.phtml:50
 msgid "All rights reserved."
 msgstr "Wszelkie prawa zastrzeżone."

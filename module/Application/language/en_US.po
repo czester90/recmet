@@ -25,6 +25,10 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+#: ../view/layout/layout.phtml:36
+msgid "Adverts"
+msgstr ""
+
 #: ../view/layout/layout.phtml:50
 msgid "All rights reserved."
 msgstr ""

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Advert\Entity\Repository\OfferRepository")
  * @ORM\Table(name="Offers")
  *
  */
@@ -16,11 +16,13 @@ class Offer
     const TYPE_ACCEPT = 1;
     const TYPE_REJECTED = 2;
     const TYPE_SENT = 3;
+    const TYPE_BUY = 4;
 
     private static $typeNames = array(
         1 => 'Zaakceptowana',
         2 => 'Odrzucona',
-        3 => 'Wysłana'
+        3 => 'Wysłana',
+        4 => 'Zakończona'
     );
 
     public static function getNameOfType($type)
@@ -43,6 +45,12 @@ class Offer
 
     /**
      * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Company\Entity\Company")
+     */
+    protected $send_company_id;
+
+    /**
+     * @ORM\Column(type="integer")
      * @ORM\ManyToOne(targetEntity="Advert\Entity\Advert")
      */
     protected $advert_id;
@@ -56,6 +64,11 @@ class Offer
      * @ORM\Column(type="integer")
      */
     protected $type;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $seen = 0;
 
     /**
      * @var string
@@ -206,6 +219,39 @@ class Offer
     {
         return $this->updated_at;
     }
+
+    /**
+     * @param mixed $seen
+     */
+    public function setSeen($seen)
+    {
+        $this->seen = $seen;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeen()
+    {
+        return $this->seen;
+    }
+
+    /**
+     * @param mixed $send_company_id
+     */
+    public function setSendCompanyId($send_company_id)
+    {
+        $this->send_company_id = $send_company_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSendCompanyId()
+    {
+        return $this->send_company_id;
+    }
+
 
 
 }

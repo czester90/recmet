@@ -155,7 +155,8 @@ var Validator = {
                 }},
                 name: {
                     required: true,
-                    minlength: 5
+                    minlength: 5,
+                    maxlength: 50
                 },
                 category_id : "required",
                 amount: {
@@ -201,7 +202,7 @@ var Validator = {
             creditcard: "Please enter a valid credit card number.",
             equalTo: "Proszę ponownie wprowadzić tę samą wartość.",
             accept: "Please enter a value with a valid extension.",
-            maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+            maxlength: jQuery.validator.format("Dozwolone jest {0} znaków."),
             minlength: jQuery.validator.format("Prosze wprowadzić minimum {0} znak."),
             rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
             range: jQuery.validator.format("Please enter a value between {0} and {1}."),

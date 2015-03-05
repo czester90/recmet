@@ -50,6 +50,12 @@ class BundlePayments extends BaseEntity {
     protected $amount;
 
     /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    protected $adverts_to_use;
+
+    /**
      * @var bool
      * @ORM\Column(type="boolean")
      */
@@ -197,6 +203,39 @@ class BundlePayments extends BaseEntity {
     {
         return $this->updated_at;
     }
+
+    /**
+     * @param int $adverts_to_use
+     */
+    public function setAdvertsToUse($adverts_to_use)
+    {
+        $this->adverts_to_use = $adverts_to_use;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAdvertsToUse()
+    {
+        return $this->adverts_to_use;
+    }
+
+    /**
+     * @param mixed $bundle_details_id
+     */
+    public function setBundleDetailsId($bundle_details_id)
+    {
+        $this->bundle_details_id = $bundle_details_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBundleDetailsId()
+    {
+        return $this->bundle_details_id;
+    }
+
 
 
 } 

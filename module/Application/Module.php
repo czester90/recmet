@@ -12,18 +12,37 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Locale;
 
 class Module
 {
 
     public function onBootstrap(MvcEvent $e)
     {
-        $eventManager = $e->getApplication()->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
-
         $application = $e->getApplication();
         $em = $application->getEventManager();
+
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($em);
+
+        /*$user = $e->getApplication()->getServiceManager()->get('user_auth_service');
+
+        if($user->hasIdentity()){
+            $locale = $user->getIdentity()->getLocale();
+        }else{
+            if(isset($_COOKIE['lang'])) {
+                $locale = $_COOKIE['lang'];
+            }else{
+                $langHttp = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+                $locale = $langHttp == 'pl' ? 'pl_PL' : 'en_US';
+                setcookie('lang', $locale, time() + (86400 * 30 * 30), '/');
+            }
+        }
+
+        $translator = $application->getServiceManager()->get('translator');
+        $translator
+            ->setLocale(\Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+            ->setFallbackLocale($locale);*/
 
         $em->attach('dispatch', function ($e) {
             $routeMatch = $e->getRouteMatch();
@@ -31,7 +50,6 @@ class Module
             $viewModel->setVariable('controller', $routeMatch->getParam('controller'));
             $viewModel->setVariable('action', $routeMatch->getParam('action'));
             $viewModel->setVariable('params', $routeMatch->getParams());
-
         }, -100);
 
         $serviceManager = $e->getApplication()->getServiceManager();

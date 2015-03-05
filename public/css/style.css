@@ -339,7 +339,6 @@ figure {
 
 .dis-table, .dashboard-profile div {
     display: table;
-    width: 100%;
 }
 
 .dashboard-profile div {
@@ -570,7 +569,6 @@ header a.logo:hover {
   float: left;
   height: 40px;
   position: relative;
-  z-index: 1000;  
   margin-top: -1px;
   background: #003647 !important;
 }
@@ -1448,7 +1446,7 @@ ul.selectpicker {
 }
 .featured-items .featured-item.featured-list .price-wrapper {
   position: absolute;
-  top: 6px;
+  top: 0px;
   right: 0px;
 }
 .featured-items .featured-item.featured-list .bottom .inner-padding {
@@ -1993,7 +1991,6 @@ ul.selectpicker {
 }
 .price-wrapper {
   float: right;
-  margin-top: 5px;
 }
 .price-wrapper .price {
   font-size: 18px;

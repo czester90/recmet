@@ -1,0 +1,22 @@
+table.offer-list {
+  border-collapse: separate;
+  border-spacing: 0 5px;
+}
+table.offer-list thead th {
+  background-color: #085871;
+  color: white;
+  font-weight: normal;
+}
+table.offer-list tbody td {
+  background-color: #EEEEEE;
+}
+table.offer-list tr td:first-child,
+table.offer-list tr th:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+table.offer-list tr td:last-child,
+table.offer-list tr th:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}

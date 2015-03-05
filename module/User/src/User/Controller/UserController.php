@@ -73,11 +73,12 @@ class UserController extends BaseController
     public function profileAction()
     {
         if($this->isUser()) return $this->isUser();
-        $companyId = $this->user()->getIdentity()->getCompany_id();
+        $adverts = $this->em('Advert\Entity\Advert')->getCompanyAdverts($this->getCompanyId());
 
         return new ViewModel(array(
-            'bundlePayments' => $this->em('Company\Entity\BundlePayments')->findOneBy(array('company_id' => $companyId), array('created_at' => 'DESC')),
-            'company' => $this->em('Company\Entity\Company')->find($companyId)
+            'bundlePayments' => $this->em('Company\Entity\BundlePayments')->findOneBy(array('company_id' => $this->getCompanyId()), array('created_at' => 'DESC')),
+            'company' => $this->em('Company\Entity\Company')->find($this->getCompanyId()),
+            'adverts' => $adverts
         ));
     }
 

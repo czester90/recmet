@@ -7,8 +7,9 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'advert\advert' => 'Advert\Controller\AdvertController',
-            'advert\category' => 'Advert\Controller\CategoryController'
+            'advert' => 'Advert\Controller\AdvertController',
+            'category' => 'Advert\Controller\CategoryController',
+            'offer' => 'Advert\Controller\OfferController'
         ),
     ),
     'router' => array(
@@ -18,8 +19,41 @@ return array(
                 'options' => array(
                     'route'    => '/category/view/',
                     'defaults' => array(
-                        'controller' => 'advert/category',
+                        'controller' => 'category',
                         'action'     => 'generateCategory',
+                    ),
+                ),
+            ),
+            'offer' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/offer',
+                    'defaults' => array(
+                        'controller' => 'offer',
+                        'action'     => 'dashboard'
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'received' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/received',
+                            'defaults' => array(
+                                'action' => 'received'
+                            ),
+                        ),
+                        'priority' => 1000,
+                    ),
+                    'shipped' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/shipped',
+                            'defaults' => array(
+                                'action' => 'shipped'
+                            ),
+                        ),
+                        'priority' => 1000,
                     ),
                 ),
             ),
@@ -31,7 +65,7 @@ return array(
                         'page' => '[0-9]'
                     ),
                     'defaults' => array(
-                        'controller' => 'advert/advert',
+                        'controller' => 'advert',
                         'action'     => 'advertList',
                         'page'       => 1,
                     ),
@@ -114,15 +148,6 @@ return array(
                             ),
                         ),
                         'priority' => 1000,
-                    ),
-                    'offer' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/offer',
-                            'defaults' => array(
-                                'action' => 'offer'
-                            ),
-                        ),
                     ),
                     'magazine' => array(
                         'type'    => 'Segment',

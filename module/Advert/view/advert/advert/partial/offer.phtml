@@ -1,6 +1,7 @@
 <h2 class="module-heading">Menu</h2>
 <ul class="list-unstyled menu-grey">
-    <li class="<?php if($this->action == 'dashboard'): ?>active<?php endif; ?>"><a href="<?= $this->url('advert/dashboard') ?>">Dashboard</a></li>
-    <li class="<?php if($this->action == 'add'): ?>active<?php endif; ?>"><a href="<?= $this->url('advert/add') ?>">Otrzymane Oferty</a></li>
-    <li class="<?php if($this->action == 'observe-list'): ?>active<?php endif; ?>"><a href="<?= $this->url('advert/observe-list') ?>" class="">Złożone Oferty</a></li>
+    <li class="<?php if($this->action == 'dashboard'): ?>active<?php endif; ?>"><a href="<?= $this->url('offer') ?>">Dashboard</a></li>
+    <?php $offerCount = $this->getRepos('Advert\Entity\Offer')->getOfferCountNotSeen($this->UserIdentity()->getCompanyId()); ?>
+    <li class="<?php if($this->action == 'received'): ?>active<?php endif; ?>"><a href="<?= $this->url('offer/received') ?>">Otrzymane Oferty <?php if($offerCount): ?><span class="badge"><?= $offerCount; ?></span><?php endif; ?></a></li>
+    <li class="<?php if($this->action == 'shipped'): ?>active<?php endif; ?>"><a href="<?= $this->url('offer/shipped') ?>" class="">Złożone Oferty</a></li>
 </ul>

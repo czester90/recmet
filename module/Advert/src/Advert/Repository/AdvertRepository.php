@@ -36,6 +36,7 @@ class AdvertRepository {
         $advert = new Advert();
         $advert->setActive(isset($preview) ? Advert::ADVERT_PREVIEW : Advert::ADVERT_ACTIVE);
         $advert->setAmount($this->getController()->post('amount'));
+        $advert->setCompanyId($this->getController()->getCompanyId());
         $advert->setDays($this->getController()->post('days'));
         $advert->setDescription($this->getController()->post('description'));
         $advert->setName($this->getController()->post('name'));
@@ -45,12 +46,12 @@ class AdvertRepository {
         $advert->setLocation($this->getController()->post('location'));
         $advert->setSellOption($this->getController()->post('sell_option'));
         $advert->setTransport($this->getController()->post('transport'));
-        $advert->getTransportType($this->getController()->post('transport_type'));
+        $advert->setTransportAmount($this->getController()->post('transport_amount'));
         $advert->setUrl(HttpServiceCaller::toAscii($this->getController()->post('name')));
         $advert->setUser_id($this->getController()->getUserId());
 
         $category = $this->getController()->em('Advert\Entity\Category')->find($this->getController()->request->getPost('category_id'));
-        $advert->setCategory_id($category->getId());
+        $advert->setCategory($category);
 
         $this->getController()->em()->persist($advert);
         $this->getController()->em()->flush();
@@ -65,7 +66,7 @@ class AdvertRepository {
         foreach ($files as $file) {
             if(isset($file['name']) && $file['name'] != ''){
                 $filter = new RenameUpload(array(
-                    "target" => $this->imagePath . DIRECTORY_SEPARATOR . date('YmdHis') . "." . pathinfo($file['name'], PATHINFO_EXTENSION),
+                    "target" => $this->imagePath . date('YmdHis') . "." . pathinfo($file['name'], PATHINFO_EXTENSION),
                     "randomize" => true,
                 ));
 
@@ -82,10 +83,10 @@ class AdvertRepository {
                 $this->getController()->em()->flush();
 
                 $webImage = new WebinoImageThumb();
-                $thumb = $webImage->create($this->imagePath . DIRECTORY_SEPARATOR . $images->getName());
+                $thumb = $webImage->create($this->imagePath . $images->getName());
                 foreach($this->thumbnailsSize as $tb){
                     $thumb->adaptiveResize($tb['width'], $tb['height']);
-                    $thumb->save($this->imagePath . DIRECTORY_SEPARATOR . $tb['folder'] . DIRECTORY_SEPARATOR . $images->getName());
+                    $thumb->save($this->imagePath . $tb['folder'] . DIRECTORY_SEPARATOR . $images->getName());
                 }
             }
         }
@@ -93,29 +94,15 @@ class AdvertRepository {
 
     public function setDirectoryPath()
     {
-        $this->imagePath  = getcwd() . Image::IMAGE_PATH . DIRECTORY_SEPARATOR . $this->getController()->getUserId();
+        $this->imagePath  = getcwd() . Image::IMAGE_PATH . $this->getController()->getCompanyId(). DIRECTORY_SEPARATOR;
         if (!is_dir($this->imagePath)) {
             mkdir($this->imagePath, 0777, true);
         }
         //thumbnails 90x160
         foreach($this->thumbnailsSize as $tb){
-            if (!is_dir($this->imagePath . DIRECTORY_SEPARATOR . $tb['folder'])) {
-                mkdir($this->imagePath . DIRECTORY_SEPARATOR . $tb['folder'], 0777, true);
+            if (!is_dir($this->imagePath . $tb['folder'])) {
+                mkdir($this->imagePath . $tb['folder'], 0777, true);
             }
-        }
-    }
-
-    public function testImage()
-    {
-        $this->setDirectoryPath();
-
-        $img = '20150127221833_54c800a9bf1d8.jpg';
-
-        $webImage = new WebinoImageThumb();
-        $thumb = $webImage->create($this->imagePath . DIRECTORY_SEPARATOR . $img);
-        foreach($this->thumbnailsSize as $tb){
-            $thumb->adaptiveResize($tb['width'], $tb['height']);
-            $thumb->save($this->imagePath . DIRECTORY_SEPARATOR . $tb['folder'] . DIRECTORY_SEPARATOR . $img);
         }
     }
 } 
