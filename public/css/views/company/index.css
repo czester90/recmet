@@ -50,3 +50,19 @@ hr {
   color: #093;
   text-decoration: none;
 }
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  margin-left: 0px;
+  margin-right: 10px;
+  position: relative;
+}
+.nav {
+  position: relative;
+  right: 0px;
+  top: 0px;
+}
+.nav-tabs {
+  border-bottom: none;
+}

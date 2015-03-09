@@ -168,12 +168,7 @@ $layout->setFormArray($this->query);
                                                 <small class="first-amount">Najwyższa Oferta:
                                                     <strong>PLN <?= $advert->getAmount() + 200; ?></strong></small>
                                                 <br/>
-                                                <small class="second-amount">Cena:
-                                                    <strong>PLN <?= $advert->getAmount(); ?></strong></small>
                                             </td>
-                                            <?php $query = $this->getRepos()->createQuery('SELECT COUNT(o.id) FROM Advert\Entity\Offer o WHERE o.advert_id = '. $advert->getId()); ?>
-                                            <?php $offerCount = $query->getSingleScalarResult(); ?>
-                                            <td><span class="labelbox <?php echo $offerCount > 0 ? 'green' : 'grey'; ?>"><?= $offerCount; ?></span></td>
                                             <td class="project-actions">
                                                 <?php if($advert->getActive() == \Advert\Entity\Advert::ADVERT_FINISH): ?>
                                                     <a href="<?= $this->url('advert/edit', array('id' => $advert->getId())) ?>"

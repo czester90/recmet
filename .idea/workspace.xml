@@ -2,62 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36fe59d3-5348-4bce-ae16-1340e3c947e6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/ibutton-slider-default.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugins/ibutton/ibutton-slider-default.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Advert/src/Advert/Controller/OfferController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Advert/src/Advert/Entity/Repository/OfferRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/src/Application/Controller/SystemController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/src/Application/Components/Payment/class_przelewy24.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/src/Application/Components/Payment/client.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/views/advert/dashboard.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Advert/view/advert/advert/offer/dashboard.phtml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/views/application/index.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/views/company/index.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Application/view/system/index.phtml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugins/ibutton/jquery.ibutton.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/plugins/ibutton/jquery.ibutton.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/jquery.migrate.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/views/offer/received.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Advert/view/advert/advert/offer/received.phtml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Advert/view/advert/advert/offer/shipped.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/cache/.gitignore" afterPath="$PROJECT_DIR$/data/cache/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/src/Advert/Components/AddOffer.php" afterPath="$PROJECT_DIR$/module/Advert/src/Advert/Components/AddOffer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/src/Advert/Entity/Advert.php" afterPath="$PROJECT_DIR$/module/Advert/src/Advert/Entity/Advert.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/src/Advert/Controller/AdvertController.php" afterPath="$PROJECT_DIR$/module/Advert/src/Advert/Controller/AdvertController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/src/Advert/Entity/Repository/AdvertRepository.php" afterPath="$PROJECT_DIR$/module/Advert/src/Advert/Entity/Repository/AdvertRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/src/Advert/Repository/AdvertRepository.php" afterPath="$PROJECT_DIR$/module/Advert/src/Advert/Repository/AdvertRepository.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/src/Application/Controller/BaseController.php" afterPath="$PROJECT_DIR$/module/Application/src/Application/Controller/BaseController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Company/src/Company/Entity/BundlePayments.php" afterPath="$PROJECT_DIR$/module/Company/src/Company/Entity/BundlePayments.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Company/src/Company/Controller/CompanyController.php" afterPath="$PROJECT_DIR$/module/Company/src/Company/Controller/CompanyController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gruntfile.js" afterPath="$PROJECT_DIR$/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/Module.php" afterPath="$PROJECT_DIR$/module/Application/Module.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/src/Advert/Entity/Offer.php" afterPath="$PROJECT_DIR$/module/Advert/src/Advert/Entity/Offer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/User/src/User/Entity/User.php" afterPath="$PROJECT_DIR$/module/User/src/User/Entity/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/User/src/User/Controller/UserController.php" afterPath="$PROJECT_DIR$/module/User/src/User/Controller/UserController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Company/view/company/company/settings/account.phtml" afterPath="$PROJECT_DIR$/module/Company/view/company/company/settings/account.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/view/advert/advert/add.phtml" afterPath="$PROJECT_DIR$/module/Advert/view/advert/advert/add.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/view/advert/advert/advert-list.phtml" afterPath="$PROJECT_DIR$/module/Advert/view/advert/advert/advert-list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/common.css" afterPath="$PROJECT_DIR$/public/css/common.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/common.less" afterPath="$PROJECT_DIR$/public/css/common.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/view/advert/advert/dashboard.phtml" afterPath="$PROJECT_DIR$/module/Advert/view/advert/advert/dashboard.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/language/en_US.po" afterPath="$PROJECT_DIR$/module/Application/language/en_US.po" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/view/application/index/index.phtml" afterPath="$PROJECT_DIR$/module/Application/view/application/index/index.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Company/src/Company/Repository/MessageRepository.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/module/User/src/User/Entity/Message.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Company/src/Company/Entity/Message.php" afterPath="$PROJECT_DIR$/module/Company/src/Company/Entity/Message.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/views/company/index.css" afterPath="$PROJECT_DIR$/public/css/views/company/index.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/views/company/index.less" afterPath="$PROJECT_DIR$/public/css/views/company/index.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Company/view/company/message/index.phtml" afterPath="$PROJECT_DIR$/module/Company/view/company/message/index.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/jquery.min.js" afterPath="$PROJECT_DIR$/public/js/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/view/layout/layout.phtml" afterPath="$PROJECT_DIR$/module/Application/view/layout/layout.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/main.js" afterPath="$PROJECT_DIR$/public/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/view/advert/advert/manager-list.phtml" afterPath="$PROJECT_DIR$/module/Advert/view/advert/advert/manager-list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/config/module.config.php" afterPath="$PROJECT_DIR$/module/Advert/config/module.config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/config/module.config.php" afterPath="$PROJECT_DIR$/module/Application/config/module.config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/view/advert/advert/observe-list.phtml" afterPath="$PROJECT_DIR$/module/Advert/view/advert/advert/observe-list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/view/advert/advert/partial/offer.phtml" afterPath="$PROJECT_DIR$/module/Advert/view/advert/advert/partial/offer.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/language/pl_PL.po" afterPath="$PROJECT_DIR$/module/Application/language/pl_PL.po" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/User/view/user/user/profile.phtml" afterPath="$PROJECT_DIR$/module/User/view/user/user/profile.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/script.min.js" afterPath="$PROJECT_DIR$/public/js/script.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/styles.min.css" afterPath="$PROJECT_DIR$/public/css/styles.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/validator.js" afterPath="$PROJECT_DIR$/public/js/validator.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Advert/view/advert/advert/view.phtml" afterPath="$PROJECT_DIR$/module/Advert/view/advert/advert/view.phtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="metal.iws" />
@@ -81,75 +33,93 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AdvertController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/module/Advert/src/Advert/Controller/AdvertController.php">
+      <file leaf-file-name="MessageRepository.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Repository/MessageRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="12" selection-start="2755" selection-end="2755" vertical-scroll-proportion="-11.25" vertical-offset="870" max-vertical-offset="4605">
+            <state line="17" column="33" selection-start="243" selection-end="243" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="390">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Advert.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/module/Advert/src/Advert/Entity/Advert.php">
+      <file leaf-file-name="Message.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/Message.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="201" column="34" selection-start="4178" selection-end="4178" vertical-scroll-proportion="148.75" vertical-offset="6555" max-vertical-offset="7230">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserController.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/module/User/src/User/Controller/UserController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="95" selection-start="1498" selection-end="1498" vertical-scroll-proportion="-5.713615" vertical-offset="4686" max-vertical-offset="5325">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dashboard.phtml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/module/Advert/view/advert/advert/dashboard.phtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="106" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="975">
+            <state line="61" column="24" selection-start="1051" selection-end="1051" vertical-scroll-proportion="0.81595093" vertical-offset="308" max-vertical-offset="1110">
               <folding>
-                <element signature="tag#div#0;tag#section#0;tag#div#0;tag#div#2;tag#section#0;tag#section#0;tag#section#0" expanded="false" />
+                <element signature="e#117#151#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile.phtml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/module/User/view/user/user/profile.phtml">
+      <file leaf-file-name="Offer.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Advert/src/Advert/Entity/Offer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="110" column="47" selection-start="7817" selection-end="7817" vertical-scroll-proportion="-13.708333" vertical-offset="1321" max-vertical-offset="3630">
+            <state line="62" column="0" selection-start="1202" selection-end="1350" vertical-scroll-proportion="-24.666666" vertical-offset="338" max-vertical-offset="3945">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboard.less" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/css/views/advert/dashboard.less">
+      <file leaf-file-name="Company.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/Company.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="90">
+            <state line="80" column="4" selection-start="1251" selection-end="1317" vertical-scroll-proportion="0.0" vertical-offset="1200" max-vertical-offset="3765">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="common.less" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/css/common.less">
+      <file leaf-file-name="MessageController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Controller/MessageController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="292" column="17" selection-start="5062" selection-end="5062" vertical-scroll-proportion="-10.625" vertical-offset="4125" max-vertical-offset="4845">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdvertRepository.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/module/Advert/src/Advert/Entity/Repository/AdvertRepository.php">
+      <file leaf-file-name="Site.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/Site.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="8" selection-start="3823" selection-end="3897" vertical-scroll-proportion="-54.375" vertical-offset="180" max-vertical-offset="1890">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="City.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/City.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1320">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Transaction.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/Transaction.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3480">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Store.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/Store.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Province.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/Province.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="0" selection-start="34" selection-end="528" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="1320">
               <folding />
             </state>
           </provider>
@@ -168,8 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/module/Application/src/Application/Components/Helper/LayoutHelper.php" />
-        <option value="$PROJECT_DIR$/module/Company/config/module.config.php" />
         <option value="$PROJECT_DIR$/module/Company/view/company/company/settings.phtml" />
         <option value="$PROJECT_DIR$/module/Company/Module.php" />
         <option value="$PROJECT_DIR$/module/Company/view/company/company/partial/settings.phtml" />
@@ -182,8 +150,6 @@
         <option value="$PROJECT_DIR$/Gruntfile.js" />
         <option value="$PROJECT_DIR$/module/Application/view/application/index/index.phtml" />
         <option value="$PROJECT_DIR$/public/css/views/application/index.less" />
-        <option value="$PROJECT_DIR$/public/css/views/company/index.less" />
-        <option value="$PROJECT_DIR$/module/Company/view/company/message/index.phtml" />
         <option value="$PROJECT_DIR$/module/Company/src/Company/Controller/CompanyController.php" />
         <option value="$PROJECT_DIR$/public/js/main.js" />
         <option value="$PROJECT_DIR$/module/Application/config/module.config.php" />
@@ -217,8 +183,12 @@
         <option value="$PROJECT_DIR$/module/Advert/src/Advert/Entity/Advert.php" />
         <option value="$PROJECT_DIR$/public/css/views/advert/dashboard.less" />
         <option value="$PROJECT_DIR$/public/css/common.less" />
-        <option value="$PROJECT_DIR$/module/User/view/user/user/profile.phtml" />
         <option value="$PROJECT_DIR$/module/Advert/src/Advert/Controller/AdvertController.php" />
+        <option value="$PROJECT_DIR$/module/User/view/user/user/profile.phtml" />
+        <option value="$PROJECT_DIR$/public/css/views/company/index.less" />
+        <option value="$PROJECT_DIR$/module/Company/view/company/message/index.phtml" />
+        <option value="$PROJECT_DIR$/module/Company/src/Company/Repository/MessageRepository.php" />
+        <option value="$PROJECT_DIR$/module/Company/src/Company/Entity/Message.php" />
       </list>
     </option>
   </component>
@@ -327,6 +297,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="offer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="company" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -668,6 +664,118 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="company" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Company" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="company" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="message" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Company" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Company" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Company" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Company" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Repository" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="module" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Company" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -703,6 +811,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Company" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1205,6 +1317,23 @@
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="sslv3">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="36fe59d3-5348-4bce-ae16-1340e3c947e6" name="Default" comment="" />
@@ -1215,26 +1344,27 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="796" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26041666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32737276" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26041666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32737276" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1256,61 +1386,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="270" column="24" selection-start="10258" selection-end="10258" vertical-scroll-proportion="0.0" vertical-offset="3492" max-vertical-offset="4155" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/src/Application/Components/Payment/client.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="69.0" vertical-offset="1656" max-vertical-offset="2505" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/src/Application/Components/Payment/class_przelewy24.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="100.875" vertical-offset="2421" max-vertical-offset="3765" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/zendframework/zendframework/library/Zend/Session/AbstractContainer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="400" column="20" selection-start="11838" selection-end="11838" vertical-scroll-proportion="0.34509203" vertical-offset="5610" max-vertical-offset="9135" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/zendframework/zendframework/library/Zend/Session/Container.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="6" selection-start="676" selection-end="685" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="690" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/validator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="204" column="57" selection-start="7552" selection-end="7552" vertical-scroll-proportion="0.0" vertical-offset="2520" max-vertical-offset="3420" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/application.config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="676" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/language/fr_CA.po">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2385" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/language/en_US.mo">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="676" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/view/application/index/index.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="22" selection-start="2495" selection-end="2495" vertical-scroll-proportion="0.86541474" vertical-offset="482" max-vertical-offset="2490" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Application/language/pl_PL.po">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="19" selection-start="807" selection-end="807" vertical-scroll-proportion="0.5882353" vertical-offset="30" max-vertical-offset="2430" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/module/Application/language/en_US.po">
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="14" selection-start="780" selection-end="780" vertical-scroll-proportion="0.50728863" vertical-offset="72" max-vertical-offset="2445" />
@@ -1406,13 +1481,6 @@
         <state line="12" column="8" selection-start="277" selection-end="344" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="540" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module/Advert/src/Advert/Entity/Offer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="23" selection-start="1349" selection-end="1349" vertical-scroll-proportion="0.0" vertical-offset="593" max-vertical-offset="3945">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/module/Advert/view/advert/advert/offer/received.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="30" column="48" selection-start="1888" selection-end="1888" vertical-scroll-proportion="0.0" vertical-offset="81" max-vertical-offset="1110" />
@@ -1435,9 +1503,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/module/Application/src/Application/Components/Helper/LayoutHelper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="20" selection-start="117" selection-end="117" vertical-scroll-proportion="0.20705521" vertical-offset="0" max-vertical-offset="652">
-          <folding />
-        </state>
+        <state line="9" column="20" selection-start="117" selection-end="117" vertical-scroll-proportion="0.20705521" vertical-offset="0" max-vertical-offset="652" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module/Advert/view/advert/advert/advert-list.phtml">
@@ -1457,87 +1523,145 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/BundlePayments.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="209" column="20" selection-start="3554" selection-end="3569" vertical-scroll-proportion="0.0" vertical-offset="3135" max-vertical-offset="3690">
-          <folding />
-        </state>
+        <state line="209" column="20" selection-start="3554" selection-end="3569" vertical-scroll-proportion="0.0" vertical-offset="3135" max-vertical-offset="3690" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module/Advert/view/advert/advert/add.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="105" selection-start="1853" selection-end="1853" vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="3585">
-          <folding />
-        </state>
+        <state line="32" column="105" selection-start="1853" selection-end="1853" vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="3585" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/BundleDetails.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="539" selection-end="635" vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="3000">
-          <folding />
-        </state>
+        <state line="35" column="0" selection-start="539" selection-end="635" vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="3000" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module/Advert/src/Advert/Repository/AdvertRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="38" selection-start="2072" selection-end="2072" vertical-scroll-proportion="0.0" vertical-offset="795" max-vertical-offset="1695">
-          <folding />
-        </state>
+        <state line="53" column="38" selection-start="2072" selection-end="2072" vertical-scroll-proportion="0.0" vertical-offset="795" max-vertical-offset="1695" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module/Advert/view/advert/advert/dashboard.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="106" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="975">
-          <folding>
-            <element signature="tag#div#0;tag#section#0;tag#div#0;tag#div#2;tag#section#0;tag#section#0;tag#section#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="106" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="975" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/views/advert/dashboard.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/common.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="292" column="17" selection-start="5062" selection-end="5062" vertical-scroll-proportion="-10.625" vertical-offset="4125" max-vertical-offset="4845">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/User/view/user/user/profile.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="47" selection-start="7817" selection-end="7817" vertical-scroll-proportion="-13.708333" vertical-offset="1321" max-vertical-offset="3630">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Advert/src/Advert/Controller/AdvertController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="12" selection-start="2755" selection-end="2755" vertical-scroll-proportion="-11.25" vertical-offset="870" max-vertical-offset="4605">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module/Advert/src/Advert/Entity/Repository/AdvertRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="8" selection-start="3823" selection-end="3897" vertical-scroll-proportion="-54.375" vertical-offset="180" max-vertical-offset="1890">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Advert/src/Advert/Entity/Advert.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="201" column="34" selection-start="4178" selection-end="4178" vertical-scroll-proportion="148.75" vertical-offset="6555" max-vertical-offset="7230">
-          <folding />
-        </state>
+        <state line="100" column="8" selection-start="3823" selection-end="3897" vertical-scroll-proportion="0.0" vertical-offset="1500" max-vertical-offset="1905" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/module/User/src/User/Controller/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="95" selection-start="1498" selection-end="1498" vertical-scroll-proportion="-5.713615" vertical-offset="4686" max-vertical-offset="5325">
+        <state line="75" column="95" selection-start="1498" selection-end="1498" vertical-scroll-proportion="3.75" vertical-offset="1125" max-vertical-offset="5325" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/User/view/user/user/profile.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="170" column="49" selection-start="12265" selection-end="12265" vertical-scroll-proportion="-12.458333" vertical-offset="2251" max-vertical-offset="3555" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/views/company/index.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="21" selection-start="1183" selection-end="1183" vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="525" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/common.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="1" selection-start="340" selection-end="349" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="4845" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Company/view/company/message/index.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="106" column="50" selection-start="7418" selection-end="7418" vertical-scroll-proportion="-11.333333" vertical-offset="1318" max-vertical-offset="1980" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Advert/src/Advert/Entity/Advert.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="201" column="34" selection-start="4178" selection-end="4178" vertical-scroll-proportion="111.25" vertical-offset="5655" max-vertical-offset="7230" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Advert/src/Advert/Controller/AdvertController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="12" selection-start="2755" selection-end="2755" vertical-scroll-proportion="0.0" vertical-offset="1275" max-vertical-offset="4740">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Repository/MessageRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="33" selection-start="243" selection-end="243" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="390">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/Site.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="676">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/City.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1305">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/Transaction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3480">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/Store.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="676">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Controller/MessageController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="676">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/Company.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="4" selection-start="1251" selection-end="1317" vertical-scroll-proportion="0.0" vertical-offset="1200" max-vertical-offset="3765">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/Province.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="34" selection-end="528" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="1320">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Advert/src/Advert/Entity/Offer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="0" selection-start="1202" selection-end="1350" vertical-scroll-proportion="-24.666666" vertical-offset="338" max-vertical-offset="3945">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Company/src/Company/Entity/Message.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="24" selection-start="1051" selection-end="1051" vertical-scroll-proportion="0.81595093" vertical-offset="308" max-vertical-offset="1110">
+          <folding>
+            <element signature="e#117#151#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
