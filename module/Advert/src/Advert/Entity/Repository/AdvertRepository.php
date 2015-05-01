@@ -73,6 +73,7 @@ class AdvertRepository extends EntityRepository {
 
         if($categoryIds != null){
             $qb->where('a.category IN(:categoryIds)')
+                ->andWhere('a.active = ' . Advert::ADVERT_ACTIVE)
                 ->setParameter('categoryIds', $categoryIds);
         }
 
@@ -108,7 +109,7 @@ class AdvertRepository extends EntityRepository {
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
 
-        $now = new \DateTime();
+        $now = new \DateTime('now');
 
         $qb->select('a')
             ->from('Advert\Entity\Advert', 'a')

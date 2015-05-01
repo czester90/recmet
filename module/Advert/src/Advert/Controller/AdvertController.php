@@ -74,18 +74,13 @@ class AdvertController extends BaseController
         ));
     }
 
-    public function advertListCompanyAction()
-    {
-
-    }
-
     public function addAction()
     {
         $bundle = $this->em('Company\Entity\BundlePayments')->findOneBy(array('company_id' => $this->getCompanyId()));
         if ($this->request->isPost()) {
             $this->getAdvertRepository()->setDirectoryPath();
             $advert = $this->getAdvertRepository()->saveAdvert();
-            $this->getAdvertRepository()->saveImage($this->files('photo'), $advert, Image::ADVERT_TYPE_PHOTO);
+            $this->getAdvertRepository()->saveImage($this->files('photo'), $advert, Image::ADVERT_TYPE_PHOTO, $this->request->getPost('profile-image'));
             $this->getAdvertRepository()->saveImage($this->files('attach'), $advert, Image::ADVERT_TYPE_ATTACH);
 
             if(isset($preview)){

@@ -38,17 +38,42 @@ var RecMetals = {
 
                 var z = ids - 1;
                 var x = $(this).parent().find('#previewimg' + z).remove();
-                $('.place-image').append("<div class='col-xs-6 col-md-4 mar-top15 add-image"+ ids +"' data-id='"+ ids +"'><img alt='100%x180' id='previewimg" + ids + "' data-src='holder.js/100%x180' style='height: 180px; width: 100%; display: block;' src='' data-holder-rendered='true'></div>");
+                $('.place-image').append("<div class='col-xs-6 col-md-4 mar-top15 image-box add-image"+ ids +"' data-id='"+ ids +"'><img alt='100%x180' id='previewimg" + ids + "' data-src='holder.js/100%x180' style='height: 180px; width: 100%; display: block;' src='' data-holder-rendered='true'></div>");
 
                 var reader = new FileReader();
                 reader.onload = imageIsLoaded;
                 reader.readAsDataURL(this.files[0]);
 
                 $(this).hide();
-                $(".add-image"+ ids).append('<button type="button" class="close img-remove" aria-label="Close"><span aria-hidden="true">&times;</span></button>').click(function() {
+                $('.add-image'+ ids).append('<button type="button" data-id="' + ids + '" class="close img-remove" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
+                $('.img-remove').click(function() {
                     var removeId = $(this).attr('data-id');
+                    var parent = $(this).parent();
+                    $("div.image-box").each(function(index, value) {
+                        var item = $(value);
+                        if(parent.data('id') == item.data('id')){
+                            $('input#profile-image').val('');
+                            return;
+                        }
+                    });
                     $(".add-image"+ removeId).remove();
                     $(".add-file"+ removeId).remove();
+                });
+
+                $('.place-image img').click(function(){
+                    var parent = $(this).parent();
+                    $('.profile-image').remove();
+                    $('.place-image img').removeClass('select-image');
+                    $(this).addClass('select-image');
+                    parent.append('<span class="profile-image">Zdjęcie profilowe ogłoszenia</span>');
+                    $("div.image-box").each(function(index, value) {
+                        var item = $(value);
+                        if(parent.data('id') == item.data('id')){
+                            var nr = index +1;
+                            $('input#profile-image').val(nr);
+                            return;
+                        }
+                    });
                 });
 
                 $('.addimage').fadeIn('slow').append('<div id="filediv add-file'+ file_ids +'"><input name="photo[]" type="file" id="photo"/></div>');
@@ -86,6 +111,14 @@ var RecMetals = {
                 console.log(msg);
             });
         })
+    },
+    preview: function() {
+        $('#preview-advert').click(function(event){
+            event.preventDefault();
+            $.get('/views/preview-add-advert.htm', function(template) {
+                $.tmpl(template, {data: '22'}).appendTo('body');
+            });
+        });
     },
     advertAdd: function() {
         $('form#form_advert').submit(function(e){
@@ -209,7 +242,16 @@ var RecMetals = {
                         $('li span.view').removeClass('active_category');
                         $('#category_id').val($(this).attr('data-id'));
                         $(this).addClass('active_category');
+                        $('#select-category').css('display', 'block');
+                        $('#select-category span.category-name').html($(this).text());
                     })
+
+                    $('#select-category span.delete').click(function(){
+                        $('li span.view').removeClass('active_category');
+                        $('#select-category').css('display', 'none');
+                        $('#select-category span.category-name').html('');
+                        $('#category_id').val('');
+                    });
 
                     function generateTree(value, view) {
                         var html = '';
@@ -257,6 +299,13 @@ var RecMetals = {
             labelOff: "Wyłączone",
             enableDrag: false
         });
+
+        $(document).ajaxStart(function(){
+            $('body').append('<div id="loadingProgressG"><div id="loadingProgressG_1" class="loadingProgressG"></div>');
+        });
+        $(document).ajaxComplete(function(){
+            $("#loadingProgressG").remove();
+        });
     }
 }
 
@@ -265,6 +314,7 @@ $(document).ready(function () {
     RecMetals.ajaxSender();
     RecMetals.categoryView();
     RecMetals.advertAdd();
+    RecMetals.preview();
 
     RecMetals.offerSend();
     RecMetals.offerAmount();

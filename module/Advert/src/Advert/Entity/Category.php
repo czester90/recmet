@@ -54,6 +54,11 @@ class Category
      */
     protected $position;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $adverts_count;
+
     public function buildForm($name, $original, $parent, $have_child, $position)
     {
         $this->setName($name);
@@ -62,6 +67,7 @@ class Category
         $this->setHaveChild($have_child);
         $this->setPosition($position);
         $this->setUrl(HttpServiceCaller::toAscii($name));
+        $this->setAdvertsCount(0);
     }
 
     public function getId()
@@ -146,5 +152,19 @@ class Category
         return $this->original_id;
     }
 
+    /**
+     * @param mixed $adverts_count
+     */
+    public function setAdvertsCount($adverts_count)
+    {
+        $this->adverts_count = $adverts_count;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getAdvertsCount()
+    {
+        return $this->adverts_count;
+    }
 }

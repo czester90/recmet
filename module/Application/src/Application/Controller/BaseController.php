@@ -69,12 +69,14 @@ class BaseController extends AbstractActionController
     public function isUser()
     {
         if (!$this->UserAuthentication()->hasIdentity()) {
-            /*return $this->redirect()->toRoute(UserController::ROUTE_LOGIN, array(), array( 'query' => array(
-                    'redirect' => $this->request->getUri()->getPath()
-                )));*/
             return $this->redirect()->toRoute(UserController::ROUTE_LOGIN);
         }
 
         return false;
+    }
+
+    public function isUserLogin()
+    {
+        return $this->UserAuthentication()->hasIdentity() ? true : false;
     }
 }

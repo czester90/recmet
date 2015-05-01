@@ -19,7 +19,8 @@ module.exports = function (grunt) {
                     'public/js/jquery.min.js': [
                         'public/js/jquery-1.11.1.min.js',
                         'public/js/jquery-ui.js',
-                        'public/js/jquery.migrate.js'
+                        'public/js/jquery.migrate.js',
+                        'public/js/jquery.tmpl.min.js'
                     ],
                     'public/js/plugins.min.js': [
                         'public/js/bootstrap.min.js',

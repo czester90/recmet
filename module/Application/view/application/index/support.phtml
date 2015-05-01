@@ -12,7 +12,7 @@
                 <div class="primary">
                     <section class="module">
                         <div class="module-content">
-                            <form class="form-horizontal" role="form" method="POST" action="<?= $this->url('user/login') ?>">
+                            <form class="form-horizontal" role="form" method="POST">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label"></label>
                                     <div class="col-sm-8">
@@ -58,7 +58,10 @@
                                             <input type="text" class="form-control" name="email" placeholder="example@email.com" />
                                         </div>
                                     </div>
-                                <?php endif; ?>
+                                <?php else: ?>
+                                    <input type="hidden" name="name" value="<?= $this->UserIdentity()->getFirstName(); ?> <?= $this->UserIdentity()->getLastName(); ?>" />
+                                    <input type="hidden" name="email" value="<?= $this->UserIdentity()->getEmail(); ?>" />
+                                <?php endif ?>
 
                                 <div class="form-group">
                                     <label for="description" class="col-sm-3 control-label">Wiadomość</label>

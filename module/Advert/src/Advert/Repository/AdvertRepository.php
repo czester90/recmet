@@ -3,6 +3,7 @@
 namespace Advert\Repository;
 
 use Advert\Entity\Advert;
+use Company\Entity\Message;
 use Library\HttpServiceCaller;
 use Advert\Entity\Image;
 use WebinoImageThumb\WebinoImageThumb;
@@ -48,7 +49,13 @@ class AdvertRepository {
         $advert->setTransport($this->getController()->post('transport'));
         $advert->setTransportAmount($this->getController()->post('transport_amount'));
         $advert->setUrl(HttpServiceCaller::toAscii($this->getController()->post('name')));
-        $advert->setUser_id($this->getController()->getUserId());
+        $advert->setUserId($this->getController()->getUserId());
+
+        $date = new \DateTime();
+        $advert->setFinishedAt(
+            // Add Days to the date of created advert
+            $date->add(new \DateInterval('P' . $this->getController()->post('days') . 'D'))
+        );
 
         $category = $this->getController()->em('Advert\Entity\Category')->find($this->getController()->request->getPost('category_id'));
         $advert->setCategory($category);
@@ -56,10 +63,16 @@ class AdvertRepository {
         $this->getController()->em()->persist($advert);
         $this->getController()->em()->flush();
 
+        $category->setAdvertsCount($category->getAdvertsCount()+1);
+        $this->getController()->em()->persist($category);
+        $this->getController()->em()->flush();
+
+        //$message = new Message();
+
         return $advert;
     }
 
-    public function saveImage($files, $advert, $advertType)
+    public function saveImage($files, $advert, $advertType, $profileImage = null)
     {
         if(!count($files)) return false;
 
@@ -76,17 +89,22 @@ class AdvertRepository {
                 $images = new Image();
                 $images->setUser_id($this->getController()->getUserId());
                 $images->setName($filePart[count($filePart) - 1]);
+                if(isset($profileImage) && $profileImage != null) {
+                    $images->setProfile(1);
+                }
                 $images->setType($file['type']);
                 $images->setAdvertType($advertType);
                 $images->getAdvert_id()->add($advert);
                 $this->getController()->em()->persist($images);
                 $this->getController()->em()->flush();
 
-                $webImage = new WebinoImageThumb();
-                $thumb = $webImage->create($this->imagePath . $images->getName());
-                foreach($this->thumbnailsSize as $tb){
-                    $thumb->adaptiveResize($tb['width'], $tb['height']);
-                    $thumb->save($this->imagePath . $tb['folder'] . DIRECTORY_SEPARATOR . $images->getName());
+                if($advertType == Image::ADVERT_TYPE_PHOTO) {
+                    $webImage = new WebinoImageThumb();
+                    $thumb = $webImage->create($this->imagePath . $images->getName());
+                    foreach($this->thumbnailsSize as $tb){
+                        $thumb->adaptiveResize($tb['width'], $tb['height']);
+                        $thumb->save($this->imagePath . $tb['folder'] . DIRECTORY_SEPARATOR . $images->getName());
+                    }
                 }
             }
         }

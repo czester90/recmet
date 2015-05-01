@@ -22,6 +22,7 @@ class Advert extends BaseEntity
     const ADVERT_PREVIEW = 2;
     const ADVERT_NOACTIVE = 0;
     const ADVERT_FINISH = 3;
+    const ADVERT_ARCHIVE = 4;
 
     private static $advert_type_arr = array(
         1 => Advert::ADVERT_TYPE_SELL,
@@ -32,7 +33,8 @@ class Advert extends BaseEntity
         1 => array('name' => 'Aktywne', 'label' => 'primary'),
         2 => array('name' => 'Podgląd', 'label' => 'primary'),
         0 => array('name' => 'Nieaktywne', 'label' => 'danger'),
-        3 => array('name' => 'Zakończone', 'label' => 'success')
+        3 => array('name' => 'Zakończone', 'label' => 'success'),
+        4 => array('name' => 'Archiwum', 'label' => 'success')
     );
 
     /**
@@ -162,6 +164,11 @@ class Advert extends BaseEntity
      * @ORM\Column(type="datetime")
      */
     protected $created_at;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $finished_at;
 
     public function __construct()
     {
@@ -473,6 +480,70 @@ class Advert extends BaseEntity
     public function isPrzetarg()
     {
         return $this->sell_option == 2 ? true : false;
+    }
+
+    /**
+     * @param mixed $finished_at
+     */
+    public function setFinishedAt($finished_at)
+    {
+        $this->finished_at = $finished_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFinishedAt()
+    {
+        return $this->finished_at;
+    }
+
+    /**
+     * @param mixed $user_id
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param mixed $updated_at
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * @param mixed $created_at
+     */
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
     }
 
 }

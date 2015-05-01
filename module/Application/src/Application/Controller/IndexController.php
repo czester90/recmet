@@ -4,10 +4,8 @@ namespace Application\Controller;
 
 use Zend\View\Model\ViewModel;
 use Zend\Mail\Message;
-use Zend\Mail\Transport\Sendmail;
-use Zend\Mail\Transport\SmtpOptions;
 use Zend\Mail\Transport\Smtp as SmtpTransport;
-use Application\Controller\BaseController;
+use Zend\Mail\Transport\SmtpOptions;
 
 class IndexController extends BaseController
 {
@@ -19,22 +17,22 @@ class IndexController extends BaseController
     public function supportAction()
     {
         if ($this->request->isPost()) {
-            $mail = new Message('UTF-8');
-            $mail->setFrom($this->post('email'), $this->post('name'));
+            $mail = new Message();
+            if($this->isUser())
+            $mail->setFrom('support@recmetals.com', $this->post('name'));
             $mail->addTo('support@recmetals.com');
+            $mail->setEncoding('UTF-8');
 
             $mail->setSubject($this->post('title'));
-
-            $mail->setEncoding('UTF-8');
             $mail->setBody($this->post('description'));
 
             $transport = new SmtpTransport();
             $options = new SmtpOptions(array(
-                'host' => 'recmetals.com',
+                'host' => 'mymark.nazwa.pl',
                 'connection_class' => 'login',
                 'connection_config' => array(
-                    'username' => 'support@recmetals.com',
-                    'password' => 'qwedsazxc'
+                    'username' => 'support@mymark.nazwa.pl',
+                    'password' => 'Qwedsazxc123'
                 ),
                 'port' => 25,
             ));

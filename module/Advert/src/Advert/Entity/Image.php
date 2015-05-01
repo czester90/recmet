@@ -55,6 +55,11 @@ class Image
     protected $advert_type;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $profile = 0;
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $type;
@@ -163,5 +168,19 @@ class Image
         $this->created_at = $created_at;
     }
 
+    /**
+     * @param mixed $profile
+     */
+    public function setProfile($profile)
+    {
+        $this->profile = $profile;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
 }

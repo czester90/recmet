@@ -2,9 +2,12 @@
 
 namespace User\Controller;
 
+use Zend\Crypt\Password\Bcrypt;
 use Zend\Form\Form;
 use Zend\Stdlib\ResponseInterface as Response;
-use Zend\Stdlib\Parameters;
+use Zend\Mail\Message;
+use Zend\Mail\Transport\Smtp as SmtpTransport;
+use Zend\Mail\Transport\SmtpOptions;
 use Zend\View\Model\ViewModel;
 use User\Service\User as UserService;
 use User\Options\UserControllerOptionsInterface;
@@ -189,102 +192,52 @@ class UserController extends BaseController
             return $this->redirect()->toRoute('user/profile');
         }
 
-        $email = $this->params('email') ? $this->params('email') : $this->params()->fromPost('email');
-        $hash = $this->params('hash');
-        $request = $this->getRequest();
-        $hash_exists = false;
-
         $returnUri = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $this->url()->fromRoute('user/login');
 
-        $host = $this->getRequest()->getServer('HTTP_HOST');
+        $request = $this->getRequest();
+        $email = $this->params('email') ? $this->params('email') : $this->params()->fromPost('email');
+        $user = $this->em('User\Entity\User')->findOneBy(array('email' => $email));
 
-        if($hash) {
-            $user = $this->em('User\Entity\User')->findOneBy(array('email' => $email, 'password_recovery_hash' => $hash));
-        } else {
-            $user = $this->em('User\Entity\User')->findOneBy(array('email' => $email));
-        }
-
-        if(count($user) > 0) {
-            $hash_exists = true;
-        }
-
-        if($hash && $hash_exists) {
-            if($request->isPost()) {
-                if(strlen(trim($request->getPost("password"))) < 6) {
-                    $this->flashMessenger()->addErrorMessage('Your password is too short.');
-                    return $this->redirect()->toUrl($returnUri);
-                }
-                if($request->getPost("password") !== $request->getPost("password2")) {
-                    $this->flashMessenger()->addErrorMessage('Passwords don\'t match. Please double check your passwords.');
-                    return $this->redirect()->toUrl($returnUri);
-                }
-
-                $bcrypt = new Bcrypt;
-                $bcrypt->setCost(14);
-                $user->password = $bcrypt->create($request->getPost("password"));
-                $user->password_recovery_hash = null;
-                $this->em()->persist($user);
-                $this->em()->flush();
-
-                $request->setPost(new Parameters(array(
-                    'identity' => $user->email,
-                    'credential' => $request->getPost("password"),
-                    'remember' => 1
-                )));
-
-                // reseting adapters and eventualy logging out old user
-                $this->UserAuthentication()->getAuthAdapter()->resetAdapters();
-                $this->UserAuthentication()->getAuthService()->clearIdentity();
-
-                // logging in new user
-                $adapter = $this->UserAuthentication()->getAuthAdapter();
-                $adapter->prepareForAuthentication($this->getRequest());
-
-                $this->UserAuthentication()->getAuthService()->authenticate($adapter);
-
-                $this->flashMessenger()->addSuccessMessage('Your password has been changed.');
-                return $this->redirect()->toUrl($this->url()->fromRoute('membership'));
-            }
-            return array();
-        } elseif(isset($hash) && !$hash_exists) {
-            return $this->redirect()->toRoute('user/login');
-        }
         if($request->getPost('email')) {
             if(!$user) {
-                $this->flashMessenger()->addErrorMessage('Email not found in the database. Please signup first.');
-                return $this->redirect()->toUrl($returnUri);
+                $this->flashMessenger()->addErrorMessage($email . ' nie istnieje w naszej bazie danych');
+                return $this->redirect()->toUrl($this->url()->fromRoute('user/changepassword'));
             }
 
             $mail = new Message();
-            $mail->setFrom('info@kwiklearning.com', 'KwikLearning.com');
-            $mail->addTo($user->email, "$user->first_name $user->last_name");
+            $mail->setFrom('support@recmetals.com', 'RecMetals.com');
+            $mail->addTo($user->getEmail(), $user->getFirstName() .' '. $user->getLastName());
+            $mail->setEncoding('ISO-8859-2');
 
-            $user->password_recovery_hash = \sha1($user->email . '-' . \time() . '-saltysalty');
+            $bcrypt = new Bcrypt();
+            $bcrypt->setCost(14);
+
+            $newPassword = $this->generatePassword();
+
+            $user->setPassword($bcrypt->create($newPassword));
             $this->em()->persist($user);
             $this->em()->flush();
 
-            $resetUrl = 'http://' . $host . $this->url()->fromRoute('user/reset', array('email' => $user->email, 'hash' => $user->password_recovery_hash));
-
-            $mail->setSubject('Reset your password.');
-            $mail->setBody("Hi $user->first_name!\n\n" .
-                "You have requested password reset on KwikLearning.com. To reset, please click this link.:\n\n" .
-                $resetUrl .
-                "\n\n Kwik Learning Team!");
+            $mail->setSubject('Nowe Hasło na RecMetals.com.');
+            $mail->setBody("Witaj " .$user->getFirstName() . "!\n\n" .
+                "Twoje hasło zostało zresetowane na Recmetals.com. Wygenerowaliśmy dla Ciebie nowe hasło:\n" .
+                $newPassword . "\n Zmień hasło po zalogowaniu.\n\n" .
+                "Zespół RecMetals.com!");
 
             $transport = new SmtpTransport();
             $options = new SmtpOptions(array(
-                'host' => 'smtpout.secureserver.net',
+                'host' => 'mymark.nazwa.pl',
                 'connection_class' => 'login',
                 'connection_config' => array(
-                    'username' => 'info@kwiklearning.com',
-                    'password' => 'Example247'
+                    'username' => 'support@mymark.nazwa.pl',
+                    'password' => 'Qwedsazxc123'
                 ),
                 'port' => 25,
             ));
             $transport->setOptions($options);
             $transport->send($mail);
 
-            $this->flashMessenger()->addInfoMessage('Confirmation email has been sent to your email address. Please check your inbox.');
+            $this->flashMessenger()->addSuccessMessage('Twoje nowe hasło zostało wysłane na Twoją skrzynkę pocztą. Prosze sprawdź skrzynkę pocztową.');
         } else {
             return $this->redirect()->toUrl($returnUri);
         }
@@ -351,5 +304,17 @@ class UserController extends BaseController
             $this->setOptions($this->getServiceLocator()->get('user_module_options'));
         }
         return $this->options;
+    }
+
+    private function generatePassword($length = 12) {
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $count = mb_strlen($chars);
+
+        for ($i = 0, $result = ''; $i < $length; $i++) {
+            $index = rand(0, $count - 1);
+            $result .= mb_substr($chars, $index, 1);
+        }
+
+        return $result;
     }
 }

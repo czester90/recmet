@@ -31,7 +31,7 @@
                             <label for="propertyType">Kategorie</label>
                             <ul class="menulist category-tree-view">
                                 <?php foreach($this->categories as $category): ?>
-                                    <li><a href="<?= $this->url('advert/sublist', array('id' => $category->getId(), 'url' => $category->getUrl())) ?>"><?= $category->getName(); ?> <span>(100)</span></a></li>
+                                    <li><a href="<?= $this->url('advert/sublist', array('id' => $category->getId(), 'url' => $category->getUrl())) ?>"><?= $category->getName(); ?> <span>(<?= $category->getAdvertsCount(); ?>)</span></a></li>
                                     <?php if($this->currentCategory): ?>
                                         <?php if($category->getId() == $this->currentCategory->getId() || $category->getId() == $this->currentCategory->getOriginalId()): ?>
                                             <ul class="submenulist">

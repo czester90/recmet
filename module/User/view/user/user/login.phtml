@@ -3,17 +3,9 @@
     <section class="row featured-items">
 
     <div class="flash-messages">
-        <?php if ($this->flashMessenger()->getInfoMessages()): ?>
-            <?php foreach ($this->flashMessenger()->getInfoMessages() as $message): ?>
-                <div class="alert">
-                    <?php echo $message; ?>
-                </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-
         <?php if ($this->flashMessenger()->getErrorMessages()): ?>
             <?php foreach ($this->flashMessenger()->getErrorMessages() as $message): ?>
-                <div class="alert alert-danger">
+                <div class="alert alert-danger text-center">
                     <?php echo $message; ?>
                 </div>
             <?php endforeach; ?>
@@ -21,7 +13,7 @@
 
         <?php if ($this->flashMessenger()->getSuccessMessages()): ?>
             <?php foreach ($this->flashMessenger()->getSuccessMessages() as $message): ?>
-                <div class="alert alert-success">
+                <div class="alert alert-success text-center">
                     <?php echo $message; ?>
                 </div>
             <?php endforeach; ?>

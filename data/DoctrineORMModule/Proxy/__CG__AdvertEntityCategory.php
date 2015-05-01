@@ -64,10 +64,10 @@ class Category extends \Advert\Entity\Category implements \Doctrine\ORM\Proxy\Pr
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'original_id', 'parent_id', 'have_child', 'name', 'url', 'position');
+            return array('__isInitialized__', 'id', 'original_id', 'parent_id', 'have_child', 'name', 'url', 'position', 'adverts_count');
         }
 
-        return array('__isInitialized__', 'id', 'original_id', 'parent_id', 'have_child', 'name', 'url', 'position');
+        return array('__isInitialized__', 'id', 'original_id', 'parent_id', 'have_child', 'name', 'url', 'position', 'adverts_count');
     }
 
     /**
@@ -340,6 +340,28 @@ class Category extends \Advert\Entity\Category implements \Doctrine\ORM\Proxy\Pr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getOriginalId', array());
 
         return parent::getOriginalId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setAdvertsCount($adverts_count)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAdvertsCount', array($adverts_count));
+
+        return parent::setAdvertsCount($adverts_count);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAdvertsCount()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAdvertsCount', array());
+
+        return parent::getAdvertsCount();
     }
 
 }

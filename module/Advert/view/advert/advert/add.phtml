@@ -41,6 +41,11 @@
                                             <label for="category" class="col-sm-3 control-label">Kategoria</label>
 
                                             <div class="col-sm-8">
+                                                <div id="select-category">
+                                                    <label>Wybraa Kategoria:</label>
+                                                    <span class="mar-left10 category-name"></span>
+                                                    <span aria-hidden="true" class="glyphicon glyphicon-remove delete red-color cursor"></span>
+                                                </div>
                                                 <input type="hidden" id="category_id" name="category_id" />
                                                 <ul id="category-tree-view" data-url="<?= $this->url('generate-category'); ?>">
                                                     <?php foreach ($this->categories as $category): ?>
@@ -138,6 +143,7 @@
                                             <label for="name" class="col-sm-3 control-label">Zdjęcia</label>
 
                                             <div class="col-sm-8">
+                                                <input type="hidden" id="profile-image" name="profile-image" value="" />
                                                 <p class="help-block">Wybierz zdjęcia do ogłoszenia. Pierwsze zdjęcie, zostanie automatycznie ustawione jako zdjęcie główne.</p>
                                                 <div class="col-sm-12 addimage padding-0">
                                                     <div id="filediv add-file1"><input name="photo[]" type="file" id="photo"/></div>
@@ -210,7 +216,7 @@
                                             <label for="description" class="col-sm-3 control-label"></label>
 
                                             <div class="col-sm-8">
-                                                <button id="add-advert" name="preview" class="btn btn-primary">Podgląd Ogłoszenie</button>
+                                                <button id="preview-advert" name="preview" class="btn btn-primary">Podgląd Ogłoszenie</button>
                                                 <button id="add-advert" name="add-advert" class="btn btn-primary">Dodaj Ogłoszenie</button>
                                             </div>
                                         </div>
