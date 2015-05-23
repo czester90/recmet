@@ -6,6 +6,7 @@ use Advert\Entity\Observe;
 use Advert\Entity\Offer;
 use Application\Controller\BaseController;
 use Application\Components\ViewModel;
+use Zend\View\Model\JsonModel;
 use Advert\Entity\Advert;
 use Advert\Entity\Image;
 use Zend\Session\Container;
@@ -16,31 +17,6 @@ use Advert\Components\AddOffer;
 class AdvertController extends BaseController
 {
 
-    private $category_ids = array();
-    private $advertRepository;
-
-    /**
-     * @param mixed $advertRepository
-     */
-    public function setAdvertRepository($advertRepository)
-    {
-        $this->advertRepository = $advertRepository;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAdvertRepository()
-    {
-        return $this->advertRepository;
-    }
-
-    public function __construct()
-    {
-        $this->setAdvertRepository(new AdvertRepository());
-        $this->getAdvertRepository()->setController($this);
-    }
-
     public function advertListAction()
     {
         $resultPage = 7;
@@ -48,7 +24,7 @@ class AdvertController extends BaseController
         $currentCategoryId = $this->getParam('id', null);
         $offset = max(0, ($page - 1) * $resultPage);
 
-        $currentCategory = 0;
+        $currentCategory = null;
         $categoryIds = null;
         $subcategory = null;
 
@@ -59,7 +35,6 @@ class AdvertController extends BaseController
         }else{
             $advertList = $this->em('Advert\Entity\Advert')->findBy(array('active' => Advert::ADVERT_ACTIVE), array('created_at' => 'DESC'), $resultPage, $offset);
         }
-        $category = $this->em('Advert\Entity\Category')->findBy(array('parent_id' => null), array('position' => 'ASC'));
         $count = $this->em('Advert\Entity\Advert')->getCountAdvertsByCategory($categoryIds, $this->request->getQuery());
 
         return new ViewModel(array(
@@ -69,7 +44,7 @@ class AdvertController extends BaseController
             'resultPage' => $resultPage,
             'resultCount' => $count,
             'pages' => ceil($count/$resultPage),
-            'categories' => $category,
+            'category' => $this->getCategoryRepository()->generateCategory($currentCategory),
             'query' => $this->request->getQuery() ? $this->request->getQuery()->toArray() : array()
         ));
     }
@@ -107,6 +82,15 @@ class AdvertController extends BaseController
             'action' => $this->params('action'),
             'bundle' => $bundle
         ));
+    }
+
+    public function getAdvertAction()
+    {
+        $id = $this->getParam('id');
+        if ($this->request->isPost()) {
+            $advert = $this->em('Advert\Entity\Advert')->find($this->request->getPost('id'));
+        }
+        return $this->jsonResponse($advert->toArray());
     }
 
     public function deleteAction()

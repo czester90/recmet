@@ -5,16 +5,56 @@ namespace Application\Controller;
 use User\Controller\UserController;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
+use Advert\Repository\AdvertRepository;
+use Advert\Repository\CategoryRepository;
 
 class BaseController extends AbstractActionController
 {
     public $request;
     public $param_id;
     public $session;
+    public $advertRepository;
+    public $categoryRepository;
+
+    /**
+     * @param CategoryRepository $categoryRepository
+     */
+    public function setCategoryRepository($categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
+    /**
+     * @return CategoryRepository
+     */
+    public function getCategoryRepository()
+    {
+        return $this->categoryRepository;
+    }
+
+    /**
+     * @param mixed $advertRepository
+     */
+    public function setAdvertRepository($advertRepository)
+    {
+        $this->advertRepository = $advertRepository;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdvertRepository()
+    {
+        return $this->advertRepository;
+    }
 
     public function __construct()
     {
         $this->request = $this->getRequest();
+        $this->setAdvertRepository(new AdvertRepository());
+        $this->getAdvertRepository()->setController($this);
+        $this->setCategoryRepository(new CategoryRepository());
+        $this->getCategoryRepository()->setController($this);
     }
 
     public function getParam($param)

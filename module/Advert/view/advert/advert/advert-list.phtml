@@ -30,17 +30,17 @@
                         <div class='inner'>
                             <label for="propertyType">Kategorie</label>
                             <ul class="menulist category-tree-view">
-                                <?php foreach($this->categories as $category): ?>
-                                    <li><a href="<?= $this->url('advert/sublist', array('id' => $category->getId(), 'url' => $category->getUrl())) ?>"><?= $category->getName(); ?> <span>(<?= $category->getAdvertsCount(); ?>)</span></a></li>
+                                <?php foreach($this->category as $category): ?>
+                                    <li><a href="<?= $this->url('advert/sublist', array('id' => $category['id'], 'url' => $category['url'])) ?>"><?= $category['name']; ?> <span>(<?= $category['count']; ?>)</span></a></li>
                                     <?php if($this->currentCategory): ?>
-                                        <?php if($category->getId() == $this->currentCategory->getId() || $category->getId() == $this->currentCategory->getOriginalId()): ?>
+                                        <?php if(isset($category['sub'])): ?>
                                             <ul class="submenulist">
-                                                <?php foreach($this->getRepos('Advert\Entity\Category')->findBy(array('parent_id' => $category->getId())) as $sub): ?>
-                                                    <li><a href="<?= $this->url('advert/sublist', array('id' => $sub->getId(), 'url' => $sub->getUrl())) ?>"><?= $sub->getName(); ?></a></li>
-                                                    <?php if($sub->getId() == $this->currentCategory->getId() || $sub->getId() == $this->currentCategory->getParentId()): ?>
+                                                <?php foreach($category['sub'] as $sub): ?>
+                                                    <li><a href="<?= $this->url('advert/sublist', array('id' => $sub['id'], 'url' => $sub['url'])) ?>"><?= $sub['name']; ?></a></li>
+                                                    <?php if(isset($sub['sub'])): ?>
                                                         <ul class="submenulist">
-                                                            <?php foreach($this->getRepos('Advert\Entity\Category')->findBy(array('parent_id' => $sub->getId())) as $subq): ?>
-                                                                <li><a href="<?= $this->url('advert/sublist', array('id' => $subq->getId(), 'url' => $subq->getUrl())) ?>"><?= $subq->getName(); ?></a></li>
+                                                            <?php foreach($sub['sub'] as $subLev): ?>
+                                                                <li><a href="<?= $this->url('advert/sublist', array('id' => $subLev['id'], 'url' => $subLev['url'])) ?>"><?= $subLev['name']; ?></a></li>
                                                             <?php endforeach; ?>
                                                         </ul>
                                                     <?php endif; ?>

@@ -242,4 +242,21 @@ class Company extends BaseEntity {
         return $html;
     }
 
+    /**
+     * @param mixed $bundle_details_id
+     */
+    public function setBundleDetailsId($bundle_details_id)
+    {
+        $this->bundle_details_id = $bundle_details_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBundleDetailsId()
+    {
+        return $this->bundle_details_id;
+    }
+
+
 }

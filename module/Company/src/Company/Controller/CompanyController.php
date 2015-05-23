@@ -175,6 +175,7 @@ class CompanyController extends BaseController {
 
             $company = new Company();
             $company->setData($request->getPost());
+            $company->setBundleDetailsId($bundle->getOptionAdvert());
             $this->em()->persist($company);
             $this->em()->flush();
 
@@ -200,6 +201,7 @@ class CompanyController extends BaseController {
             $bundle_pay->setAmount(-$amount);
             $bundle_pay->setPaid(false);
             $bundle_pay->setPakiet($bundle->getId());
+            $bundle_pay->setAdvertsToUse($bundle->getOptionAdvert());
             $this->em()->persist($bundle_pay);
             $this->em()->flush();
 

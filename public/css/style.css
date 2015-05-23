@@ -1526,7 +1526,7 @@ ul.selectpicker {
 .property-box .row {
   margin-left: 0px;
 }
-.property-box .top {
+.property-box .top, .property-box .top-view {
   padding: 20px 20px 30px;
   background-color: white;
   position: relative;

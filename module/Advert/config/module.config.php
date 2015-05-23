@@ -92,6 +92,16 @@ return array(
                         ),
                         'priority' => 1000,
                     ),
+                    'get-advert' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/getAdvert',
+                            'defaults' => array(
+                                'action' => 'getAdvert'
+                            ),
+                        ),
+                        'priority' => 1000,
+                    ),
                     'sublist' => array(
                         'type'    => 'Segment',
                         'options' => array(

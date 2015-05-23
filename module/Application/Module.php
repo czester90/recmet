@@ -63,6 +63,17 @@ class Module
         $serviceManager->get('viewhelpermanager')->setFactory('Bundle', function ($sm) use ($e) {
             return new View\Helper\Bundle($e, $sm);
         });
+
+        $sharedManager = $e->getApplication()->getEventManager()->getSharedManager();
+
+        $sharedManager->attach('Zend\Mvc\Application', 'dispatch.error',
+            function($e) use ($serviceManager) {
+                if ($e->getParam('exception')) {
+                    $serviceManager->get('\Zend\Log\Logger')->crit($e->getParam('exception'));
+                    return false;
+                }
+            }
+        );
     }
 
     public function loadConfiguration(MvcEvent $e)

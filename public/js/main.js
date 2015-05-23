@@ -1,11 +1,59 @@
+var Urls = {
+    previewAdvert: '/advert/getAdvert'
+}
+
 var RecMetals = {
+    tools: {
+        generateRadomId: function(str) {
+            var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+            var randomstring = '';
+            for (var i=0; i<str; i++) {
+              var rnum = Math.floor(Math.random() * chars.length);
+              randomstring += chars.substring(rnum,rnum+1);
+            }
+            return randomstring;
+        },
+        sendAjax: function(href, details) {
+            return $.ajax({
+                type: "POST",
+                url: href,
+                dataType: "json",
+                data: details,
+                async: false
+            })
+            .success(function (msg) {
+                if(msg.success){
+                    return msg.param;
+                }
+            })
+            .error(function(msg) {
+                console.log(msg);
+            }).responseJSON;
+        },
+        serializeObject: function(form)
+        {
+            var o = {};
+            var a = form.serializeArray();
+            $.each(a, function() {
+                if (o[this.name]) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        }
+    },
     init: function () {
         tinymce.init({
             selector: "textarea.editor",
             plugins: [
                 "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+                "table contextmenu directionality emoticons template textcolor paste textcolor colorpicker textpattern"
             ],
 
             toolbar1: "cut copy paste | bullist numlist | outdent indent blockquote preview | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify",
@@ -115,9 +163,37 @@ var RecMetals = {
     preview: function() {
         $('#preview-advert').click(function(event){
             event.preventDefault();
-            $.get('/views/preview-add-advert.htm', function(template) {
-                $.tmpl(template, {data: '22'}).appendTo('body');
-            });
+            var description = tinyMCE.get('description').getContent();
+            $('#description').val(description);
+            var formValid = $('#addAdvertForm').valid();
+            if(formValid){
+                var fields = RecMetals.tools.serializeObject($('#addAdvertForm'));
+                var photos = new Array();
+                $('.place-image img').each(function(index, value){
+                    var item = $(value);
+                    photos[index] = item.attr('src');
+                });
+                fields.photos = photos;
+                fields.description = description;
+                var dateTime = new Date();
+                var day = (dateTime.getDate() < 10 ? "0" : "") + dateTime.getDate(),
+                    month = (dateTime.getMonth() < 10 ? "0" : "") + dateTime.getMonth(),
+                    year = dateTime.getFullYear(),
+                    hours = (dateTime.getHours() < 10 ? "0" : "") + dateTime.getHours(),
+                    minute = (dateTime.getMinutes() < 10 ? "0" : "") + dateTime.getMinutes(),
+                    secunte = (dateTime.getSeconds() < 10 ? "0" : "") + dateTime.getSeconds()
+                    fields.date = day + '-' + month + '-' + year + ' ' + hours + ':' + minute + ':' + secunte;
+                $.get('/views/preview-add-advert.htm', {requestId : RecMetals.tools.generateRadomId(24)}, function(template) {
+                    $.tmpl(template,
+                        fields
+                    ).appendTo('body');
+
+                    $('.back-modal').click(function(){
+                        $(this).remove();
+                        $('.ad-modal').remove();
+                    });
+                });
+            }
         });
     },
     advertAdd: function() {
@@ -212,6 +288,7 @@ var RecMetals = {
     },
     categoryView: function () {
         $('li span.tree').click(function (event) {
+            event.preventDefault();
             category(this);
         })
 
@@ -223,7 +300,8 @@ var RecMetals = {
                 type: "POST",
                 url: href,
                 dataType: "json",
-                data: {id: id}
+                data: {id: id},
+                async: true
             })
                 .success(function (msg) {
                     tree.html(' ');

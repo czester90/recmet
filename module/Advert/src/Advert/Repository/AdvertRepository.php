@@ -3,33 +3,17 @@
 namespace Advert\Repository;
 
 use Advert\Entity\Advert;
+use Application\Repository\BaseRepository;
 use Company\Entity\Message;
 use Library\HttpServiceCaller;
 use Advert\Entity\Image;
 use WebinoImageThumb\WebinoImageThumb;
 use Zend\Filter\File\RenameUpload;
 
-class AdvertRepository {
+class AdvertRepository extends BaseRepository {
 
-    private $controller;
     private $imagePath;
     private $thumbnailsSize = array(array('width' => 160, 'height' => 90, 'folder' => '90x160'));
-
-    /**
-     * @param mixed $controller
-     */
-    public function setController($controller)
-    {
-        $this->controller = $controller;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getController()
-    {
-        return $this->controller;
-    }
 
     public function saveAdvert()
     {
@@ -60,11 +44,9 @@ class AdvertRepository {
         $category = $this->getController()->em('Advert\Entity\Category')->find($this->getController()->request->getPost('category_id'));
         $advert->setCategory($category);
 
-        $this->getController()->em()->persist($advert);
-        $this->getController()->em()->flush();
+        $this->getController()->em('Advert\Entity\Category')->updateCategoryCount($category);
 
-        $category->setAdvertsCount($category->getAdvertsCount()+1);
-        $this->getController()->em()->persist($category);
+        $this->getController()->em()->persist($advert);
         $this->getController()->em()->flush();
 
         //$message = new Message();
@@ -75,6 +57,8 @@ class AdvertRepository {
     public function saveImage($files, $advert, $advertType, $profileImage = null)
     {
         if(!count($files)) return false;
+
+        $index = 1;
 
         foreach ($files as $file) {
             if(isset($file['name']) && $file['name'] != ''){
@@ -89,8 +73,14 @@ class AdvertRepository {
                 $images = new Image();
                 $images->setUser_id($this->getController()->getUserId());
                 $images->setName($filePart[count($filePart) - 1]);
-                if(isset($profileImage) && $profileImage != null) {
-                    $images->setProfile(1);
+                if (isset($profileImage) && $profileImage != null) {
+                    if ($index == $profileImage) {
+                        $images->setProfile(1);
+                    }
+                } else {
+                    if ($index == 1) {
+                        $images->setProfile(1);
+                    }
                 }
                 $images->setType($file['type']);
                 $images->setAdvertType($advertType);
@@ -106,6 +96,8 @@ class AdvertRepository {
                         $thumb->save($this->imagePath . $tb['folder'] . DIRECTORY_SEPARATOR . $images->getName());
                     }
                 }
+
+                $index++;
             }
         }
     }

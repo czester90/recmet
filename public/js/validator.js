@@ -151,7 +151,7 @@ var Validator = {
                     required: true
                 },
                 sell_option: {required: function(element) {
-                    return $('.advert_type').val() == 1;
+                    return $('.advert_type:checked').val() == 1;
                 }},
                 name: {
                     required: true,
@@ -159,6 +159,10 @@ var Validator = {
                     maxlength: 50
                 },
                 category_id : "required",
+                description : {
+                    required: true,
+                    tinymce: '#description'
+                },
                 amount: {
                     required: true,
                     pattern: /^\d{1,11}(\,\d{0,2})?$/
@@ -175,7 +179,7 @@ var Validator = {
                     required: true
                 },
                 transport_amount: {required: function(element) {
-                        return $('.transport').val() == 1;
+                        return $('.transport:checked').val() == 1;
                     },
                     pattern: /^\d{1,11}(\,\d{0,2})?$/
                 }
@@ -210,8 +214,10 @@ var Validator = {
             min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
         });
 
-        $.validator.addMethod("tinymce", function() {
-            if(tinyMCE) tinyMCE.triggerSave();
+        $.validator.addMethod("tinymce", function(value, element) {
+            if ($(value).length < 1) {
+                return false;
+            }
             return true;
         });
     }
