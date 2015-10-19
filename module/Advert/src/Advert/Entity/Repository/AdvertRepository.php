@@ -120,4 +120,20 @@ class AdvertRepository extends EntityRepository {
 
         return $qb->getQuery()->getResult();
     }
+
+    public function filterAdverts($companyId)
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $now = new \DateTime('now');
+
+        $qb->update('Advert\Entity\Advert', 'a')
+            ->set('a.active', Advert::ADVERT_FINISH)
+            ->where('a.company_id = ' . $companyId)
+            ->andWhere('a.active = ' . Advert::ADVERT_ACTIVE)
+            ->andWhere('a.finished_at < ' . $now->format('d-m-Y'));
+
+        return $qb->getQuery()->getResult();
+    }
 } 

@@ -67,6 +67,12 @@ class Message extends BaseEntity {
     protected $seen = 0;
 
     /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    protected $is_delete = false;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $updated_at;

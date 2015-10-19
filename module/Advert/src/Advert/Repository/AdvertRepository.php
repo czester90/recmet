@@ -4,7 +4,6 @@ namespace Advert\Repository;
 
 use Advert\Entity\Advert;
 use Application\Repository\BaseRepository;
-use Company\Entity\Message;
 use Library\HttpServiceCaller;
 use Advert\Entity\Image;
 use WebinoImageThumb\WebinoImageThumb;

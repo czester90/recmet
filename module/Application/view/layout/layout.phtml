@@ -61,10 +61,8 @@
             $mainNav = array(
                 array('url' => 'home', 'name' => $this->translate('Home'), 'action' => 'index'),
                 array('url' => 'advert', 'name' => $this->translate('Adverts'), 'action' => 'advertList'),
-                array('url' => 'companies', 'name' => 'Firmy', 'action' => 'companiesList'),
-                array('url' => 'transport', 'name' => 'Transport', 'action' => 'transport'),
-                array('url' => 'site', 'name' => 'Site', 'action' => 'site'),
-                array('url' => 'stock', 'name' => 'Stock', 'action' => 'stock'),
+                array('url' => 'companies', 'name' => $this->translate('Company'), 'action' => 'companiesList'),
+                array('url' => 'site', 'name' => $this->translate('Site'), 'action' => 'site'),
                 array('url' => 'support', 'name' => 'Support', 'action' => 'support')
             )
             ?>
@@ -107,7 +105,6 @@
               <li><a href="<?= $this->url('advert/dashboard') ?>">Zarzadzanie Ogłoszeniami <span class="badge">3</span></a></li>
               <li><a href="<?= $this->url('advert/magazine') ?>">Magazyn <span class="badge">22</span></a></li>
               <li><a href="<?= $this->url('advert/transations') ?>">Transakcje <span class="badge">1</span></a></li>
-              <li><a href="<?= $this->url('company/representatives') ?>">Przedstawiciele</a></li>
               <li><a href="<?= $this->url('company/payments') ?>">Płatności <span class="badge red">!</span></a></li>
               <li><a href="<?= $this->url('company/settings') ?>">Ustawienia</a></li>
           </ul>

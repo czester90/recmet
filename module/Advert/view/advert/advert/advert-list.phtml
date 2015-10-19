@@ -36,11 +36,11 @@
                                         <?php if(isset($category['sub'])): ?>
                                             <ul class="submenulist">
                                                 <?php foreach($category['sub'] as $sub): ?>
-                                                    <li><a href="<?= $this->url('advert/sublist', array('id' => $sub['id'], 'url' => $sub['url'])) ?>"><?= $sub['name']; ?></a></li>
+                                                    <li><a href="<?= $this->url('advert/sublist', array('id' => $sub['id'], 'url' => $sub['url'])) ?>"><?= $sub['name']; ?> <span>(<?= $sub['count']; ?>)</span></a></li>
                                                     <?php if(isset($sub['sub'])): ?>
                                                         <ul class="submenulist">
                                                             <?php foreach($sub['sub'] as $subLev): ?>
-                                                                <li><a href="<?= $this->url('advert/sublist', array('id' => $subLev['id'], 'url' => $subLev['url'])) ?>"><?= $subLev['name']; ?></a></li>
+                                                                <li><a href="<?= $this->url('advert/sublist', array('id' => $subLev['id'], 'url' => $subLev['url'])) ?>"><?= $subLev['name']; ?> <span>(<?= $subLev['count']; ?>)</span></a></li>
                                                             <?php endforeach; ?>
                                                         </ul>
                                                     <?php endif; ?>
@@ -186,7 +186,7 @@
                         <?php $company = $this->getRepos('Company\Entity\Company')->find($advert->getCompanyId()); ?>
                       <p><?= $company->getCity(); ?>, <?= $company->getCountry(); ?></p>
                       <div class='description'>
-                        <p><?= strlen(strip_tags($advert->getDescription())) > 150 ? substr(strip_tags($advert->getDescription()), 0, 150).'...' : strip_tags($advert->getDescription()); ?></p>
+                        <p><?= strlen(strip_tags($advert->getDescription())) > 180 ? substr(strip_tags($advert->getDescription()), 0, 150).'... <a class="link-blue" href="' . $this->url('advert/view', array('id' => $advert->getId(), 'url' => $advert->getUrl())) . '">[więcej]</a>' : strip_tags($advert->getDescription()); ?></p>
                       </div>
                       <div class='price-wrapper'>
                         <div class='price'>PLN <?= $advert->getAmount() ?></div>
@@ -201,11 +201,11 @@
                 <div class='inner-border'>
                   <div class='inner-padding'>
                       <div class="pull-left bottom-advert">
-                          <span>Data zakończenia: <span class="<?php if($advert->isLessOneDay()): ?>red-color<?php endif; ?>"><?= $advert->getHoursToFinishAdvert(); ?></span></span>
+                          <span>Data zakończenia: <span data-toggle="tooltip" data-placement="bottom" title="<?= $advert->getFinishedAt()->format('d-m-Y H:i:s'); ?>" class="<?php if($advert->isLessOneDay()): ?>red-color<?php endif; ?>"><?= $advert->getHoursToFinishAdvert(); ?></span></span>
                           <span class="space-line"> | </span>
                           <span>Oglądnięte: <?= $advert->getVisits(); ?></span>
                           <span class="space-line"> | </span>
-                          <span>Kategoria: <?= $advert->getCategory()->getName(); ?></span>
+                          <span>Kategoria: <a class="link-gray" href="<?= $this->url('advert/sublist', array('id' => $advert->getCategory()->getId(), 'url' => $advert->getCategory()->getUrl())) ?>"><?= $advert->getCategory()->getName(); ?></a></span>
                       </div>
                       <?= \Company\Entity\Company::rank($company->getRank(), ''); ?>
                   </div>

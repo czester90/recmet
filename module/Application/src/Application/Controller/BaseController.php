@@ -2,6 +2,8 @@
 
 namespace Application\Controller;
 
+use Application\Components\Helper\Validators;
+use Application\Components\Response\HttpResponse;
 use User\Controller\UserController;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -118,5 +120,25 @@ class BaseController extends AbstractActionController
     public function isUserLogin()
     {
         return $this->UserAuthentication()->hasIdentity() ? true : false;
+    }
+
+    public function getHttpResponse()
+    {
+        return new HttpResponse();
+    }
+
+    public function successResponse($data)
+    {
+        $this->getHttpResponse()->successResponse($data);
+    }
+
+    public function errorResponse($data, $status = HttpResponse::STATUS_NOT_FOUND)
+    {
+        $this->getHttpResponse()->errorResponse($data, $status);
+    }
+
+    public function validator($value)
+    {
+        return new Validators($value);
     }
 }

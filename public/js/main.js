@@ -388,6 +388,8 @@ var RecMetals = {
 }
 
 $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+
     RecMetals.init();
     RecMetals.ajaxSender();
     RecMetals.categoryView();

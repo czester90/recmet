@@ -9,19 +9,16 @@
                         Opłać pakiet by móc w pełni korzystać z funkcjonalności serwisu.</p>
                 </div>
             </div>
-            <div class="toolbar">
-                <ol class="breadcrumb">
-                    <li class="home"><a href="/"><i class="fa fa-home"></i><span> Home</span></a></li>
-                    <li class="active"><a href="/user/login" class=" active">Firma</a></li>
-                    <li class="active"><a href="/user/profile" class=" active">Ustawienia</a></li>
-                </ol>
-            </div>
-            <div class="wrapper">
+            <div class="wrapper-all-view">
                 <div class="primary">
                     <section class="module">
-                        <div class="module-content dis-table col-lg-12">
+                        <div class="module-content dis-table width100">
                             <div class="col-lg-12">
-
+                                <div class="col-sm-12 col-md-12 padding-0 mar-bottom15">
+                                    <button type="button" class="btn btn-default">Skrzynka Odbiorcza</button>
+                                    <button type="button" class="btn btn-default">Skrzynka Nadawcza</button>
+                                    <button type="button" class="btn btn-default">Nowa Wiadomość</button>
+                                </div>
                                 <div class="col-sm-12 col-md-12 padding-0 mar-bottom15">
                                     <!-- Split button -->
                                     <div class="btn-group">
@@ -52,7 +49,7 @@
                                             More <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Mark all as read</a></li>
+                                            <li><a href="#">Oznacz jako przeczytane</a></li>
                                             <li class="divider"></li>
                                             <li class="text-center">
                                                 <small class="text-muted">Select messages to see more actions</small>
@@ -78,9 +75,9 @@
                                         <!-- Nav tabs -->
                                         <ul class="nav nav-tabs">
                                             <li class="active"><a href="#home" data-toggle="tab">
-                                                    <span class="glyphicon glyphicon-inbox"></span>Primary</a></li>
+                                                    <span class="glyphicon glyphicon-inbox"></span>Prywatne</a></li>
                                             <li><a href="#profile" data-toggle="tab">
-                                                    <span class="glyphicon glyphicon-user"></span>Social</a></li>
+                                                    <span class="glyphicon glyphicon-user"></span>Systemowe</a></li>
 
                                         </ul>
                                         <!-- Tab panes -->
@@ -92,7 +89,7 @@
                                                             <input type="checkbox">
                                                         </div>
                                                         <span class="glyphicon glyphicon-star-empty"></span><span styel="display: inline-block;">Bhaumik Patel</span> <span class="">This is big title</span>
-                                                        <span class="text-muted" style="font-size: 11px;">- Hi hello how r u ?</span> <span class="badge">12:10 AM</span> <span class="pull-right"><span class="glyphicon glyphicon-paperclip">
+                                                        <span class="text-muted" style="font-size: 11px;">- Hi hello how r u ?</span> <span class="badge">12:10 AM</span>
                                                             </span>
                                                         </span>
                                                     </a>
@@ -112,15 +109,6 @@
                             </div>
                     </section>
                 </div>
-                <aside class="secondary">
-                    <section class="module module-narrow module-shallow">
-                        <?=
-                        $this->partial('company/company/partial/settings.phtml', array(
-                            'action' => $this->action,
-                            'method' => $this->method
-                        )); ?>
-                    </section>
-                </aside>
             </div>
         </section>
     </section>

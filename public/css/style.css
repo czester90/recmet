@@ -67,7 +67,7 @@ figure {
     clear: both;
 }
 
-.wrapper, .wrapper-view {
+.wrapper, .wrapper-view, .wrapper-all-view {
     background: url("../img/nav.png") repeat-y scroll 7px 0 #ffffff;
     border: 1px solid #cccccc;
     border-radius: 4px;
@@ -75,7 +75,7 @@ figure {
     margin-bottom: 20px;
     position: relative;
 }
-.wrapper-view {
+.wrapper-view, .wrapper-all-view {
     background: #ffffff;
 }
 .flash-messages {
@@ -165,6 +165,10 @@ figure {
 .primary {
     float: right;
     width: 80%;
+}
+.wrapper-all-view .primary {
+    float: none;
+    width:  auto;
 }
 
 .secondary {

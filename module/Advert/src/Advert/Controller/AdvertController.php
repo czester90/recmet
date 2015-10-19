@@ -123,6 +123,7 @@ class AdvertController extends BaseController
 
         unset($sessionAdvert->alert);
 
+        $this->em('Advert\Entity\Advert')->filterAdverts($this->getCompanyId());
         $adverts = $this->em('Advert\Entity\Advert')->findBy(array('company_id' => $this->getCompanyId()));
         return new ViewModel(array(
             'adverts' => $adverts,

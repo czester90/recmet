@@ -11,6 +11,7 @@ class IndexController extends BaseController
 {
     public function indexAction()
     {
+        $this->layout('layout/home');
         return new ViewModel();
     }
 
